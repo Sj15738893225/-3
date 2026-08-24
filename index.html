@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一人公司项目清单｜通用AI为主、卫浴为辅</title>
+<style>
+:root{
+  --bg:#f3f5f7; --card:#ffffff; --border:#e2e8f0; --line:#eef2f6;
+  --text:#1e293b; --muted:#64748b;
+  --teal:#0f766e; --teal-soft:#ccfbf1;
+  --amber:#b45309; --amber-soft:#fef3c7;
+  --green:#047857; --green-soft:#d1fae5;
+  --blue:#1d4ed8; --blue-soft:#dbeafe;
+  --red:#b91c1c; --red-soft:#fee2e2;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Segoe UI",sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.55;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px 40px;}
+button{font-family:inherit;}
+.topbar{background:var(--card); border-bottom:1px solid var(--border);}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:18px; padding-bottom:18px;}
+.topbar h1{font-size:20px; font-weight:700; letter-spacing:0;}
+.topbar .sub{color:var(--muted); font-size:13px; margin-top:4px;}
+.btn{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--border); background:var(--card); color:var(--text); padding:8px 14px; border-radius:8px; font-size:13px; cursor:pointer;}
+.btn:hover{border-color:#cbd5e1; background:#f8fafc;}
+.btn-primary{background:var(--teal); border-color:var(--teal); color:#fff;}
+.btn-primary:hover{background:#115e59;}
+.panel{background:var(--card); border:1px solid var(--border); border-radius:8px; margin-top:20px;}
+.h2{font-size:15px; font-weight:700; margin-bottom:12px;}
+.filters{padding:14px 16px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;}
+.fgroup{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.fname{font-size:12px; color:var(--muted); white-space:nowrap;}
+.chip{border:1px solid var(--border); background:#fff; color:var(--text); font-size:13px; padding:5px 12px; border-radius:999px; cursor:pointer;}
+.chip:hover{border-color:#94a3b8;}
+.chip.active{background:#1e293b; color:#fff; border-color:#1e293b;}
+.chip-fav.active{background:var(--amber-soft); color:var(--amber); border-color:#f59e0b;}
+.count{margin-left:auto; font-size:13px; color:var(--muted); white-space:nowrap;}
+.summary{padding:16px;}
+.table-wrap{overflow-x:auto;}
+table{width:100%; border-collapse:collapse; font-size:13px; min-width:860px;}
+th{text-align:left; background:#f8fafc; color:var(--muted); font-weight:600; padding:9px 10px; border-bottom:1px solid var(--border); white-space:nowrap;}
+td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr{cursor:pointer;}
+tbody tr:hover{background:#f8fafc;}
+td.num{color:var(--muted); font-weight:600;}
+td.pname{font-weight:600;}
+.tag{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; white-space:nowrap;}
+.tag-top{background:var(--amber-soft); color:var(--amber); font-weight:600;}
+.tag-high{background:var(--green-soft); color:var(--green);}
+.tag-mid{background:var(--blue-soft); color:var(--blue);}
+.tag-low{background:#f1f5f9; color:var(--muted);}
+.tag-ext{background:var(--teal-soft); color:var(--teal);}
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; margin-top:20px;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; display:flex; flex-direction:column; gap:12px;}
+.card.hidden{display:none;}
+.card-head{display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap;}
+.num{font-size:13px; color:var(--muted); font-weight:700; padding-top:3px; min-width:26px;}
+.cname{font-size:16px; font-weight:700; line-height:1.35; flex:1 1 180px;}
+.badges{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap;}
+.badge{display:inline-block; font-size:12px; padding:2px 9px; border-radius:999px; white-space:nowrap;}
+.badge-top{background:var(--amber-soft); color:var(--amber); font-weight:600;}
+.badge-ext{background:var(--teal-soft); color:var(--teal); font-weight:600;}
+.pitch{font-size:13.5px; background:#f8fafc; border:1px solid var(--line); border-radius:6px; padding:8px 10px; color:#334155;}
+.meta{display:grid; grid-template-columns:76px 1fr; gap:7px 10px; font-size:13px;}
+.lbl{color:var(--muted);}
+.meta ul{list-style:none;}
+.meta ul li{position:relative; padding-left:13px;}
+.meta ul li::before{content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:#94a3b8;}
+.time-note{font-size:12px; color:var(--muted);}
+.time-bar{display:flex; height:8px; border-radius:999px; overflow:hidden; margin-top:6px; background:#f1f5f9;}
+.seg-a{background:var(--teal);}
+.seg-b{background:#f59e0b;}
+.seg-c{background:#94a3b8;}
+.facts{display:flex; flex-wrap:wrap; gap:6px;}
+.fact{font-size:12px; padding:3px 9px; border-radius:6px; background:#f8fafc; border:1px solid var(--line); color:#334155; white-space:nowrap;}
+.ext-note{font-size:12px; color:var(--teal); background:var(--teal-soft); border-radius:6px; padding:6px 9px;}
+.card-actions{display:flex; gap:8px; margin-top:auto; padding-top:12px; border-top:1px solid var(--line);}
+.fav-btn{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); background:#fff; color:var(--muted); padding:7px 12px; border-radius:8px; font-size:13px; cursor:pointer;}
+.fav-btn:hover{border-color:#cbd5e1;}
+.fav-btn svg{fill:none; stroke:currentColor;}
+.fav-btn.on{color:var(--amber); border-color:#fcd34d; background:var(--amber-soft);}
+.fav-btn.on svg{fill:currentColor; stroke:currentColor;}
+.pick-btn{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--teal); background:var(--teal); color:#fff; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer;}
+.pick-btn:hover{background:#115e59;}
+.footer{margin-top:24px; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:18px 20px;}
+.closing{font-size:15px; font-weight:700; color:var(--text);}
+.footer-note{margin-top:8px; font-size:12.5px; color:var(--muted);}
+.modal{position:fixed; inset:0; background:rgba(15,23,42,.45); display:none; align-items:center; justify-content:center; padding:20px; z-index:100;}
+.modal.open{display:flex;}
+.modal-box{background:#fff; border-radius:8px; max-width:560px; width:100%; padding:20px; box-shadow:0 20px 50px rgba(15,23,42,.25);}
+.modal-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;}
+.modal-head h3{font-size:15px; font-weight:700;}
+.icon-btn{border:none; background:none; color:var(--muted); cursor:pointer; padding:4px; border-radius:6px; display:inline-flex;}
+.icon-btn:hover{background:#f1f5f9; color:var(--text);}
+.sentence{background:#f8fafc; border:1px solid var(--line); border-radius:8px; padding:12px; font-size:14px; color:#334155; line-height:1.7; margin-bottom:14px;}
+.modal-actions{display:flex; gap:8px; justify-content:flex-end;}
+@media (max-width:860px){
+  .topbar .wrap{flex-direction:column; align-items:flex-start;}
+  .cards{grid-template-columns:1fr;}
+  .count{margin-left:0; width:100%;}
+}
+@media (max-width:520px){
+  .meta{grid-template-columns:1fr; gap:3px 0;}
+  .card{padding:14px;}
+  .cname{font-size:15px;}
+}
+@media print{
+  body{background:#fff;}
+  .topbar{border-bottom:1px solid #cbd5e1;}
+  .filters,.card-actions,.fav-btn,.modal,.no-print{display:none !important;}
+  .wrap{padding:0 6px; max-width:none;}
+  .cards{display:block;}
+  .card{break-inside:avoid; page-break-inside:avoid; margin-bottom:12px; border-color:#cbd5e1;}
+  .summary{margin-top:14px;}
+  table{min-width:0; font-size:11.5px;}
+  thead{display:table-header-group;}
+  tbody tr{break-inside:avoid; page-break-inside:avoid;}
+  .footer{display:none;}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div>
+      <h1>一人公司项目清单</h1>
+      <p class="sub">通用AI为主 · 卫浴为辅 · 轻资产 · 零囤货 · 每天2-4小时 · 启动成本≤1000元</p>
+    </div>
+    <button class="btn no-print" id="printBtn" type="button">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>
+      打印 / 导出PDF
+    </button>
+  </div>
+</header>
+<main class="wrap">
+  <section class="panel filters no-print" aria-label="项目筛选">
+    <div class="fgroup">
+      <span class="fname">类型</span>
+      <button class="chip active" type="button" data-group="type" data-value="全部">全部</button>
+      <button class="chip" type="button" data-group="type" data-value="服务型">服务型</button>
+      <button class="chip" type="button" data-group="type" data-value="内容型">内容型</button>
+      <button class="chip" type="button" data-group="type" data-value="产品型">产品型</button>
+    </div>
+    <div class="fgroup">
+      <span class="fname">上手难度</span>
+      <button class="chip active" type="button" data-group="diff" data-value="全部">全部</button>
+      <button class="chip" type="button" data-group="diff" data-value="低">低</button>
+      <button class="chip" type="button" data-group="diff" data-value="中">中</button>
+      <button class="chip" type="button" data-group="diff" data-value="高">高</button>
+    </div>
+    <div class="fgroup">
+      <span class="fname">变现周期</span>
+      <button class="chip active" type="button" data-group="cycle" data-value="全部">全部</button>
+      <button class="chip" type="button" data-group="cycle" data-value="1个月内">1个月内</button>
+      <button class="chip" type="button" data-group="cycle" data-value="1-3个月">1-3个月</button>
+      <button class="chip" type="button" data-group="cycle" data-value="3-6个月">3-6个月</button>
+    </div>
+    <button class="chip chip-fav" id="favToggle" type="button">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.01-4.75 4.4 1.13 6.58L12 17.03l-5.88 3.22 1.13-6.58-4.75-4.4 6.6-1.01z"/></svg>
+      只看心仪
+    </button>
+    <span class="count" id="count">显示 10 / 10 项</span>
+  </section>
+
+  <section class="panel summary">
+    <h2 class="h2">项目一览</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>项目</th><th>类型</th><th>付费客户</th><th>核心AI工具</th><th>启动成本</th><th>难度</th><th>变现周期</th><th>优先级</th></tr>
+        </thead>
+        <tbody id="tblBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="cards" id="cards" aria-label="项目卡片"></section>
+
+  <footer class="footer">
+    <p class="closing">以上哪个项目最吸引您？确认后我将为您进行深度拆解（包含启动步骤、工具推荐、变现路径）。</p>
+    <p class="footer-note">所有项目启动成本≤1000元，零囤货、零加盟费；卫浴延伸项不依赖存量人脉与行业判断力。</p>
+  </footer>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="pickTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="pickTitle">已选择项目</h3>
+      <button class="icon-btn no-print" id="modalClose" type="button" aria-label="关闭">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="sentence" id="pickSentence"></p>
+    <div class="modal-actions no-print">
+      <button class="btn btn-primary" id="copyBtn" type="button">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="copyLabel">复制文案</span>
+      </button>
+      <button class="btn" id="modalCancel" type="button">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var FAV_KEY = 'opc_favs_v1';
+  var projects = [
+    {id:1, name:'小红书实体店AI代运营', type:'服务型', difficulty:'低', cycle:'1个月内', cost:'0-300元', priority:'首推', top:true,
+     pitch:'帮实体店用AI批量产出小红书图文和短视频，稳定获取本地客源。',
+     customer:'本地实体店（餐饮、美业、建材门店等）；老板不懂内容、没时间拍剪，线上获客几乎为零。',
+     tools:['豆包（选题+文案，替代文案岗）','即梦（产品/场景图，替代美工）','剪映AI（剪辑+字幕，替代剪辑岗）','Coze（评论自动回复留资，替代客服盯评）'],
+     time:[{label:'获客',pct:40},{label:'交付',pct:40},{label:'学习',pct:20}],
+     channels:'小红书发同城实体店案例、闲鱼挂“实体店代运营”、本地商家群和朋友圈晒单。'},
+    {id:2, name:'AI自动化工作流定制', type:'服务型', difficulty:'中', cycle:'1-3个月', cost:'100-500元', priority:'首推', top:true,
+     pitch:'给小微商家搭建自动客服、线索管理和报表流程，把人从重复劳动里解放出来。',
+     customer:'3-20人小团队商家；客服和报表占大量人力，买不起企业级软件。',
+     tools:['Coze（智能客服机器人，替代客服岗）','飞书多维表格（线索/报表自动流转）','n8n（跨应用自动化，替代人工搬运）','DeepSeek（流程调试与文档）'],
+     time:[{label:'学习',pct:30},{label:'交付',pct:50},{label:'获客',pct:20}],
+     channels:'项目1老客户二次转化、知乎/公众号发流程案例、闲鱼挂定制单。'},
+    {id:3, name:'中小企业AI内训与落地陪跑', type:'服务型', difficulty:'中', cycle:'1-3个月', cost:'0-200元', priority:'中', top:false,
+     pitch:'做半天到一天的AI应用内训，再陪跑一周把方法落地到真实业务。',
+     customer:'想用AI提效但没人带的中小企业老板/部门负责人；员工不知道怎么落地。',
+     tools:['豆包/DeepSeek（生成课件与案例）','剪映AI（课程录制与剪辑）','即梦（课件配图）','飞书多维表格（落地SOP模板）'],
+     time:[{label:'交付',pct:50},{label:'获客',pct:30},{label:'学习',pct:20}],
+     channels:'朋友圈发“AI落地清单”、本地商会/创业者社群、老客户转介绍。'},
+    {id:4, name:'AI短视频代剪与数字人口播代做', type:'服务型', difficulty:'低', cycle:'1个月内', cost:'0-300元', priority:'高', top:false,
+     pitch:'用数字人和AI剪辑，替不想出镜的老板批量制作口播视频。',
+     customer:'想靠短视频获客但不出镜、不会剪的老板；外包贵且不稳定。',
+     tools:['剪映AI（剪辑/字幕/包装，替代剪辑岗）','数字人工具（口播出镜，替代真人出镜）','豆包（口播稿撰写）'],
+     time:[{label:'获客',pct:30},{label:'交付',pct:50},{label:'学习',pct:20}],
+     channels:'闲鱼挂“代剪+数字人口播”、小红书发案例、本地商家群。'},
+    {id:5, name:'AI文案与电商素材代做', type:'服务型', difficulty:'低', cycle:'1个月内', cost:'0-100元', priority:'首推', top:true,
+     pitch:'接电商与实体店的标题、详情页、主图文案及素材代做，按单收费。',
+     customer:'淘宝/拼多多/抖音小店商家；文案同质化、主图没转化。',
+     tools:['豆包/DeepSeek（标题与详情文案，替代文案岗）','即梦（主图/详情图，替代美工）','剪映AI（短视频素材，替代拍摄剪辑）'],
+     time:[{label:'获客',pct:50},{label:'交付',pct:40},{label:'学习',pct:10}],
+     channels:'闲鱼挂单、电商卖家群、小红书发“文案改造前后对比”。'},
+    {id:6, name:'AI工具测评与教程知识IP', type:'内容型', difficulty:'中', cycle:'3-6个月', cost:'0-100元', priority:'低', top:false,
+     pitch:'在小红书/B站/公众号做AI工具测评和保姆级教程，靠内容积累长期资产。',
+     customer:'泛职场用户；想知道哪个AI工具值得用、具体怎么用。',
+     tools:['豆包/DeepSeek（选题与脚本）','剪映AI（剪辑成片）','即梦（封面图）','Coze（互动测试小工具）'],
+     time:[{label:'创作',pct:60},{label:'学习',pct:30},{label:'变现运营',pct:10}],
+     channels:'平台推荐与搜索流量，内容即获客，不依赖熟人圈。'},
+    {id:7, name:'AI提示词库与工作流模板包', type:'产品型', difficulty:'中', cycle:'3-6个月', cost:'0-100元', priority:'低', top:false,
+     pitch:'把高频提示词和Coze工作流打包成模板，在小报童/知识星球/闲鱼售卖。',
+     customer:'想用AI但不会写提示词、不会搭流程的职场人与小老板。',
+     tools:['豆包/DeepSeek（内容打磨）','Coze（工作流验证）','飞书多维表格（模板目录整理）','即梦（样例与封面）'],
+     time:[{label:'产品制作',pct:50},{label:'获客',pct:30},{label:'学习',pct:20}],
+     channels:'先做免费内容账号引流，再挂付费模板链接。'},
+    {id:8, name:'AI定制图轻服务', type:'服务型', difficulty:'低', cycle:'1个月内', cost:'0-50元', priority:'高', top:false,
+     pitch:'用即梦/豆包接定制头像、写真、活动海报与产品图，快速交付。',
+     customer:'要好看头像/海报但不会设计、请设计师太贵的个人与商家。',
+     tools:['即梦（生成图与改图，替代美工）','豆包（需求梳理与提示词）','剪映AI（封面与动态图）'],
+     time:[{label:'获客',pct:40},{label:'交付',pct:40},{label:'学习',pct:20}],
+     channels:'闲鱼挂“AI定制图”、小红书发作品集、朋友圈接单。'},
+    {id:9, name:'卫浴/建材门店AI小红书代运营', type:'服务型', difficulty:'中', cycle:'1-3个月', cost:'0-300元', priority:'中', top:false, ext:true,
+     pitch:'复用通用代运营方法论，专做卫浴/建材门店的本地内容获客。',
+     customer:'卫浴经销商、建材门店、装修公司；线上获客弱，只能等门店客流。',
+     tools:['豆包（行业文案）','即梦（卫浴产品场景图）','剪映AI（门店实拍剪辑）','Coze（留资自动回复）'],
+     time:[{label:'学习',pct:30},{label:'交付',pct:40},{label:'获客',pct:30}],
+     channels:'本地建材市场/门店群、朋友圈转介绍；先做免费案例再谈单，不依赖存量人脉。',
+     extNote:'可选延伸：不依赖行业判断力与存量人脉，行业知识边做边补。'},
+    {id:10, name:'卫浴/建材行业AI资讯号', type:'内容型', difficulty:'低', cycle:'3-6个月', cost:'0-50元', priority:'低', top:false, ext:true,
+     pitch:'用AI聚合卫浴/建材行业动态与应用案例，做垂直资讯内容。',
+     customer:'卫浴/建材从业者；没时间追行业动态，信息差明显。',
+     tools:['Kimi/豆包（信息聚合与总结）','Coze（定时整理流程）','剪映AI（资讯短视频）','即梦（封面图）'],
+     time:[{label:'创作',pct:60},{label:'学习',pct:20},{label:'变现运营',pct:20}],
+     channels:'平台算法推荐与搜索流量，不依赖行业人脉。',
+     extNote:'可选延伸：以信息整理取胜，不依赖行业判断力。'}
+  ];
+
+  var favs;
+  try { favs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')); }
+  catch(e) { favs = new Set(); }
+
+  var state = {type:'全部', diff:'全部', cycle:'全部', onlyFav:false};
+  var prClass = {'首推':'tag-top','高':'tag-high','中':'tag-mid','低':'tag-low'};
+  var diffClass = {'低':'tag-high','中':'tag-mid','高':'tag-low'};
+  var segClass = ['seg-a','seg-b','seg-c'];
+  var starSvg = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.01-4.75 4.4 1.13 6.58L12 17.03l-5.88 3.22 1.13-6.58-4.75-4.4 6.6-1.01z"/></svg>';
+
+  function badgeHtml(p){
+    var h = '';
+    if (p.top) h += '<span class="badge badge-top">首推</span>';
+    if (p.ext) h += '<span class="badge badge-ext">卫浴延伸</span>';
+    return h;
+  }
+  function timeHtml(t){
+    var segs = t.map(function(s, i){
+      return '<span class="seg ' + segClass[i] + '" style="width:' + s.pct + '%"></span>';
+    }).join('');
+    var note = t.map(function(s){ return s.label + ' ' + s.pct + '%'; }).join(' · ');
+    return '<span class="time-note">' + note + '</span><span class="time-bar">' + segs + '</span>';
+  }
+  function toolsHtml(list){
+    return '<ul>' + list.map(function(t){ return '<li>' + t + '</li>'; }).join('') + '</ul>';
+  }
+  function rowHtml(p){
+    return '<tr data-target="card-' + p.id + '">'
+      + '<td class="num">' + p.id + '</td>'
+      + '<td class="pname">' + p.name + (p.ext ? ' <span class="tag tag-ext">延伸</span>' : '') + '</td>'
+      + '<td>' + p.type + '</td>'
+      + '<td>' + p.customer + '</td>'
+      + '<td>' + p.tools.join('、') + '</td>'
+      + '<td>' + p.cost + '</td>'
+      + '<td><span class="tag ' + diffClass[p.difficulty] + '">' + p.difficulty + '</span></td>'
+      + '<td>' + p.cycle + '</td>'
+      + '<td><span class="tag ' + prClass[p.priority] + '">' + p.priority + '</span></td>'
+      + '</tr>';
+  }
+  function cardHtml(p){
+    var faved = favs.has(p.id);
+    return '<article class="card" id="card-' + p.id + '">'
+      + '<div class="card-head">'
+      + '<span class="num">' + p.id + '</span>'
+      + '<span class="cname">' + p.name + '</span>'
+      + '<span class="badges">' + badgeHtml(p) + '</span>'
+      + '</div>'
+      + '<div class="pitch">' + p.pitch + '</div>'
+      + '<div class="meta">'
+      + '<span class="lbl">客户与痛点</span><span>' + p.customer + '</span>'
+      + '<span class="lbl">核心AI工具</span><span>' + toolsHtml(p.tools) + '</span>'
+      + '<span class="lbl">每日2-4小时</span><span>' + timeHtml(p.time) + '</span>'
+      + '<span class="lbl">成本 / 难度 / 周期</span><span class="facts"><span class="fact">启动 ' + p.cost + '</span><span class="fact">难度 ' + p.difficulty + '</span><span class="fact">' + p.cycle + '</span></span>'
+      + '<span class="lbl">冷启动获客</span><span>' + p.channels + '</span>'
+      + '</div>'
+      + (p.ext ? '<div class="ext-note">' + p.extNote + '</div>' : '')
+      + '<div class="card-actions">'
+      + '<button class="fav-btn' + (faved ? ' on' : '') + '" type="button" data-id="' + p.id + '" aria-label="收藏或取消收藏">' + starSvg + '<span>' + (faved ? '已心仪' : '心仪') + '</span></button>'
+      + '<button class="pick-btn" type="button" data-id="' + p.id + '">选择此项目</button>'
+      + '</div>'
+      + '</article>';
+  }
+
+  function applyFilters(){
+    var shown = 0;
+    projects.forEach(function(p){
+      var ok = true;
+      if (state.type !== '全部' && p.type !== state.type) ok = false;
+      if (ok && state.diff !== '全部' && p.difficulty !== state.diff) ok = false;
+      if (ok && state.cycle !== '全部' && p.cycle !== state.cycle) ok = false;
+      if (ok && state.onlyFav && !favs.has(p.id)) ok = false;
+      document.getElementById('card-' + p.id).classList.toggle('hidden', !ok);
+      if (ok) shown++;
+    });
+    document.getElementById('count').textContent = '显示 ' + shown + ' / ' + projects.length + ' 项';
+  }
+
+  document.querySelectorAll('.chip[data-group]').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var group = chip.getAttribute('data-group');
+      document.querySelectorAll('.chip[data-group="' + group + '"]').forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      state[group] = chip.getAttribute('data-value');
+      applyFilters();
+    });
+  });
+
+  document.getElementById('favToggle').addEventListener('click', function(){
+    state.onlyFav = !state.onlyFav;
+    this.classList.toggle('active', state.onlyFav);
+    applyFilters();
+  });
+
+  document.getElementById('tblBody').addEventListener('click', function(e){
+    var tr = e.target.closest('tr');
+    if (tr){
+      var el = document.getElementById(tr.getAttribute('data-target'));
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+
+  document.getElementById('cards').addEventListener('click', function(e){
+    var favBtn = e.target.closest('.fav-btn');
+    if (favBtn){
+      var id = parseInt(favBtn.getAttribute('data-id'), 10);
+      if (favs.has(id)){ favs.delete(id); } else { favs.add(id); }
+      try { localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(favs))); } catch(err){}
+      favBtn.classList.toggle('on', favs.has(id));
+      var label = favBtn.querySelector('span');
+      if (label) label.textContent = favs.has(id) ? '已心仪' : '心仪';
+      applyFilters();
+      return;
+    }
+    var pickBtn = e.target.closest('.pick-btn');
+    if (pickBtn) openPick(parseInt(pickBtn.getAttribute('data-id'), 10));
+  });
+
+  var modal = document.getElementById('modal');
+  var sentenceEl = document.getElementById('pickSentence');
+  var copyLabel = document.getElementById('copyLabel');
+  function openPick(id){
+    var p = projects.filter(function(x){ return x.id === id; })[0];
+    if (!p) return;
+    sentenceEl.textContent = '我选择【项目' + p.id + '：' + p.name + '】，请为我深度拆解（包含启动步骤、工具推荐、变现路径）。';
+    copyLabel.textContent = '复制文案';
+    modal.classList.add('open');
+  }
+  function closeModal(){ modal.classList.remove('open'); }
+  function fallbackCopy(txt){
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(err){}
+    document.body.removeChild(ta);
+  }
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var txt = sentenceEl.textContent;
+    function done(){
+      copyLabel.textContent = '已复制';
+      setTimeout(function(){ copyLabel.textContent = '复制文案'; }, 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallbackCopy(txt); done(); });
+    } else {
+      fallbackCopy(txt);
+      done();
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCancel').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+
+  document.getElementById('tblBody').innerHTML = projects.map(rowHtml).join('');
+  document.getElementById('cards').innerHTML = projects.map(cardHtml).join('');
+  applyFilters();
+})();
+</script>
+</body>
+</html>
