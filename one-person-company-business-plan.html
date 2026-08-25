@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="一人公司项目企划书：8 个 AI 轻资产项目的完整拆解，1000 元预算内可执行。">
+<title>一人公司项目企划书</title>
+<style>
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light dark;
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --text: #1d2733;
+  --muted: #5c6672;
+  --border: #dce3e8;
+  --accent: #0e7c66;
+  --accent-soft: #e2f2ee;
+  --accent-text: #07594e;
+  --warn: #a35d0a;
+  --warn-soft: #f7ecd9;
+  --tag-bg: #eef2f4;
+  --tag-text: #34424e;
+  --shadow: 0 1px 2px rgba(16, 24, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15181c;
+    --surface: #1e2329;
+    --text: #eef1f4;
+    --muted: #a6b0ba;
+    --border: #313a44;
+    --accent: #35b99f;
+    --accent-soft: #173a34;
+    --accent-text: #8fe0cd;
+    --warn: #e2a05b;
+    --warn-soft: #3a2f1d;
+    --tag-bg: #262d35;
+    --tag-text: #c8d0d8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 64px; }
+.hero {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 22px;
+  margin-bottom: 24px;
+}
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+}
+h1 { margin: 0 0 10px; font-size: 32px; line-height: 1.3; }
+.subtitle { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.rule-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+.toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+  margin: 0 0 28px;
+}
+.toc a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: 14px;
+  padding: 12px 14px;
+  text-decoration: none;
+}
+.toc a:hover { border-color: var(--accent); color: var(--accent-text); }
+h2 {
+  margin: 34px 0 14px;
+  font-size: 24px;
+  line-height: 1.35;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+h3 { margin: 22px 0 10px; font-size: 18px; }
+h4 { margin: 16px 0 8px; font-size: 15px; }
+p { margin: 8px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 18px;
+  font-size: 14px;
+  background: var(--surface);
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: var(--tag-bg); color: var(--tag-text); font-weight: 500; }
+.time { color: var(--warn); font-size: 12px; white-space: nowrap; }
+.project {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 20px 22px 26px;
+  margin: 18px 0 30px;
+}
+.project h2 { margin-top: 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; }
+.note {
+  border-left: 3px solid var(--warn);
+  background: var(--warn-soft);
+  padding: 10px 12px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.checklist { list-style: none; margin: 8px 0; padding: 0; }
+.checklist li { padding-left: 24px; position: relative; margin: 6px 0; }
+.checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--accent); }
+.footer { margin-top: 32px; border-top: 1px solid var(--border); padding-top: 14px; color: var(--muted); font-size: 13px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 44px; }
+  h1 { font-size: 26px; }
+  .project { padding: 16px 14px 20px; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { color-scheme: light; }
+  body { background: #fff; color: #000; }
+  .project { box-shadow: none; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">一人公司 · 8 项目深度企划</p>
+    <h1>《一人公司项目企划书》</h1>
+    <p class="subtitle">小红书实体店AI代运营 · AI文案与电商素材代做 · AI提示词库与工作流模板包 · 行业AI资讯号 · AI数字产品小店 · 垂直内容+知识付费 · AI工具站/轻量订阅 · 订阅式AI助理</p>
+    <p class="rule-line"><span>预算 ≤ 1000 元</span><span>每天 2-4 小时</span><span>不囤货 · 不加盟 · 不拉人头</span><span>不承诺日入过千</span></p>
+  </header>
+
+  <nav class="toc" aria-label="目录">
+    <a href="#overview">0. 总览与选择策略</a>
+    <a href="#p1">1. 小红书实体店AI代运营</a>
+    <a href="#p2">2. AI文案与电商素材代做</a>
+    <a href="#p3">3. AI提示词库与工作流模板包</a>
+    <a href="#p4">4. 行业AI资讯号</a>
+    <a href="#p5">5. AI数字产品小店</a>
+    <a href="#p6">6. 垂直内容+知识付费</a>
+    <a href="#p7">7. AI工具站/轻量订阅</a>
+    <a href="#p8">8. 订阅式AI助理</a>
+    <a href="#common">通用合规与避坑</a>
+  </nav>
+
+  <section id="overview">
+    <h2>0. 总览与选择策略</h2>
+    <p>你现在的卫浴渠道运营背景，本质上是一套“懂实体门店、懂渠道、懂老板语言、懂线下销售”的能力。8 个项目都不要求你从零学技术，核心是把这套经验翻译成 AI 能放大 5-10 倍的交付物。</p>
+    <table>
+      <thead><tr><th>项目</th><th>第一周动作</th><th>首月目标</th><th>启动成本</th><th>卫浴背景优势</th></tr></thead>
+      <tbody>
+        <tr><td>1. 小红书实体店AI代运营</td><td>免费帮 1 家店做 10 条内容</td><td>1 个案例报告 + 2 家付费店</td><td>0-300 元</td><td>你本来就懂门店和老板，可主攻卫浴/建材/家居门店</td></tr>
+        <tr><td>2. AI文案与电商素材代做</td><td>发 3 套样品 + 明码标价</td><td>10 个订单，累计 2000 元</td><td>0-200 元</td><td>卫浴/建材产品卖点文案，你比普通写手更懂</td></tr>
+        <tr><td>3. AI提示词库与工作流模板包</td><td>做第一套场景模板包</td><td>上架 30 件，卖出 10 份</td><td>0-200 元</td><td>可做全网少见的“卫浴行业AI工作流模板”</td></tr>
+        <tr><td>4. 行业AI资讯号</td><td>连发 7 天每日速报</td><td>稳定更新，100 个订阅</td><td>0 元</td><td>可做“卫浴/建材+AI”垂直资讯，素材稀缺</td></tr>
+        <tr><td>5. AI数字产品小店</td><td>上架 5 个 9.9-99 元产品</td><td>30 件在售，卖出 10 单</td><td>0-300 元</td><td>卫浴门店话术、建材销售模板可直接商品化</td></tr>
+        <tr><td>6. 垂直内容+知识付费</td><td>发 7 条内容</td><td>30 条内容 + 10 个付费用户</td><td>0-200 元</td><td>“卫浴行业怎么做新媒体/AI获客”是你的独家选题</td></tr>
+        <tr><td>7. AI工具站/轻量订阅</td><td>确定一个窄工具需求</td><td>MVP 上线，100 个试用用户</td><td>100-500 元</td><td>卫浴门店AI话术/文案生成器，需求真实存在</td></tr>
+        <tr><td>8. 订阅式AI助理</td><td>列出服务清单，谈 1 个客户</td><td>3 个月费客户</td><td>0-200 元</td><td>服务卫浴经销商/门店老板，你听得懂他们的业务</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>策略建议：</strong>不要 8 个同时做。先选 1 个“现金流型”（2 或 5）跑 30 天，再选 1 个“高客单型”（1 或 8）谈 1 个种子客户。4、6 是长期资产，7 留到有稳定收入后让 Codex 帮你开发。</div>
+  </section>
+
+<section class="project" id="p1">
+  <h2>1. 小红书实体店AI代运营</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>把“线下门店不会做小红书”变成一个标准化、按月付费的服务。</p>
+  <p><strong>目标客户：</strong>同城实体店主（餐饮、美甲、服装、民宿、卫浴建材门店）。他们的痛点是：没时间做内容、不会写不会拍、请代运营公司太贵且不透明、怕被套路。</p>
+  <p><strong>市场与竞争：</strong>大量线下门店线上内容几乎空白，本地生活流量正在向小红书转移；现有代运营公司贵、交付模板化。你的差异化是：本地贴身、AI 降本、按效果分档、先出案例再收费。</p>
+  <p><strong>你的天然优势：</strong>卫浴渠道运营背景让你天然懂门店、懂老板、懂渠道语言。你可以直接定位“卫浴/建材/家居门店小红书代运营”，这是大多数写手和 MCN 不懂的细分市场。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>“1 店 30 天体验包”：账号定位 + 10 条图文/视频 + 1 份数据报告</td></tr>
+      <tr><td>验证需求</td><td>免费或 999 元做 1 家店；30 天后把曝光/涨粉/到店数据做成案例</td></tr>
+      <tr><td>前 10 个客户来源</td><td>同城商户群、老板转介绍、小红书私信本地店、卫浴渠道老关系</td></tr>
+      <tr><td>定价策略</td><td>首月 999-1999 元试运营；转正 3000-6000 元/月；后期加“到店转化分成”</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>注册小红书、准备选题库模板、筛选 1 家目标店 → Notion/飞书 → ⏱️ 2 小时/天 → 账号就绪、模板可用</td></tr>
+      <tr><td>第 1 周</td><td>免费帮 1 家店做定位和 10 条内容 → Kimi/豆包初稿、即梦出图、剪映剪辑 → ⏱️ 3 小时/天 → 案例雏形 + 可发布的谈单材料</td></tr>
+      <tr><td>第 2-4 周</td><td>按数据迭代选题，同时私信 20 家本地店 → 小红书创作平台看数据 → ⏱️ 2-3 小时/天 → 1 份案例报告 + 2-3 家付费意向</td></tr>
+      <tr><td>第 2 个月起</td><td>提价到 3000+，复制第 2-3 家店；把流程做成 SOP → 飞书表格 → ⏱️ 每周 2 小时管理 → 稳定 3-5 家店</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>Kimi / 豆包 / DeepSeek（文案初稿）、即梦 / 可灵（图片视频）</td></tr>
+      <tr><td>视频制作</td><td>剪映（剪辑字幕）、度加创作工具（口播配音）</td></tr>
+      <tr><td>客户沟通</td><td>企业微信 + 预设话术库（用 ChatGPT 生成 30 条谈单话术）</td></tr>
+      <tr><td>运营效率</td><td>Notion/飞书（选题库）、小红书创作服务平台（合规与数据）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>客户需求 → Kimi 出选题 5 分钟 → 人工选题 10 分钟 → 豆包出文案 15 分钟 → 人工校准 20 分钟 → 即梦出图 20 分钟 → 剪映成片 30 分钟 → 定时发布 10 分钟 → 数据复盘 30 分钟。合计约 2 小时，原手工流程约 8 小时，压缩比 4:1。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期（第 1 个月）：</strong>1 家试运营 + 首单 999-1999 元。<strong>中期（2-3 个月）：</strong>3 家店 × 3000 元月费。<strong>长期（6 个月+）：</strong>5-8 家店 + 分成 + 把 SOP 做成课程/陪跑，形成二次收入。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>3000-5000 元</td><td>2 家店，每天 2 小时</td></tr>
+      <tr><td>中等</td><td>8000-12000 元</td><td>3-4 家店，流程 SOP 化</td></tr>
+      <tr><td>乐观</td><td>15000 元以上</td><td>5 家店 + 分成 + 培训收入</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>剪映会员</td><td>约 20-30 元/月</td><td>可后期再买</td><td>剪映免费版够用 1 个月</td></tr>
+      <tr><td>即梦/可灵积分</td><td>约 50-100 元</td><td>可后期再买</td><td>先用免费额度</td></tr>
+      <tr><td>稿定设计会员</td><td>约 30 元/月</td><td>可后期再买</td><td>Canva 免费版 + 醒图</td></tr>
+      <tr><td>小红书企业号/认证</td><td>0-600 元</td><td>有单后再考虑</td><td>个人号先跑通</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（2-3 小时）：</strong>1 小时选题+文案，1 小时出图剪辑，30 分钟发布回复，30 分钟数据记录。<strong>批量处理：</strong>周末集中做一周 7 条内容。<strong>碎片化：</strong>通勤时回复客户、刷同城热门选题。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：客户不续费。</strong>应对：每次交付留数据证据，合同写明“效果报告 + 每周复盘”。</li>
+    <li><strong>失败原因 2：内容没有流量。</strong>应对：前 2 周只追同城热门选题，不追求爆款。</li>
+    <li><strong>失败原因 3：被白嫖方案。</strong>应对：免费只做 1 家，其余先收 999 元试运营费。</li>
+  </ul>
+  <p><strong>合规：</strong>接单后建议注册个体工商户；广告内容需标注“广告”；与客户签简单服务合同，明确交付范围和数据口径。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没单 → 免费再做 1 家不同品类，或把案例视频发到小红书“代运营”关键词下。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>1 家店已产出 10 条内容</td><td>换更配合的店，或改为自建 1 个账号演示</td></tr>
+      <tr><td>第 14 天</td><td>20 家店已私信，3 家意向</td><td>把案例做成一页纸，直接上门/发群</td></tr>
+      <tr><td>第 21 天</td><td>1 家付费试运营</td><td>降门槛到 999 元或改为“内容包”按件卖</td></tr>
+      <tr><td>第 30 天</td><td>1 份案例报告 + 2 家付费店</td><td>延长试运营 15 天，换品类再试</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p2">
+  <h2>2. AI文案与电商素材代做</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>把“写文案、做素材”变成按件收费的服务，再沉淀成可复制的模板资产。</p>
+  <p><strong>目标客户：</strong>淘宝/拼多多/小红书商家、公众号号主、需要详情页和新品图的微型经营者。痛点是：缺人、出图慢、写不出卖点、外包沟通成本高。</p>
+  <p><strong>市场与竞争：</strong>电商素材需求量大且高频；普通外包贵，纯模板不贴合产品。你的差异化是：垂直行业文案（卫浴/建材/家居）+ AI 快速交付 + 明码标价。</p>
+  <p><strong>你的天然优势：</strong>你懂卫浴/建材产品的真实卖点、安装场景和客户顾虑，能做“卫浴电商详情页文案”“建材促销文案”这类全网稀缺的垂直服务。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>3 套样品：产品文案、主图文案、短视频脚本 + 一张明码标价表</td></tr>
+      <tr><td>验证需求</td><td>样品发小红书/闲鱼/朋友圈，看谁主动询价</td></tr>
+      <tr><td>前 10 个客户来源</td><td>闲鱼、小红书、淘宝服务市场、卫浴渠道认识的店主</td></tr>
+      <tr><td>定价策略</td><td>单篇文案 50-200 元，素材包 100-500 元；有 10 个案例后提价 50%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>写需求问卷、做 3 套样品、注册闲鱼/小红书店铺 → Canva + Kimi → ⏱️ 2 小时/天 → 样品和报价表</td></tr>
+      <tr><td>第 1 周</td><td>每天发 1 条样品笔记，回复询价 → 小红书/闲鱼 → ⏱️ 1.5 小时/天 → 3-5 个询价</td></tr>
+      <tr><td>第 2-4 周</td><td>接 10 单，统一流程交付，收集好评 → 飞书表格管订单 → ⏱️ 2-3 小时/天 → 10 个案例 + 2000 元左右收入</td></tr>
+      <tr><td>第 2 个月起</td><td>把高频需求做成模板包，推出“月包套餐” → Notion/飞书 → ⏱️ 每周 3 小时 → 服务+产品双收入</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Claude / Kimi（文案）、即梦 / 可灵 / Flux（电商素材）</td></tr>
+      <tr><td>视频制作</td><td>剪映（短视频脚本成片）、度加/剪映配音（口播）</td></tr>
+      <tr><td>客户沟通</td><td>企业微信 + 需求问卷（飞书表单自动收集）</td></tr>
+      <tr><td>运营效率</td><td>飞书多维表格（订单状态）、Notion（交付模板）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>客户填问卷（飞书表单）→ 系统自动汇总到表格 → Kimi 生成初稿 15 分钟 → 人工加入产品卖点校准 20 分钟 → 即梦出 3 张主图 30 分钟 → 稿定排版 20 分钟 → 交付+修改一次 30 分钟。合计约 2 小时，原手工约 8 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>10 单散单，首月 1500-2500 元。<strong>中期：</strong>月包套餐（1000-3000 元/月）+ 散单。<strong>长期：</strong>模板包/提示词包被动销售 + 2-3 个长期代运营客户。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>1500-3000 元</td><td>散单为主</td></tr>
+      <tr><td>中等</td><td>5000-8000 元</td><td>3 个月包客户 + 散单</td></tr>
+      <tr><td>乐观</td><td>10000 元以上</td><td>月包 + 模板二次销售 + 代运营升级</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Claude 订阅</td><td>约 140-160 元/月</td><td>必须（核心工具）</td><td>Kimi/豆包/DeepSeek 免费版先替代</td></tr>
+      <tr><td>即梦/可灵积分</td><td>约 50-100 元</td><td>可后期再买</td><td>免费额度 + 稿定素材</td></tr>
+      <tr><td>Canva 会员</td><td>约 30-50 元/月</td><td>可后期再买</td><td>Canva 免费版/醒图</td></tr>
+      <tr><td>小店保证金</td><td>0-1000 元</td><td>有稳定单再交</td><td>先用个人号/朋友圈接单</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（2-3 小时）：</strong>1 小时写单+校准，1 小时出图排版，30 分钟发布样品，30 分钟回复客户。<strong>批量：</strong>周末集中做 5 套样品和模板。<strong>碎片：</strong>通勤回消息、收集竞品文案。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：只做低价散单，累且不赚钱。</strong>应对：第 2 个月强制推月包，散单只做引流款。</li>
+    <li><strong>失败原因 2：交付反复修改。</strong>应对：问卷把需求问透，明确“只改一次”。</li>
+    <li><strong>失败原因 3：被投诉素材侵权。</strong>应对：只用授权素材和 AI 原创图，留生成记录。</li>
+  </ul>
+  <p><strong>合规：</strong>接单开具个人/个体户收款即可；素材若涉及品牌 LOGO 需客户提供授权；涉及“最便宜”“第一”等广告词要提示风险。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没单 → 免费帮 1 家卫浴淘宝店做详情页，换成“可展示案例”再报价。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>3 套样品 + 报价表已发布</td><td>换平台，或主攻卫浴卖家群</td></tr>
+      <tr><td>第 14 天</td><td>5 个询价，2 单成交</td><td>降价 30% 换首单案例</td></tr>
+      <tr><td>第 21 天</td><td>5 单交付，2 条好评</td><td>把差评问题写成 FAQ 前置沟通</td></tr>
+      <tr><td>第 30 天</td><td>10 单，累计 2000 元</td><td>改做“免费样品换案例”冲刺</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p3">
+  <h2>3. AI提示词库与工作流模板包</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>把“经过验证的提示词和流程”打包成产品，一次制作、反复售卖。</p>
+  <p><strong>目标客户：</strong>想用 AI 但不会用的个人用户、自由职业者、小店老板、自媒体新手。痛点是：会打开 ChatGPT 但不会提问，买来的教程太泛，学完还是不会。</p>
+  <p><strong>市场与竞争：</strong>提示词资料很多但同质化严重、质量参差。你的差异化是：按真实工作场景打包 + 附可运行的工作流 + 持续更新版本。</p>
+  <p><strong>你的天然优势：</strong>你可以做“卫浴行业 AI 工作流模板包”：门店获客话术、销售跟进、产品文案、售后回复，全网几乎没有，且你验证过这些场景。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>1 套“场景模板包”：Notion/飞书模板 + PDF 使用说明 + 10-20 条核心提示词</td></tr>
+      <tr><td>验证需求</td><td>自己真实使用 30 天，记录哪些提示词有效，再公开售卖</td></tr>
+      <tr><td>前 10 个客户来源</td><td>小红书/闲鱼/淘宝搜索流量、行业群、朋友圈</td></tr>
+      <tr><td>定价策略</td><td>单品 19-99 元；合集 99-199 元；会员资料库 99-299 元/年</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>选定一个场景，整理 30 天使用记录 → Notion/飞书 → ⏱️ 2 小时/天 → 第一版模板包</td></tr>
+      <tr><td>第 1 周</td><td>写产品说明页，上架闲鱼/淘宝，发 5 条小红书笔记 → Canva + 小红书 → ⏱️ 1.5 小时/天 → 3-5 个咨询</td></tr>
+      <tr><td>第 2-4 周</td><td>收集买家反馈，每两周更新版本；做 2-3 个新场景包 → 飞书表格 → ⏱️ 2 小时/天 → 10 份销量 + 反馈库</td></tr>
+      <tr><td>第 2 个月起</td><td>升级为“会员资料库”，月更 1 个新包 → 知识星球/小报童 → ⏱️ 每周 4 小时 → 复购和订阅收入</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Claude / Kimi（编写和测试提示词）</td></tr>
+      <tr><td>模板载体</td><td>Notion / 飞书知识库（交付模板）、ProcessOn（工作流图）</td></tr>
+      <tr><td>客户沟通</td><td>微信自动欢迎语 + 关键词回复（用模板预设）</td></tr>
+      <tr><td>运营效率</td><td>飞书多维表格（订单/版本记录）、语雀/腾讯文档（更新日志）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>选定场景 → Kimi 生成 20 条候选提示词 30 分钟 → Claude 交叉测试 30 分钟 → 人工选留 10 条 30 分钟 → 写入 Notion 模板 30 分钟 → 生成 PDF 说明 20 分钟 → 上架 + 发笔记 20 分钟。合计约 2.5 小时，原手工编写和测试约 8 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>单品售卖，首月 300-1000 元。<strong>中期：</strong>合集 + 定制（企业/个人提示词定制 200-500 元/次）。<strong>长期：</strong>会员资料库 + 课程/陪跑，收入自动化和复购。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>300-1000 元</td><td>10-20 份单品</td></tr>
+      <tr><td>中等</td><td>2000-5000 元</td><td>合集 + 30-50 个会员</td></tr>
+      <tr><td>乐观</td><td>8000 元以上</td><td>会员 100+ + 定制 + 课程</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Claude 订阅</td><td>约 140-160 元/月</td><td>必须</td><td>Kimi/豆包/DeepSeek 免费版</td></tr>
+      <tr><td>Notion 个人版</td><td>0 元</td><td>必须</td><td>免费版即可</td></tr>
+      <tr><td>知识星球/小报童</td><td>约 50-200 元</td><td>可后期再买</td><td>先用微信群 + 表格交付</td></tr>
+      <tr><td>店铺保证金</td><td>0-1000 元</td><td>可后期再买</td><td>先用闲鱼/朋友圈</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（2 小时）：</strong>1 小时写/测提示词，30 分钟排版，30 分钟发内容回复。<strong>批量：</strong>周末集中做一个场景包。<strong>碎片：</strong>通勤时收集用户问题，攒成新包选题。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：免费教程太多，卖不动。</strong>应对：只卖“验证过的 + 更新承诺”，不卖宽泛资料。</li>
+    <li><strong>失败原因 2：提示词很快过时。</strong>应对：写明版本号和更新日期，会员持续更新。</li>
+    <li><strong>失败原因 3：买家觉得不值。</strong>应对：先给 1 条高价值提示词做试读，再做 7 天无理由。</li>
+  </ul>
+  <p><strong>合规：</strong>不要搬运他人课程/截图；不要承诺“AI 变现日入 XX”；涉及个人隐私的模板要提示脱敏。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没单 → 免费送 10 份给行业群换反馈，用反馈更新版本后重新上架。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>第一套模板包完成并上架</td><td>先用“小红书运营”等更大众场景</td></tr>
+      <tr><td>第 14 天</td><td>3-5 个咨询，2 份成交</td><td>降价到 9.9 元换首单和评价</td></tr>
+      <tr><td>第 21 天</td><td>5 份销量，3 条反馈</td><td>按反馈改版并发布 v2</td></tr>
+      <tr><td>第 30 天</td><td>10 份销量 + 1 个合集包</td><td>考虑转会员制或换场景</td></tr>
+    </tbody>
+  </table>
+</section>
+</section>
+
+<section class="project" id="p4">
+  <h2>4. 行业AI资讯号</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>用 AI 把行业信息加工成“人话解读”，积累垂直内容和订阅用户。</p>
+  <p><strong>目标客户：</strong>行业从业者、想了解 AI 但没时间读原文的人、寻找 AI 工具的商家。痛点是：信息太多、看不懂、不知道和自己有什么关系。</p>
+  <p><strong>市场与竞争：</strong>AI 资讯号很多，但大多泛泛而谈。你的差异化是：绑定具体行业（卫浴/建材/家居）+ 每篇给出“结论、影响、行动建议”，而不是转述新闻。</p>
+  <p><strong>你的天然优势：</strong>你可以做“卫浴/建材行业 AI 应用资讯”，把 AI 新闻翻译成门店老板听得懂的话，素材和读者都稀缺。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>“每日速报”栏目：每天 1 条，3-5 条新闻 + 1 句结论 + 1 条行动建议</td></tr>
+      <tr><td>验证需求</td><td>连发 7 天，看阅读量和收藏；哪个选题阅读高就深耕</td></tr>
+      <tr><td>前 10 个读者来源</td><td>朋友圈、行业群、小红书/公众号自然流量</td></tr>
+      <tr><td>定价策略</td><td>先不收费；1000 粉或稳定阅读后，做付费日报/社群 9.9-29.9 元/月</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>注册公众号/小红书，配置 RSS 信息源和选题库 → RSSHub/Feedly + Notion → ⏱️ 1.5 小时/天 → 账号和选题流水线</td></tr>
+      <tr><td>第 1 周</td><td>每天发 1 条速报 → Kimi 摘要 + ChatGPT 改写 → ⏱️ 1-1.5 小时/天 → 7 条内容 + 数据基线</td></tr>
+      <tr><td>第 2-4 周</td><td>增加每周深度和工具实测，测试发布时间 → 公众号后台数据 → ⏱️ 2 小时/天 → 3 篇爆款候选 + 稳定更新</td></tr>
+      <tr><td>第 2 个月起</td><td>做付费日报/社群，接工具推广 → 知识星球/小报童 → ⏱️ 每周 5 小时 → 第一批付费用户</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Claude / Kimi（摘要、改写、起标题）</td></tr>
+      <tr><td>信息收集</td><td>RSSHub / Feedly / Google Alerts（订阅关键词）</td></tr>
+      <tr><td>运营效率</td><td>Notion（选题库）、公众号后台/小红书创作服务平台（排期）</td></tr>
+      <tr><td>社群变现</td><td>知识星球 / 小报童（付费日报和社群）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>早上花 20 分钟刷信息源 → 选 3-5 条进 Notion → Kimi 生成摘要 10 分钟 → ChatGPT 改写成人话 15 分钟 → 人工校准 10 分钟 → 配图发布 10 分钟。合计约 1 小时，原手工收集加写作约 4 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>不赚钱，赚数据和标签。<strong>中期：</strong>付费日报/社群 + AI 工具推广（单条 100-500 元）。<strong>长期：</strong>企业内训/咨询 + 课程，成为行业 AI 入口。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>0-500 元</td><td>前 2 个月积累期</td></tr>
+      <tr><td>中等</td><td>1000-3000 元</td><td>1000+ 粉 + 广告/社群</td></tr>
+      <tr><td>乐观</td><td>5000-10000 元</td><td>垂直行业头部 + 课程/内训</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Claude 订阅</td><td>约 140-160 元/月</td><td>必须</td><td>Kimi/豆包/DeepSeek 免费版</td></tr>
+      <tr><td>RSSHub 自建</td><td>0-50 元/月服务器</td><td>可后期再买</td><td>Feedly 免费版</td></tr>
+      <tr><td>知识星球/小报童</td><td>约 50-200 元</td><td>可后期再买</td><td>先用微信群</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（1-1.5 小时）：</strong>早上 30 分钟收集，30 分钟写摘要，30 分钟发布。<strong>批量：</strong>周日集中做“每周深度”和下周选题。<strong>碎片：</strong>通勤时看信息源、记灵感。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：坚持不下来。</strong>应对：把速报固定在每天同一时间，内容控制在 500 字内。</li>
+    <li><strong>失败原因 2：内容像翻译，没人看。</strong>应对：每篇必须写“对你的行业有什么用”。</li>
+    <li><strong>失败原因 3：赚不到钱。</strong>应对：前 90 天只积累，第 90 天没数据就换行业或换形式。</li>
+  </ul>
+  <p><strong>合规：</strong>引用新闻要注明来源；不造谣、不夸大 AI 能力；转载他人内容需授权。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周阅读低 → 停更速报 3 天，集中做 1 篇“行业 AI 实测”，测试深度内容。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>7 条速报已发布</td><td>换到阅读量更高的平台</td></tr>
+      <tr><td>第 14 天</td><td>累计 50 次收藏/点赞</td><td>选题改为“工具实测”</td></tr>
+      <tr><td>第 21 天</td><td>100 个关注/订阅</td><td>做 1 次转发活动或行业群分享</td></tr>
+      <tr><td>第 30 天</td><td>稳定更新 + 1 篇深度内容</td><td>调整栏目比例，砍掉低阅读栏目</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p5">
+  <h2>5. AI数字产品小店</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>卖模板、提示词、素材、电子书等数字商品，一次制作、反复售卖。</p>
+  <p><strong>目标客户：</strong>个人用户、自媒体新手、小店老板、职场新人。痛点是：不会做模板、没时间做素材、怕买到没用的资料。</p>
+  <p><strong>市场与竞争：</strong>数字产品门槛低但同质化高。你的差异化是：细分场景（卫浴门店话术、建材销售模板、简历、小红书运营）+ 真实验证 + 持续更新。</p>
+  <p><strong>你的天然优势：</strong>你能把卫浴/建材行业的真实经验直接做成产品，例如“卫浴门店 50 条获客话术”“建材销售月度报表模板”，别人抄不走。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>5 个最小产品：2 个话术包 + 1 个提示词包 + 1 个模板 + 1 本小册子</td></tr>
+      <tr><td>验证需求</td><td>统一主图上架闲鱼/淘宝，看搜索词和询价</td></tr>
+      <tr><td>前 10 个客户来源</td><td>闲鱼/淘宝搜索流量、小红书笔记、行业群</td></tr>
+      <tr><td>定价策略</td><td>单品 9.9-99 元；第 2 个月做组合包 199 元；第 3 个月会员 299 元/年</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>做 5 个产品 + 统一主图模板 → Canva + Notion → ⏱️ 2 小时/天 → 5 件商品</td></tr>
+      <tr><td>第 1 周</td><td>上架闲鱼/淘宝，发 5 条小红书笔记 → 平台后台 → ⏱️ 1.5 小时/天 → 10-20 个曝光词</td></tr>
+      <tr><td>第 2-4 周</td><td>按销量砍产品，补 5 个新品类；优化标题 → 飞书表格 → ⏱️ 1.5 小时/天 → 10 件在售 + 10 单</td></tr>
+      <tr><td>第 2 个月起</td><td>做组合包和会员制，周末批量上新品 → 微信小商店/知识星球 → ⏱️ 每周 4 小时 → 复购和订阅</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Kimi（话术、文案、电子书初稿）、即梦（素材封面）</td></tr>
+      <tr><td>模板制作</td><td>Notion / 飞书（模板载体）、Canva（主图和 PDF）</td></tr>
+      <tr><td>客户沟通</td><td>闲鱼自动回复 + 微信话术库</td></tr>
+      <tr><td>运营效率</td><td>飞书表格（商品/订单）、知识星球（会员交付）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>选题 → Kimi 生成内容 30 分钟 → 人工校准 20 分钟 → Notion 排版 30 分钟 → Canva 做封面 20 分钟 → 上架+写标题 20 分钟。合计约 2 小时产出一个产品，原手工约 6-8 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>10 单单品，首月 200-1000 元。<strong>中期：</strong>30 件在售 + 组合包。<strong>长期：</strong>会员资料库 + 定制服务，形成重复购买。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>200-1000 元</td><td>10-30 件单品</td></tr>
+      <tr><td>中等</td><td>2000-6000 元</td><td>组合包 + 50 个会员</td></tr>
+      <tr><td>乐观</td><td>10000 元以上</td><td>会员 200+ + 定制 + 课程</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Kimi 会员</td><td>0-160 元/月</td><td>可后期再买</td><td>免费版即可起步</td></tr>
+      <tr><td>Canva 会员</td><td>约 30-50 元/月</td><td>可后期再买</td><td>Canva 免费版/稿定</td></tr>
+      <tr><td>淘宝保证金</td><td>0-1000 元</td><td>可后期再买</td><td>先用闲鱼</td></tr>
+      <tr><td>知识星球</td><td>约 50-200 元</td><td>可后期再买</td><td>微信群 + 表格</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（1.5-2 小时）：</strong>1 小时做新品，30 分钟上架改标题，30 分钟回复客户。<strong>批量：</strong>周末集中做 5 个新品和主图。<strong>碎片：</strong>通勤时刷竞品标题和差评。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：上架没流量。</strong>应对：标题抄已验证的爆款结构，前 2 周只改关键词不改产品。</li>
+    <li><strong>失败原因 2：低价内卷。</strong>应对：靠“卫浴行业稀缺内容”避开纯价格战。</li>
+    <li><strong>失败原因 3：盗版传播。</strong>应对：打水印、限时链接、用会员制代替单品。</li>
+  </ul>
+  <p><strong>合规：</strong>数字产品一般不涉及资质，但若卖课程超规模需注意；不开虚假交易、不刷单。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没单 → 免费送 1 个引流品，只留邮箱/微信换取后续销售。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>5 件商品上架</td><td>先做 1 件主推，集中流量</td></tr>
+      <tr><td>第 14 天</td><td>3 单成交</td><td>降价引流 + 送赠品</td></tr>
+      <tr><td>第 21 天</td><td>5-8 单 + 10 件在售</td><td>砍掉 0 曝光产品</td></tr>
+      <tr><td>第 30 天</td><td>10 单 + 1 个组合包</td><td>评估转会员制</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p6">
+  <h2>6. 垂直内容+知识付费</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>用垂直内容获取信任，再卖课程、社群、咨询服务。</p>
+  <p><strong>目标客户：</strong>细分人群（职场新人、宝妈、会计、卫浴经销商、想学新媒体的门店老板）。痛点是：知道该学但没方向、买课怕被坑、学了用不上。</p>
+  <p><strong>市场与竞争：</strong>课程市场大但复购率低。你的差异化是：先做 30 条免费内容建立信任，再卖“能马上用”的低价课，而不是卖概念。</p>
+  <p><strong>你的天然优势：</strong>“卫浴行业怎么做新媒体/AI获客”是你的独家选题，行业里没人系统讲，而你有真实操盘经验。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>7 条内容 + 1 页“痛点清单”免费领取（收集联系方式）</td></tr>
+      <tr><td>验证需求</td><td>哪条内容互动最高，就围绕它做课</td></tr>
+      <tr><td>前 10 个客户来源</td><td>内容自然流量 + 免费清单引流 + 行业群</td></tr>
+      <tr><td>定价策略</td><td>引流课 9.9-49 元；训练营 199-999 元；社群 99-299 元/月</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>定人群和选题，写 7 条内容脚本 → Kimi + Notion → ⏱️ 2 小时/天 → 一周内容库</td></tr>
+      <tr><td>第 1 周</td><td>每天发 1 条，做免费清单 → 小红书/B站/公众号 → ⏱️ 1.5 小时/天 → 首批 20 个粉丝</td></tr>
+      <tr><td>第 2-4 周</td><td>把互动最高的 3 个需求做成 3 节录播课 → 剪映 + 小鹅通 → ⏱️ 2-3 小时/天 → 10 个付费用户</td></tr>
+      <tr><td>第 2 个月起</td><td>推训练营/社群，做直播答疑 → 视频号/腾讯会议 → ⏱️ 每周 5-6 小时 → 复购和高客单</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Claude（脚本、大纲）、Kimi（素材检索）</td></tr>
+      <tr><td>视频制作</td><td>剪映（剪辑字幕）、度加/剪映配音（口播）</td></tr>
+      <tr><td>课程交付</td><td>小鹅通 / 千聊（课程）、知识星球（社群）</td></tr>
+      <tr><td>运营效率</td><td>飞书表格（学员进度）、Notion（选题库）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>选题 → ChatGPT 出大纲 15 分钟 → Kimi 补素材 15 分钟 → 写逐字稿 30 分钟 → 剪映录制剪辑 1 小时 → 发布 + 答疑 30 分钟。合计约 2.5 小时/条，原手工约 6-8 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>9.9-49 元引流课。<strong>中期：</strong>训练营 + 社群。<strong>长期：</strong>高客单咨询/陪跑 + 企业内训。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>300-1500 元</td><td>30 个低价课学员</td></tr>
+      <tr><td>中等</td><td>3000-8000 元</td><td>训练营 + 社群 50 人</td></tr>
+      <tr><td>乐观</td><td>15000 元以上</td><td>高客单 + 企业内训</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Claude 订阅</td><td>约 140-160 元/月</td><td>必须</td><td>Kimi/豆包/DeepSeek 免费版</td></tr>
+      <tr><td>剪映会员</td><td>约 20-30 元/月</td><td>可后期再买</td><td>剪映免费版</td></tr>
+      <tr><td>小鹅通/千聊</td><td>约 0-300 元/年</td><td>可后期再买</td><td>先用腾讯会议录课 + 网盘交付</td></tr>
+      <tr><td>知识星球</td><td>约 50-200 元</td><td>可后期再买</td><td>微信群</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（2 小时）：</strong>1 小时写内容，1 小时录制发布答疑。<strong>批量：</strong>周日录 3 条，工作日只发和答。<strong>碎片：</strong>通勤时回学员问题、收集选题。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：内容有流量但没人买。</strong>应对：在每条内容结尾放“下一步行动”，引导领免费清单。</li>
+    <li><strong>失败原因 2：课程口碑差。</strong>应对：只卖“带作业+答疑”的训练营，不卖纯录播。</li>
+    <li><strong>失败原因 3：学员中途流失。</strong>应对：设置打卡和小组，结营做成果展示。</li>
+  </ul>
+  <p><strong>合规：</strong>卖课建议注册个体工商户；宣传中不得承诺“保证学会/保证变现”；录课引用他人内容需授权。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没人买课 → 免费直播 1 场，现场解决 3 个真实问题再推课。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>7 条内容 + 免费清单上线</td><td>换选题方向或平台</td></tr>
+      <tr><td>第 14 天</td><td>50 个粉丝，20 个清单领取</td><td>把清单换成更刚需的模板</td></tr>
+      <tr><td>第 21 天</td><td>引流课上线，10 个学员</td><td>降到 9.9 元冲刺</td></tr>
+      <tr><td>第 30 天</td><td>3 节录播课 + 1 期训练营报名</td><td>改做直播答疑再转化</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p7">
+  <h2>7. AI工具站/轻量订阅</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>做一个窄场景小工具，个人用户按月订阅。</p>
+  <p><strong>目标客户：</strong>个人用户、小店老板、内容创作者。痛点是：通用 AI 太复杂，想要“打开就能用”的垂直小工具。</p>
+  <p><strong>市场与竞争：</strong>工具站容易同质化，但细分场景仍有机会。你的差异化是：只做“卫浴/建材/本地门店 AI 话术生成”“小红书文案生成”这类窄需求，先比大厂快、比通用工具贴场景。</p>
+  <p><strong>你的天然优势：</strong>你懂门店真实场景，能把“销售话术生成器”“门店 AI 获客助手”做成别人做不出来的垂直工具；开发部分可以直接用 Codex 完成。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>1 个功能：输入行业/产品/人群，30 秒生成 3 条获客文案</td></tr>
+      <tr><td>验证需求</td><td>免费试用 3 天，找 100 个用户收集“是否愿意付费”</td></tr>
+      <tr><td>前 10 个用户来源</td><td>小红书教程、行业群、朋友圈、导航站提交</td></tr>
+      <tr><td>定价策略</td><td>9-39 元/月；只做月付；后期加按次计费</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>确定 1 个场景和 1 个核心功能 → 让 Codex 出原型 → ⏱️ 2-3 小时/天 → 可演示页面</td></tr>
+      <tr><td>第 1 周</td><td>接模型 API、上线试用页、写 3 篇引流教程 → Vercel + OpenAI API → ⏱️ 2 小时/天 → MVP 可访问</td></tr>
+      <tr><td>第 2-4 周</td><td>收集 100 个试用反馈，砍功能，加付费墙 → Supabase + 支付 → ⏱️ 2 小时/天 → 10 个付费用户</td></tr>
+      <tr><td>第 2 个月起</td><td>按 SEO 关键词迭代，加 1 个新功能 → 数据看板 → ⏱️ 每周 4 小时 → 稳定订阅</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>模型能力</td><td>OpenAI API / Claude API（文案生成）</td></tr>
+      <tr><td>开发部署</td><td>Codex（写代码）、Vercel / Netlify（部署）</td></tr>
+      <tr><td>数据存储</td><td>Supabase / Firebase（用户和用量）</td></tr>
+      <tr><td>收款与数据</td><td>微信支付 / Stripe（收款）、Google Analytics（统计）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>用户输入场景 → API 接收并拼提示词 → 模型返回 3 条结果 → 前端展示 → 用量计数 → 免费额度用完提示付费。开发一次约 2-3 周业余时间；维护每天 30 分钟，核心成本是模型 API 按量付费。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>试用用户转订阅。<strong>中期：</strong>月付 + 按量计费。<strong>长期：</strong>企业版/批量授权 + 定制功能。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>100-500 元</td><td>10-30 个订阅</td></tr>
+      <tr><td>中等</td><td>1000-5000 元</td><td>100-300 个订阅</td></tr>
+      <tr><td>乐观</td><td>10000 元以上</td><td>垂直头部 + 企业版</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>域名</td><td>约 60-100 元/年</td><td>必须</td><td>先用免费子域名</td></tr>
+      <tr><td>API 预充值</td><td>100-300 元</td><td>必须（有试用后）</td><td>先用免费额度验证</td></tr>
+      <tr><td>Vercel 部署</td><td>0 元起步</td><td>必须</td><td>免费版即可</td></tr>
+      <tr><td>Supabase</td><td>0 元起步</td><td>可后期再买</td><td>免费版即可</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（1.5-2 小时）：</strong>30 分钟看用户反馈，1 小时开发，30 分钟发内容。<strong>批量：</strong>周末集中开发新功能。<strong>碎片：</strong>通勤时看竞品和导航站收录。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：做了一大堆功能没人用。</strong>应对：MVP 只做 1 个功能，第 30 天没 100 个试用就换场景。</li>
+    <li><strong>失败原因 2：API 成本吃掉收入。</strong>应对：设置单用户每日额度，超出引导升级。</li>
+    <li><strong>失败原因 3：被大厂抄。</strong>应对：做细分场景 + 服务绑定（如行业模板），不拼通用能力。</li>
+  </ul>
+  <p><strong>合规：</strong>收集用户数据需有隐私说明；支付需接入合规渠道；AI 生成内容页需免责声明。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周无新订阅 → 开放 7 天免费并私信前 50 个试用用户，问“卡在哪一步”。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>MVP 原型可演示</td><td>让 Codex 帮忙拆小，先出静态页</td></tr>
+      <tr><td>第 14 天</td><td>试用页上线，50 个试用</td><td>加大内容引流，或提交导航站</td></tr>
+      <tr><td>第 21 天</td><td>100 个试用，付费墙可用</td><td>砍功能，只保留核心</td></tr>
+      <tr><td>第 30 天</td><td>10 个付费订阅</td><td>换更窄场景或调整定价</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="project" id="p8">
+  <h2>8. 订阅式AI助理</h2>
+
+  <h3>一、项目概述与市场分析</h3>
+  <p><strong>商业本质：</strong>以固定月费为个人创业者和小店主提供“虚拟助理”服务。</p>
+  <p><strong>目标客户：</strong>卫浴经销商、门店老板、自由职业者、自媒体人。痛点是：没人手处理内容、客服、文件、周报，招人太贵。</p>
+  <p><strong>市场与竞争：</strong>“AI 助理”概念多，但边界不清、交付不透明。你的差异化是：服务边界写死、每月固定交付清单、每月一份成果报告。</p>
+  <p><strong>你的天然优势：</strong>你听得懂卫浴经销商和门店老板的业务，能直接用“卫浴行业语言”做内容、客服话术和数据周报，普通助理做不到。</p>
+
+  <h3>二、最小可行产品（MVP）设计</h3>
+  <table>
+    <thead><tr><th>项目</th><th>方案</th></tr></thead>
+    <tbody>
+      <tr><td>第一周上线的 MVP</td><td>服务清单（内容 4 条 + 客服话术 10 条 + 周报 1 份）+ 交付日历</td></tr>
+      <tr><td>验证需求</td><td>前 1-3 个客户低价或免费做 1 个月，收集“最想要的服务”</td></tr>
+      <tr><td>前 10 个客户来源</td><td>卫浴渠道老关系、门店老板转介绍、朋友圈、行业群</td></tr>
+      <tr><td>定价策略</td><td>399-999 元/月，3 个月起签；加“内容+客服+数据”套餐 999-1999 元/月</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三、详细启动步骤</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>做什么 → 用什么工具 → 耗时 → 预期产出</th></tr></thead>
+    <tbody>
+      <tr><td>第 1-3 天</td><td>写服务清单和交付日历，准备合同模板 → Notion/飞书 → ⏱️ 2 小时/天 → 可签单的交付说明</td></tr>
+      <tr><td>第 1 周</td><td>谈第 1 个客户（低价/免费），跑通第一周交付 → 企业微信 → ⏱️ 2 小时/天 → 1 个种子客户</td></tr>
+      <tr><td>第 2-4 周</td><td>把重复工作流程化，做自动化；每月交成果报告 → n8n/Make + 飞书 → ⏱️ 2 小时/天 → 2-3 个付费客户</td></tr>
+      <tr><td>第 2 个月起</td><td>提价，复制第 3-4 个客户；把流程做成模板卖 → 飞书模板 → ⏱️ 每周 5 小时 → 稳定月费收入</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四、AI 工具与自动化工作流</h3>
+  <table>
+    <thead><tr><th>用途</th><th>推荐工具</th></tr></thead>
+    <tbody>
+      <tr><td>内容生成</td><td>ChatGPT / Claude / Kimi（内容、话术、周报初稿）</td></tr>
+      <tr><td>自动化</td><td>n8n / Make（自动整理数据、定时提醒）、飞书机器人（日报）</td></tr>
+      <tr><td>客户沟通</td><td>企业微信 + 话术库（自动回复模板）</td></tr>
+      <tr><td>运营效率</td><td>飞书/Notion（协作和交付）、腾讯文档/Excel（数据周报）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>完整工作流：</strong>每周日收集客户数据 20 分钟 → n8n 自动汇总 10 分钟 → ChatGPT 生成周报初稿 15 分钟 → 人工校准 15 分钟 → 企业微信交付 5 分钟 → 每月生成成果报告 30 分钟。单客户每周约 1.5 小时，原人工约 6 小时。</p>
+
+  <h3>五、变现路径与收入模型</h3>
+  <p><strong>短期：</strong>2-3 个月费客户。<strong>中期：</strong>5 个客户 + 套餐升级。<strong>长期：</strong>10 个客户 + 自动化模板/课程二次销售。</p>
+  <table>
+    <thead><tr><th>档位</th><th>月收入预估</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>保守</td><td>800-2000 元</td><td>2-3 个基础客户</td></tr>
+      <tr><td>中等</td><td>4000-8000 元</td><td>5-8 个客户 + 套餐</td></tr>
+      <tr><td>乐观</td><td>12000 元以上</td><td>10 个客户 + 模板/课程</td></tr>
+    </tbody>
+  </table>
+
+  <h3>六、投入成本明细（≤1000 元）</h3>
+  <table>
+    <thead><tr><th>项目</th><th>费用</th><th>优先级</th><th>免费替代</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT/Claude 订阅</td><td>约 140-160 元/月</td><td>必须</td><td>Kimi/豆包/DeepSeek 免费版</td></tr>
+      <tr><td>n8n 自建/云版</td><td>0-50 元/月</td><td>可后期再买</td><td>先用免费版和手动流程</td></tr>
+      <tr><td>企业微信/飞书</td><td>0 元</td><td>必须</td><td>免费版即可</td></tr>
+      <tr><td>合同/电子签名</td><td>0-200 元/年</td><td>可后期再买</td><td>先用 Word 模板 + 微信确认</td></tr>
+    </tbody>
+  </table>
+
+  <h3>七、时间管理方案</h3>
+  <p><strong>每日（1.5-2 小时）：</strong>40 分钟做内容，30 分钟客服话术，30 分钟数据，20 分钟沟通。<strong>批量：</strong>周日集中做所有客户的周报。<strong>碎片：</strong>通勤回客户消息、记录客户需求。</p>
+
+  <h3>八、风险预案与避坑指南</h3>
+  <ul class="checklist">
+    <li><strong>失败原因 1：服务范围失控。</strong>应对：合同里写明“每周 X 条内容、X 次话术、X 份周报”，超范围另行报价。</li>
+    <li><strong>失败原因 2：客户随时停订。</strong>应对：3 个月起签 + 每月成果报告，让续费有据可依。</li>
+    <li><strong>失败原因 3：依赖单个大客户。</strong>应对：客户数量控制在 5-10 个，单客户占比不超过 30%。</li>
+  </ul>
+  <p><strong>合规：</strong>涉及客户经营数据要签保密条款；代发内容需客户授权；收款建议走个体户/对公渠道。</p>
+  <p><strong>瓶颈破局：</strong>连续 2 周没新客户 → 把种子客户的成果报告脱敏后发朋友圈/行业群，标题写“1 个月帮门店节省 XX 小时”。</p>
+
+  <h3>九、30 天里程碑检查表</h3>
+  <table>
+    <thead><tr><th>节点</th><th>应达到状态</th><th>未达标调整</th></tr></thead>
+    <tbody>
+      <tr><td>第 7 天</td><td>服务清单完成，1 个种子客户</td><td>改为免费做 1 周换案例</td></tr>
+      <tr><td>第 14 天</td><td>2 个客户，交付流程跑通</td><td>简化服务项，只保留 2 项</td></tr>
+      <tr><td>第 21 天</td><td>2-3 个付费客户</td><td>降月费或缩短起签期</td></tr>
+      <tr><td>第 30 天</td><td>3 个客户 + 1 份成果报告样板</td><td>用样板开发新客户</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="common">
+  <h2>通用合规与避坑</h2>
+  <h3>一、营业执照与税务</h3>
+  <p>起步阶段可以先以个人身份接单、收款。一旦有稳定收入，建议注册个体工商户（线上办理，多数地区免费）；涉及开票、月流水超过起征点时，按当地政策申报个人所得税或经营所得。工具站和付费社群涉及第三方支付时，优先使用平台合规结算。</p>
+  <h3>二、内容与版权红线</h3>
+  <ul class="checklist">
+    <li>AI 生成内容不直接抄袭他人作品；引用新闻、数据要标注来源。</li>
+    <li>不使用他人品牌 LOGO、肖像、课程截图做交付物，除非客户提供授权。</li>
+    <li>广告内容按平台要求标注“广告”，不承诺“保证变现”“日入过千”。</li>
+    <li>涉及客户经营数据、个人信息时，先脱敏并签保密条款。</li>
+  </ul>
+  <h3>三、通用破局策略</h3>
+  <ul class="checklist">
+    <li>连续 2 周没单：免费做 1 个最小案例，换回数据和转介绍。</li>
+    <li>单子太杂：砍到 2 类客户、1 个主打交付物，其他只做引流。</li>
+    <li>忙到没时间赚钱：每周日花 1 小时做“流程复盘”，把重复工作写成模板或自动化。</li>
+    <li>工具会员费超预算：所有项目都先跑 1 个月免费版，确认有收入再付费。</li>
+  </ul>
+  <h3>四、最终选择建议</h3>
+  <table>
+    <thead><tr><th>你的目标</th><th>首选项目</th><th>备选项目</th></tr></thead>
+    <tbody>
+      <tr><td>最快见到现金流</td><td>2. AI文案与电商素材代做</td><td>5. AI数字产品小店</td></tr>
+      <tr><td>高客单、可复制</td><td>1. 小红书实体店AI代运营</td><td>8. 订阅式AI助理</td></tr>
+      <tr><td>长期资产、被动收入</td><td>3. 提示词库与模板包</td><td>6. 垂直内容+知识付费</td></tr>
+      <tr><td>有技术条件再启动</td><td>7. AI工具站/轻量订阅</td><td>让 Codex 协助搭建 MVP</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>务实提醒：</strong>上面所有收入预估都是“认真执行 30 天后的可能区间”，不是保证。真正能拿到的数字取决于你的执行力、行业资源和你选的细分赛道。任何让你先交钱、拉人头、囤货、承诺稳赚的项目，都直接拒绝。</div>
+</section>
+
+<footer class="footer">
+  本企划书由 AI 助手基于你选择的 8 个项目生成，仅作起步参考；预算、法律和平台规则请以实际情况为准。
+</footer>
+</main>
+</body>
+</html>
