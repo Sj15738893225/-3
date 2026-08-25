@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="AI 数字产品小店可验证竞品信号报告：数据来源、市场信号、跨平台对比、SKU 建议">
+<title>AI 数字产品小店 · 可验证竞品信号报告</title>
+<style>
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light dark;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --text: #1d2733;
+  --muted: #5c6672;
+  --border: #dce3e8;
+  --accent: #2b6f9e;
+  --accent-soft: #e5f0f7;
+  --accent-text: #1c5276;
+  --warn: #a35d0a;
+  --warn-soft: #f7ecd9;
+  --danger: #b3402c;
+  --danger-soft: #fbe9e5;
+  --tag-bg: #eef2f4;
+  --tag-text: #34424e;
+  --shadow: 0 1px 2px rgba(16, 24, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15181c;
+    --surface: #1e2329;
+    --text: #eef1f4;
+    --muted: #a6b0ba;
+    --border: #313a44;
+    --accent: #64b5e0;
+    --accent-soft: #16303e;
+    --accent-text: #a8d8f0;
+    --warn: #e2a05b;
+    --warn-soft: #3a2f1d;
+    --danger: #ef8a73;
+    --danger-soft: #3a211d;
+    --tag-bg: #262d35;
+    --tag-text: #c8d0d8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.7;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { max-width: 1180px; margin: 0 auto; padding: 32px 18px 64px; }
+.hero { border-bottom: 1px solid var(--border); padding-bottom: 22px; margin-bottom: 28px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+h1 { margin: 0 0 10px; font-size: 31px; line-height: 1.3; }
+h2 { margin: 0 0 12px; font-size: 23px; line-height: 1.35; }
+h3 { margin: 22px 0 10px; font-size: 18px; line-height: 1.4; }
+h4 { margin: 16px 0 8px; font-size: 15px; }
+p { margin: 8px 0; }
+.subtitle { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.chips span {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent-text);
+  font-size: 13px;
+  padding: 6px 10px;
+  box-shadow: var(--shadow);
+}
+.module {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 20px 22px 24px;
+  margin: 18px 0 30px;
+}
+.module-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 16px; }
+.m-no {
+  display: inline-block;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.table-wrap { overflow-x: auto; margin: 10px 0 14px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; background: var(--surface); }
+th, td { border: 1px solid var(--border); padding: 9px 10px; text-align: left; vertical-align: top; }
+th { background: var(--tag-bg); color: var(--tag-text); font-weight: 600; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.note { border-left: 3px solid var(--warn); background: var(--warn-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.tip { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.unavail { border-left: 3px solid var(--danger); background: var(--danger-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.src { color: var(--muted); font-size: 12px; }
+.badge { display: inline-block; border-radius: 8px; padding: 3px 7px; font-size: 11px; font-weight: 600; margin-right: 6px; white-space: nowrap; }
+.b-high { background: var(--accent-soft); color: var(--accent-text); }
+.b-mid { background: var(--warn-soft); color: var(--warn); }
+.b-low { background: var(--tag-bg); color: var(--tag-text); }
+.footer { margin-top: 34px; border-top: 1px solid var(--border); padding-top: 14px; color: var(--muted); font-size: 13px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 44px; }
+  h1 { font-size: 25px; }
+  .module { padding: 16px 14px 18px; }
+}
+@media print { :root { color-scheme: light; } body { background: #fff; color: #000; } .module { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">AI 数字产品小店 · 竞品信号研究</p>
+    <h1>AI 数字产品小店 · 可验证竞品信号报告</h1>
+    <p class="subtitle">只输出可验证、有来源、可追溯的信息。凡公开渠道拿不到的销量、成交额、咨询量、互动量，均明确标注“不可获取”，并提供替代验证方式。</p>
+    <div class="chips">
+      <span>数据采集日：2026-08-25</span>
+      <span>来源：微信搜狗 / 必应 / GitHub API</span>
+      <span>不编造后台数据</span>
+      <span>小红书公开接口不可用</span>
+    </div>
+  </header>
+
+  <section class="module" id="m1">
+    <div class="module-head"><span class="m-no">一</span><h2>数据采集方法论说明</h2></div>
+    <p>本次分析使用三种可复核来源：微信搜狗公众号搜索、必应公开网页检索、GitHub 公开 API。同时直连探测了小红书、知乎、CSDN、搜狐，记录真实返回状态。所有结论均附来源；没有来源的结论不写入。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>来源</th><th>采集方式</th><th>可信度</th><th>已知局限</th></tr></thead>
+        <tbody>
+          <tr><td>微信搜狗公众号搜索<br><span class="src">weixin.sogou.com</span></td><td>构造关键词查询，抓取结果页并提取文章标题、公众号名、发布时间</td><td><span class="badge b-high">高</span> 标题/账号/日期可复核</td><td>单页最多显示 10 条；不提供阅读量/评论/成交；文章直链需浏览器跳转，未解析</td></tr>
+          <tr><td>必应公开网页检索<br><span class="src">bing.com</span></td><td>关键词检索，提取结果标题与来源域名</td><td><span class="badge b-mid">中</span> 存在性可复核</td><td>部分结果是导航站/官网；小红书笔记未被有效索引；无互动数据</td></tr>
+          <tr><td>GitHub 公开 API<br><span class="src">api.github.com</span></td><td>读取仓库 full_name、star 数、描述</td><td><span class="badge b-high">高</span> 公开 API 可复核</td><td>只代表开发者侧供给，不代表消费端销量</td></tr>
+          <tr><td>小红书直连探测<br><span class="src">xiaohongshu.com</span></td><td>访问搜索页与搜索接口</td><td><span class="badge b-low">低</span> 未获得可用数据</td><td>网页返回 301 跳转登录，搜索接口返回 HTTP 500，公开数据不可获取</td></tr>
+          <tr><td>知乎 / CSDN / 搜狐直连</td><td>访问文章页</td><td><span class="badge b-low">低</span> 未获得可用互动数据</td><td>知乎与 CSDN 被验证拦截；搜狐文章页阅读数占位符为空，未渲染出数值</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>指标说明：</strong>真实销量、成交额、私信咨询量、订单复购率属于平台后台或商家私有数据，公开渠道不可获取。本报告全部使用“公开内容是否存在、标题关键词、发布时间、GitHub 星数、检索返回条数”作为替代信号，并逐条标注可信度。</div>
+  </section>  <section class="module" id="m2">
+    <div class="module-head"><span class="m-no">二</span><h2>AI 文案与电商素材代做服务 · 市场信号分析</h2></div>
+    <p>说明：以下所有“案例”均为公众号文章标题、账号名、发布日期，可经微信搜狗按标题复现；不存在任何销量或成交数据。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>评估维度</th><th>替代指标</th><th>具体案例</th><th>数据点</th><th>关键发现</th><th>可信度</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>市场需求热度</td>
+            <td>公开文章存在性 + 发布时间</td>
+            <td>《案例库 #14 | AI代写服务:一个人就是一支文案工厂,月入3万的秘密》，账号：铃铛的副业自动化笔记，2026-03-28<br>《都说文案代写一单几百块,我扒完真实行情,发现被AI抬价的是另一拨人》，账号：一起谈副业，2026-08-13<br>《一、AI代写文案》，账号：晓晓今天想记录下来，2026-08-23<br>《拆解靠AI代写接单月入8000+的真实账号,完整SOP照抄》，账号：稳捷说副业，2026-08-12</td>
+            <td>4 篇标题可复核；其中 3 篇发布于 2026-08，1 篇发布于 2026-03</td>
+            <td>公众号内容供给活跃，标题同时指向“接单赚钱”与“行情/避坑”，说明讨论热度存在；但“月入”数字均为文章主张，未获独立验证</td>
+            <td><span class="badge b-mid">中-高</span> 存在性可验证，量级不可量化</td>
+          </tr>
+          <tr>
+            <td>用户痛点集中度</td>
+            <td>公开标题中的高频词</td>
+            <td>《新手AI文案接单全流程:从0到第一单,手把手教你稳赚不被骗》，账号：花叙人间，2026-04-02<br>《AI 代写避坑指北(一)》，账号：XiDianAIWI，2026-02-26<br>《AI做小红书月入过万是真的吗?我拆了3个真实账号有人说吹的,有人说真赚到了》，账号：AI笔记指南，2026-08-17<br>《AI小红书文案副业:每天30分钟,零基础也能稳定月入过千》，账号：AI实用成长笔记，2026-03-09</td>
+            <td>4 篇标题含“避坑 / 不被骗 / 真假 / 副业 / 零基础”</td>
+            <td>标题层面高频出现“被骗、避坑、真假、副业”，说明潜在客户担心不靠谱、夸大收益、不知道能否赚钱；评论区原文未获取</td>
+            <td><span class="badge b-mid">中</span> 标题是公开信号，评论区不可验证</td>
+          </tr>
+          <tr>
+            <td>价格接受区间</td>
+            <td>公开标题中的价格词</td>
+            <td>《都说文案代写一单几百块,我扒完真实行情,发现被AI抬价的是另一拨人》，账号：一起谈副业，2026-08-13<br>《新手AI副业接单全攻略:从0到月入3000,报价/谈单/复购全给你写好了》，账号：致富笔记，2026-03-07<br>《只需9.9元,就能生成一套AI写真?!软件运营方遭上海市消保委点名!专家提醒》，账号：央视财经，2023-07-27（已超90天，仅作价格锚点参考）</td>
+            <td>3 条标题含价格词；无任何成交凭证</td>
+            <td>公开标题出现“一单几百块”的文案行情表述，以及 9.9 元的低门槛定价案例（该例为 AI 写真，非文案代写）；真实成交价不可获取</td>
+            <td><span class="badge b-low">低-中</span> 仅标题信号，无成交凭证</td>
+          </tr>
+          <tr>
+            <td>交付形式偏好</td>
+            <td>公开文章中出现的交付载体词</td>
+            <td>《飞书AI三步搞定小红书爆款封面,小白也能轻松上手!》，账号：秋叶PPT，2026-03-25<br>《飞书多维表格搭建 AI 记账全流程,附模板》，账号：科技川，2026-03-26<br>《Notion AI 工作流模板为什么在创作者圈走红?我先给你 3 个最值得抄的用法》，账号：行业透视镜Pro，2026-03-23</td>
+            <td>3 篇标题含“飞书 / Notion / 模板”</td>
+            <td>飞书、Notion 文档是公众号内容经常出现的交付与教程载体；但未获取任何真实订单交付记录</td>
+            <td><span class="badge b-mid">中</span> 载体词可验证，交付证据不可获取</td>
+          </tr>
+          <tr>
+            <td>复购 / 口碑信号</td>
+            <td>公开标题中的“复购 / 转介绍 / 老客户”</td>
+            <td>《普通人AI赚100万·第14天:老客户复购+转介绍,让订单源源不断》，账号：3DMAX终结者，2026-03-26<br>《新手AI副业接单全攻略:从0到月入3000,报价/谈单/复购全给你写好了》，账号：致富笔记，2026-03-07<br>《新手AI文案接单全流程:从0到第一单,手把手教你稳赚不被骗》，账号：花叙人间，2026-04-02</td>
+            <td>3 篇标题含“复购 / 转介绍 / 第一单”</td>
+            <td>“复购 + 转介绍”被作为可教学话题，说明行业内存在复购概念；实际复购率、老客户数量不可获取</td>
+            <td><span class="badge b-mid">中</span> 概念存在可验证，比率不可验证</td>
+          </tr>
+          <tr>
+            <td>竞争密度</td>
+            <td>同一关键词查询返回条数</td>
+            <td>微信搜狗查询“AI文案代写 服务”：返回 10 条<br>微信搜狗查询“AI电商文案 代写”：返回 10 条<br>微信搜狗查询“AI代写 老客户 复购”：返回 10 条</td>
+            <td>3 个查询均达到搜狗单页显示上限 10 条</td>
+            <td>公众号内容供给活跃；但搜狗单页上限无法代表全量，无法量化服务提供者总数</td>
+            <td><span class="badge b-mid">中</span> 检索条数可复核，总量不可得</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>互动量 TOP5 笔记 / 文章</h3>
+    <div class="unavail"><strong>本项无法执行：</strong>小红书搜索接口返回 HTTP 500、网页返回 301 跳转登录，知乎与 CSDN 直连被验证拦截，微信文章页未提供公开互动数据。因此无法给出任何“点赞 / 收藏 / 评论”数值。替代方式：登录小红书后手动搜索关键词并按“点赞最多”排序，逐条记录前 5 条笔记的标题、账号、点赞、收藏、评论原文。</div>
+
+    <h3>评论区最常问的 5 个问题</h3>
+    <div class="unavail"><strong>本项无法执行：</strong>未获取任何平台评论区原文。禁止把文章标题关键词冒充为真实提问。替代方式：使用本人账号在小红书、公众号、知乎评论区直接观察并记录原文，至少收集 20 条后归类。</div>
+
+    <h3>差评 / 负面反馈的典型内容</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>公开信号</th><th>来源</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>《AI 代写避坑指北(一)》</td><td>账号：XiDianAIWI，2026-02-26</td><td>标题即“避坑”，说明存在从业者或客户认为该领域有常见坑</td></tr>
+          <tr><td>《新手AI文案接单全流程:从0到第一单,手把手教你稳赚不被骗》</td><td>账号：花叙人间，2026-04-02</td><td>标题含“不被骗”，说明诈骗 / 被坑风险是公开讨论话题</td></tr>
+          <tr><td>《AI做小红书月入过万是真的吗?我拆了3个真实账号有人说吹的,有人说真赚到了》</td><td>账号：AI笔记指南，2026-08-17</td><td>标题含“是真的吗 / 有人说吹的”，说明收益宣称存在争议</td></tr>
+          <tr><td>《只需9.9元,就能生成一套AI写真?!软件运营方遭上海市消保委点名!专家提醒》</td><td>账号：央视财经，2023-07-27</td><td>官方媒体点名低单价 AI 产品，提示合规与消费投诉风险；已超 90 天，仅作背景</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>对差评的诚实说明：</strong>以上全部为标题级信号，不是任何用户评论原文。没有一条可验证的“差评截图”或“退款记录”。</div>
+  </section>  <section class="module" id="m3">
+    <div class="module-head"><span class="m-no">三</span><h2>AI 提示词库与工作流模板包 · 市场信号分析</h2></div>
+    <p>说明：GitHub 星数为 2026-08-25 GitHub API 读取值，可复核；公众号案例为微信搜狗检索标题，可复现。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>评估维度</th><th>替代指标</th><th>具体案例</th><th>数据点</th><th>关键发现</th><th>可信度</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>市场需求热度</td>
+            <td>公开内容存在性 + GitHub 星数</td>
+            <td>《10个Prompt模板,覆盖你90%的AI使用场景(收藏备用)》，账号：AI提效计划，2026-03-24<br>《用AI写开发信:三条Prompt模板,回复率直接翻倍》，账号：苏外贸，2026-08-20<br>《写邮件的Prompt模板》，账号：日常AI指南，2026-08-18<br>GitHub：f/prompts.chat，167,871 星</td>
+            <td>3 篇公众号文章 + 1 个 GitHub 仓库；星数来自 GitHub API</td>
+            <td>免费提示词内容供给量巨大；公众号仍持续发布新模板，说明话题热度在，但付费转化证据缺失</td>
+            <td><span class="badge b-mid">中-高</span> 存在性与星数可验证，销量不可得</td>
+          </tr>
+          <tr>
+            <td>用户痛点集中度</td>
+            <td>公开标题中的高频词</td>
+            <td>《Prompt、工作流、Agent: 普通职场人到底该学到哪一层?》，账号：上班有 AI，2026-08-20<br>《Prompt高手都在用的3个技巧:Few-shot、CoT、任务分解,你还没学会?》，账号：城市数据派，2026-03-31<br>《如何写好AI提示词，一文带你从入门到精通（含40个模版）》，来源：CSDN（经必应索引），发布日期未获取</td>
+            <td>3 篇标题含“该学到哪一层 / 还没学会 / 从入门到精通”</td>
+            <td>公开标题指向“信息过载、不知道从哪学起”，但无法判断这是需求还是内容供给制造的焦虑</td>
+            <td><span class="badge b-mid">中</span> 标题可验证，需求强度不可量化</td>
+          </tr>
+          <tr>
+            <td>价格接受区间</td>
+            <td>公开标题中的价格词</td>
+            <td>微信搜狗查询“AI提示词 9.9元”：返回 0 条与提示词直接相关的结果<br>微信搜狗查询“AI提示词 知识星球”：返回 0 条直接结果<br>《只需9.9元,就能生成一套AI写真?!...》，账号：央视财经，2023-07-27</td>
+            <td>2 个查询 0 条直接结果；1 条 9.9 元案例为 AI 写真而非提示词</td>
+            <td>付费提示词的公开价格证据不足；不能据此判断价格区间，必须由用户自行询价验证</td>
+            <td><span class="badge b-low">低</span> 无价格凭证</td>
+          </tr>
+          <tr>
+            <td>交付形式偏好</td>
+            <td>公开文章中的载体词 + GitHub 仓库形态</td>
+            <td>《AI日报自动生成怎么做?从数据到成文4个Prompt模板(Kimi/飞书/Notion AI对比)》，账号：职场百态-职场的那点事儿，2026-08-18<br>《飞书多维表格搭建 AI 记账全流程,附模板》，账号：科技川，2026-03-26<br>《Notion AI 工作流模板为什么在创作者圈走红?》，账号：行业透视镜Pro，2026-03-23<br>GitHub：zengfr/n8n-workflow-all-templates，106 星；aircrushin/awesome-dify-workflow，38 星</td>
+            <td>3 篇文章 + 2 个仓库；星数来自 GitHub API</td>
+            <td>飞书、Notion 文档是公众号主流交付形态；GitHub 上 n8n / Dify 工作流模板仓库存在但星数低，说明开发者侧供给少</td>
+            <td><span class="badge b-mid">中</span> 载体词与星数可验证，付费交付不可验证</td>
+          </tr>
+          <tr>
+            <td>复购 / 口碑信号</td>
+            <td>直接证据</td>
+            <td>针对“提示词 / 模板包”品类未检索到可验证的复购、转介绍、老客户记录</td>
+            <td>0 条直接证据</td>
+            <td>本维度对提示词品类无法下结论；建议通过私域问卷或付费用户访谈验证</td>
+            <td><span class="badge b-low">低</span> 不可获取</td>
+          </tr>
+          <tr>
+            <td>竞争密度</td>
+            <td>GitHub 星数 + 检索返回条数</td>
+            <td>GitHub：f/prompts.chat，167,871 星；PlexPt/awesome-chatgpt-prompts-zh，61,793 星；ai-collection/ai-collection，9,128 星<br>微信搜狗查询“Prompt 模板”：返回 10 条；查询“飞书 AI 模板”：返回 10 条；查询“Notion AI 模板”：返回 10 条</td>
+            <td>3 个高星仓库 + 3 个查询达到单页上限</td>
+            <td>通用提示词供给高度饱和；垂直行业工作流模板仓库星数低，可能是空白，也可能说明需求小，需验证</td>
+            <td><span class="badge b-high">高</span> 星数和检索条数可复核</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>模板包内容分类分布</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>分类</th><th>可验证案例</th><th>供给判断</th></tr></thead>
+        <tbody>
+          <tr><td>职场效率类（邮件 / 提案 / 日报 / 预案）</td><td>《用AI写开发信:三条Prompt模板》苏外贸 2026-08-20；《AI写项目提案教程:4个Prompt模板》职场百态 2026-08-22；《AI做应急预案教程》职场百态 2026-08-22；《AI日报自动生成怎么做》职场百态 2026-08-18</td><td>供给密集</td></tr>
+          <tr><td>个人效能类（记账 / 复盘）</td><td>《飞书多维表格搭建 AI 记账全流程,附模板》科技川 2026-03-26；《notion模板:AI让复盘快准狠》Notion教程 2026-03-01</td><td>供给较多</td></tr>
+          <tr><td>内容创作类（小红书 / 爆款文案）</td><td>《飞书AI三步搞定小红书爆款封面》秋叶PPT 2026-03-25；《天啊!用AI写小红书爆款文案居然这么简单!》创客宇言 2026-03-24</td><td>供给较多</td></tr>
+          <tr><td>研究调研类</td><td>《一个 Prompt 模板,让 AI 帮你做任何行业的市场调研》效率盒子 2026-03-19</td><td>供给中等</td></tr>
+          <tr><td>通用合集类</td><td>《10个Prompt模板,覆盖你90%的AI使用场景》AI提效计划 2026-03-24；《我常用的 37 个 AI 提示词模板》知乎专栏（经必应索引，日期未获取）</td><td>供给饱和</td></tr>
+          <tr><td>垂直实体店 / 卫浴建材类</td><td>本次检索未出现</td><td>可能是空白，也可能是需求过小；需自行验证</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>免费 vs 付费内容的边界</h3>
+    <p><strong>可验证事实：</strong>免费模板文章大量存在（见上表），GitHub 上也有 16.8 万星和 6.2 万星的全免费提示词库。<strong>付费侧证据：</strong>本次检索未找到可验证的提示词销售价格、成交记录或商品链接；唯一付费相关标题《Sora付费课爆火!是真干货还是“智商税”?》（光明网，2024-02-22，已超 90 天）是对付费课的质疑。</p>
+    <div class="note"><strong>推断（未经交易数据验证）：</strong>免费内容负责提供“模板样例”，付费内容通常需要做到“完整合集 + 持续更新 + 答疑/社群”。该边界无法从本次数据中证实，必须用低单价试用商品验证。</div>
+
+    <h3>用户对更新频率 / 售后支持 / 格式兼容性的关注度</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>关注点</th><th>可验证信号</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>更新频率</td><td>GitHub 仓库 zengfr/n8n-workflow-all-templates 描述含“synchronized and updated every 1 months”；公众号《AI日报自动生成怎么做》2026-08-18 描述持续产出流程</td><td>更新承诺出现在供给端，无法验证用户是否因此付费</td></tr>
+          <tr><td>售后支持</td><td>无公开可验证记录</td><td>不可获取；替代方式：购买 1-3 份竞品体验售后响应</td></tr>
+          <tr><td>格式兼容性</td><td>文章标题反复出现“Kimi / 飞书 / Notion AI 对比”“飞书多维表格”“Notion 模板”</td><td>格式兼容是公开内容常讲的点，但无用户提问原文</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>  <section class="module" id="m4">
+    <div class="module-head"><span class="m-no">四</span><h2>跨平台对比矩阵</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>平台</th><th>优势信号</th><th>劣势 / 盲区</th><th>最适合验证的商品类型</th><th>数据可信度评级</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>小红书</td>
+            <td>公众号与必应索引中出现大量“小红书 AI 文案 / 代运营 / 爆款”内容，说明话题活跃，例：《天啊!用AI写小红书爆款文案居然这么简单!》创客宇言 2026-03-24；《飞书AI三步搞定小红书爆款封面》秋叶PPT 2026-03-25</td>
+            <td>搜索接口返回 500，网页 301 跳登录；笔记互动量、评论、销量全部不可获取</td>
+            <td>小红书种草文代写、标题生成 Prompt、AI 工具测评</td>
+            <td><span class="badge b-low">低</span> 仅能引用第三方内容，无法直接验证</td>
+          </tr>
+          <tr>
+            <td>微信订阅号</td>
+            <td>微信搜狗可检索文章标题、账号名、发布日期，供给变化可追踪</td>
+            <td>无阅读量、评论、成交数据；文章直链需浏览器跳转，本次未解析</td>
+            <td>垂直教程、付费社群、模板交付说明</td>
+            <td><span class="badge b-mid">中-高</span> 存在性可验证，效果不可验证</td>
+          </tr>
+          <tr>
+            <td>知乎</td>
+            <td>必应索引到专栏标题，如《我常用的 37 个 AI 提示词模板！直接复制就能用！》zhuanlan.zhihu.com/p/2051435123065747291</td>
+            <td>直连被拦截；赞同、评论、阅读数不可获取</td>
+            <td>长文教程、付费咨询</td>
+            <td><span class="badge b-low">低</span> 仅索引标题可验证</td>
+          </tr>
+          <tr>
+            <td>GitHub</td>
+            <td>仓库名、描述、星数经公开 API 可复核，适合判断开发者侧供给密度</td>
+            <td>星数不等于消费端销量；高星仓库多为免费项目</td>
+            <td>提示词库、工作流模板的供给密度与空白判断</td>
+            <td><span class="badge b-high">高</span> API 数据可复核</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="module" id="m5">
+    <div class="module-head"><span class="m-no">五</span><h2>商品选择建议（基于证据）</h2></div>
+    <p>以下 5 个 SKU 是“公开信号支持 + 风险可控 + 可用最小成本验证”的组合。每个建议都写明证据、风险和验证方法。</p>
+
+    <div class="card">
+      <h3>SKU 1：小红书爆款标题 / 种草文提示词包（电商 + 实体店垂直版）</h3>
+      <p><strong>推荐理由：</strong>公开内容中“小红书 AI 文案 / 爆款封面”是高频话题，见《天啊!用AI写小红书爆款文案居然这么简单!》创客宇言 2026-03-24、《飞书AI三步搞定小红书爆款封面》秋叶PPT 2026-03-25；同时 GitHub 通用提示词库已饱和（f/prompts.chat 167,871 星），做垂直行业才有差异。</p>
+      <p><strong>风险提示：</strong>免费同类内容多，付费意愿未验证；如果只做“通用标题模板”而没有行业案例，难以卖出。</p>
+      <p><strong>验证方法：</strong>发 3 篇免费笔记，文末提供 9.9 元试用品，统计 7 天私信领取量与购买量。</p>
+    </div>
+
+    <div class="card">
+      <h3>SKU 2：淘宝 / 拼多多主图 + 详情页文案代写（按单）</h3>
+      <p><strong>推荐理由：</strong>公众号公开标题出现“文案代写一单几百块”的行情表述，见《都说文案代写一单几百块,我扒完真实行情,发现被AI抬价的是另一拨人》一起谈副业 2026-08-13；微信搜狗查询“AI电商文案 代写”返回 10 条，说明服务供给活跃。</p>
+      <p><strong>风险提示：</strong>低价竞争、改稿次数多、接单量不稳定；标题中的“几百块”不是成交凭证。</p>
+      <p><strong>验证方法：</strong>上架 69 元体验包，接 3 单，记录每单交付耗时、修改轮次和好评情况。</p>
+    </div>
+
+    <div class="card">
+      <h3>SKU 3：月度 AI 内容代做套餐（20 条文案 + 8 张图）</h3>
+      <p><strong>推荐理由：</strong>“报价 / 谈单 / 复购”被公开讨论，见《新手AI副业接单全攻略:从0到月入3000,报价/谈单/复购全给你写好了》致富笔记 2026-03-07；还出现《【合同范本】小红书平台AI生图/代运营服务合作合同》法律雇佣军LegalMercenary 2026-02-25，说明服务合同化是行业现象。</p>
+      <p><strong>风险提示：</strong>个人产能有限；客户可能把“内容代做”理解成“代运营”，产生超出交付范围的预期。</p>
+      <p><strong>验证方法：</strong>只招 3 个 399-599 元月度客户，跑 30 天，看续费率。</p>
+    </div>
+
+    <div class="card">
+      <h3>SKU 4：飞书 / Notion 垂直工作流模板（实体店小红书运营 SOP）</h3>
+      <p><strong>推荐理由：</strong>飞书、Notion 模板是公开内容常见形态，见《飞书多维表格搭建 AI 记账全流程,附模板》科技川 2026-03-26、《Notion AI 工作流模板为什么在创作者圈走红?》行业透视镜Pro 2026-03-23；GitHub 上 n8n / Dify 模板仓库星数低（106 星 / 38 星），垂直供给可能少。</p>
+      <p><strong>风险提示：</strong>付费意愿未验证；模板容易被复制；低星也可能代表需求小。</p>
+      <p><strong>验证方法：</strong>免费发布 1 个章节，私信“完整版”领取，统计领取到付费的转化率。</p>
+    </div>
+
+    <div class="card">
+      <h3>SKU 5：1对1 AI 文案诊断 / 咨询（99-299 元）</h3>
+      <p><strong>推荐理由：</strong>新手教程类内容供给密集，说明“不会写、不会接单”的人群大；咨询是筛选高意向客户的最低成本方式。公开证据见《新手AI文案接单全流程:从0到第一单,手把手教你稳赚不被骗》花叙人间 2026-04-02。</p>
+      <p><strong>风险提示：</strong>咨询依赖个人口碑，早期可能无人下单；99-299 元定价仅为建议区间，无公开成交证据。</p>
+      <p><strong>验证方法：</strong>先提供 3 个免费诊断名额，换取真实案例与好评，再定价收费。</p>
+    </div>
+
+    <h3>不建议现在做</h3>
+    <div class="unavail">
+      <p><strong>通用 AI 提示词大全：</strong>GitHub 上 f/prompts.chat（167,871 星）、PlexPt/awesome-chatgpt-prompts-zh（61,793 星）已免费供给饱和，做“大全”没有差异化。</p>
+      <p><strong>“AI 副业月入 xxx”类课程：</strong>公开标题已出现“避坑”“真假”“智商税”等争议信号，例：XiDianAIWI《AI 代写避坑指北(一)》2026-02-26、AI笔记指南《AI做小红书月入过万是真的吗?》2026-08-17、光明网《Sora付费课爆火!是真干货还是“智商税”?》2024-02-22。合规与口碑风险高，且收益承诺不可验证。</p>
+    </div>
+  </section>
+
+  <section class="module" id="m6">
+    <div class="module-head"><span class="m-no">六</span><h2>数据局限性与后续行动建议</h2></div>
+    <h3>本次分析的 3 大局限</h3>
+    <ol>
+      <li>小红书、知乎、CSDN 的平台限制：无法获取笔记原文、互动数、评论原文；小红书搜索接口返回 HTTP 500。</li>
+      <li>微信搜狗只能验证文章存在性与标题、账号、日期：没有阅读量、评论、成交记录；文章直链需要浏览器跳转，未解析出 mp.weixin.qq.com 原始链接。</li>
+      <li>公开标题不等于真实需求或销量：所有“月入”“订单量”数字均无法独立核验，不能作为定价或投产依据。</li>
+    </ol>
+    <h3>下一步获取更精准数据的方法</h3>
+    <ul>
+      <li>登录小红书手动搜索“AI提示词”“AI文案代写”“小红书代运营”“Prompt模板”“AI工具测评”，按点赞排序，记录前 20 条笔记的标题、账号、点赞、收藏、评论原文。</li>
+      <li>用小号私信 5 个同类商家或代写服务者询价，只记录自己收到的真实回复，注明日期与账号。</li>
+      <li>购买 1-3 份 9.9-49.9 元低单价竞品，体验交付形态、响应速度和售后，形成体验记录。</li>
+      <li>加入 2 个 AI 副业或代运营社群，收集 30 条以上用户提问原文，按“需求 / 价格 / 担忧”归类。</li>
+      <li>用飞书问卷向首批 100 个粉丝收集：愿意为什么付费、可接受价格、最怕踩什么坑。</li>
+    </ul>
+    <h3>正式选品前，请亲自完成 3 个验证动作</h3>
+    <div class="tip">
+      <p><strong>动作 1：</strong>亲手在小红书搜索 5 组关键词，记录前 20 条笔记的标题、点赞、收藏、评论原文，存成表格。</p>
+      <p><strong>动作 2：</strong>用自己的账号发布 3 篇垂直内容，测试“私信领取 / 付费购买”的转化率，连续跑 7 天。</p>
+      <p><strong>动作 3：</strong>给 10 个目标客户发私信询价或免费诊断，记录他们回复中的价格预期与需求原话。</p>
+    </div>
+    <div class="note"><strong>最终提醒：</strong>本报告只提供可验证的证据链，不提供“答案”。在完成上述 3 个动作前，任何关于销量、价格、复购的结论都应视为未验证。</div>
+  </section>
+
+  <footer class="footer">
+    <p>AI 数字产品小店 · 可验证竞品信号报告 · 数据采集日期 2026-08-25</p>
+    <p>来源：微信搜狗公众号搜索、必应公开检索、GitHub 公开 API、各平台直连探测结果。所有后台数据、销量、成交额、互动量均未获取，也未编造。</p>
+  </footer>
+</main>
+</body>
+</html>
