@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="AI 数字产品小店选品落地与从零到一执行手册：30 天卖出第一单，预算 1000 元内，全部产出靠 AI 工具完成">
+<title>AI 数字产品小店 · 选品落地与从零到一执行手册</title>
+<style>
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light dark;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --text: #1d2733;
+  --muted: #5c6672;
+  --border: #dce3e8;
+  --accent: #2b6f9e;
+  --accent-soft: #e5f0f7;
+  --accent-text: #1c5276;
+  --warn: #a35d0a;
+  --warn-soft: #f7ecd9;
+  --danger: #b3402c;
+  --danger-soft: #fbe9e5;
+  --good: #2e7d5b;
+  --good-soft: #e3f2ec;
+  --tag-bg: #eef2f4;
+  --tag-text: #34424e;
+  --shadow: 0 1px 2px rgba(16, 24, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15181c;
+    --surface: #1e2329;
+    --text: #eef1f4;
+    --muted: #a6b0ba;
+    --border: #313a44;
+    --accent: #64b5e0;
+    --accent-soft: #16303e;
+    --accent-text: #a8d8f0;
+    --warn: #e2a05b;
+    --warn-soft: #3a2f1d;
+    --danger: #ef8a73;
+    --danger-soft: #3a211d;
+    --good: #7cc9a5;
+    --good-soft: #1d352b;
+    --tag-bg: #262d35;
+    --tag-text: #c8d0d8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.75;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { max-width: 1180px; margin: 0 auto; padding: 30px 18px 64px; }
+.hero { border-bottom: 1px solid var(--border); padding-bottom: 22px; margin-bottom: 26px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+h1 { margin: 0 0 10px; font-size: 30px; line-height: 1.32; }
+h2 { margin: 0 0 12px; font-size: 22px; line-height: 1.36; }
+h3 { margin: 22px 0 10px; font-size: 17px; line-height: 1.42; }
+h4 { margin: 16px 0 8px; font-size: 15px; }
+p { margin: 8px 0; }
+.subtitle { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li, .chips span {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent-text);
+  font-size: 13px;
+  padding: 6px 10px;
+  box-shadow: var(--shadow);
+}
+.module {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 20px 22px 24px;
+  margin: 18px 0 30px;
+}
+.module-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 14px; }
+.m-no {
+  display: inline-block;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin: 10px 0 16px; }
+.toc a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 8px 10px;
+  color: var(--accent-text);
+  text-decoration: none;
+  font-size: 13px;
+  box-shadow: var(--shadow);
+}
+.toc a:hover { border-color: var(--accent); }
+.table-wrap { overflow-x: auto; margin: 10px 0 14px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; background: var(--surface); }
+th, td { border: 1px solid var(--border); padding: 9px 10px; text-align: left; vertical-align: top; }
+th { background: var(--tag-bg); color: var(--tag-text); font-weight: 600; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.note { border-left: 3px solid var(--warn); background: var(--warn-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.tip { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.ok { border-left: 3px solid var(--good); background: var(--good-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.unavail { border-left: 3px solid var(--danger); background: var(--danger-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+blockquote {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+blockquote.script { border-left-color: var(--good); background: var(--good-soft); }
+.badge { display: inline-block; border-radius: 8px; padding: 3px 7px; font-size: 11px; font-weight: 600; margin-right: 6px; white-space: nowrap; }
+.b-high { background: var(--accent-soft); color: var(--accent-text); }
+.b-mid { background: var(--warn-soft); color: var(--warn); }
+.b-low { background: var(--tag-bg); color: var(--tag-text); }
+.step {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 10px 0;
+  background: var(--surface);
+}
+.step b.k { display: block; margin-bottom: 4px; color: var(--accent-text); }
+.sku { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 14px 0; background: var(--surface); }
+.sku h4 { margin-top: 0; color: var(--accent-text); }
+.kv { font-size: 13px; margin: 6px 0; }
+.kv b { display: inline-block; min-width: 110px; color: var(--tag-text); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; margin: 12px 0; }
+.footer { margin-top: 34px; border-top: 1px solid var(--border); padding-top: 14px; color: var(--muted); font-size: 13px; }
+@media (max-width: 700px) {
+  .page { padding: 22px 14px 44px; }
+  h1 { font-size: 24px; }
+  .module { padding: 16px 14px 18px; }
+}
+@media print { :root { color-scheme: light; } body { background: #fff; color: #000; } .module { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">AI 数字产品小店 · 从零到一执行手册</p>
+    <h1>AI 数字产品小店 · 选品落地与从零到一执行手册</h1>
+    <p class="subtitle">给完全零基础的新人：从决定做这件事到 30 天内卖出第一单。只写你明天就能打开电脑照着做的步骤，每个“第一步”都具体到“打开什么 → 点什么 → 输入什么 → 看到什么结果算成功”。</p>
+    <ul class="chips">
+      <li>预算 ≤1000 元</li>
+      <li>每天 2-4 小时</li>
+      <li>模板包先行 · 代做后端</li>
+      <li>30 天目标：卖出第一单</li>
+      <li>所有产出靠 AI 完成</li>
+      <li>不确定处明确标注 ⚠️</li>
+    </ul>
+    <nav class="toc" aria-label="目录">
+      <a href="#m1">一 · 选品策略与 SKU 确定</a>
+      <a href="#m2">二 · 产品制作全流程</a>
+      <a href="#m3">三 · 上架与销售渠道</a>
+      <a href="#m4">四 · 引流体系搭建</a>
+      <a href="#m5">五 · 30 天逐日执行计划</a>
+      <a href="#m6">六 · 每日固定 SOP</a>
+      <a href="#m7">七 · 获客话术与转化模板</a>
+      <a href="#m8">八 · 工具清单与费用总表</a>
+      <a href="#m9">九 · 风险预案与避坑指南</a>
+      <a href="#m10">十 · 30 天里程碑与后续规划</a>
+    </nav>
+  </header>
+
+  <section class="module" id="m1">
+    <div class="module-head"><span class="m-no">一</span><h2>选品策略与具体 SKU 确定</h2></div>
+
+    <h3>1.1 选品逻辑：四维打分法</h3>
+    <p>选品只看四件事，每件按 1-5 分打分，四项相加决定优先级。分数低不一定是坏品，可能只是现在不适合你：要么需求太小，要么做起来太慢，要么免费内容已经把价格打到 0。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>问自己</th><th>1 分</th><th>5 分</th></tr></thead>
+        <tbody>
+          <tr><td>需求频次</td><td>目标客户是不是反复需要、反复买？</td><td>一年买一次</td><td>每周都要用</td></tr>
+          <tr><td>付费意愿</td><td>客户愿意为“省时间、直接能用”付钱吗？</td><td>只想要免费的</td><td>愿意先付钱再看结果</td></tr>
+          <tr><td>制作难度</td><td>零基础 + AI 工具，2-4 小时内能做出可售版吗？</td><td>需要代码/设计/拍摄</td><td>填表格就能做完</td></tr>
+          <tr><td>竞争密度</td><td>同类免费和付费内容多不多？</td><td>几乎没人做（蓝海）</td><td>免费内容已泛滥（红海）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>判分标准：</strong>18 分以上立即做；14-17 分可以做，但要找差异化；13 分以下先放一放。竞争密度这一项，分数越低越好：通用提示词现在已经是 5 分红海，卫浴建材实体店模板几乎没有公开供给，是 1 分蓝海。</div>
+
+    <h3>候选商品评分表</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>候选商品</th><th>需求频次</th><th>付费意愿</th><th>制作难度</th><th>竞争密度</th><th>总分</th><th>策略结论</th></tr></thead>
+        <tbody>
+          <tr><td>电商小红书种草文模板包（补充）</td><td>4</td><td>4</td><td>2</td><td>4</td><td>14</td><td>S 级，首批主推</td></tr>
+          <tr><td>电商主图/详情页文案提示词包（补充）</td><td>4</td><td>4</td><td>2</td><td>3</td><td>13</td><td>S 级，首批主推</td></tr>
+          <tr><td>AI 小红书种草文代写</td><td>4</td><td>4</td><td>2</td><td>3</td><td>13</td><td>A 级，做模板包的转化后端</td></tr>
+          <tr><td>AI 电商主图文案代写</td><td>4</td><td>4</td><td>2</td><td>3</td><td>13</td><td>A 级，做体验包后端</td></tr>
+          <tr><td>AI 详情页文案代写</td><td>4</td><td>4</td><td>3</td><td>3</td><td>14</td><td>A 级，订单稳定后开放</td></tr>
+          <tr><td>AI 短视频脚本代写</td><td>4</td><td>3</td><td>3</td><td>3</td><td>13</td><td>B 级，第二个月再上</td></tr>
+          <tr><td>AI 商品标题优化</td><td>3</td><td>2</td><td>1</td><td>3</td><td>9</td><td>只做模板包赠品，不单独卖</td></tr>
+          <tr><td>AI 客服话术包</td><td>3</td><td>3</td><td>2</td><td>2</td><td>10</td><td>放入合集包章节，不单独卖</td></tr>
+          <tr><td>通用 AI 提示词合集</td><td>3</td><td>2</td><td>2</td><td>5</td><td>12</td><td>不做，免费内容已饱和</td></tr>
+          <tr><td>电商运营 AI 工作流模板</td><td>3</td><td>3</td><td>3</td><td>2</td><td>11</td><td>并入卫浴 SOP 包，不单独卖</td></tr>
+          <tr><td>自媒体内容 AI 提示词包</td><td>4</td><td>3</td><td>2</td><td>4</td><td>13</td><td>B 级，第二个月做垂直细分</td></tr>
+          <tr><td>AI 办公效率模板包</td><td>3</td><td>3</td><td>3</td><td>4</td><td>13</td><td>暂不做，竞争多且难做出差异</td></tr>
+          <tr><td>卫浴建材实体店小红书运营 SOP 包（补充）</td><td>3</td><td>4</td><td>3</td><td>1</td><td>11</td><td>A 级，蓝海差异化利润款</td></tr>
+          <tr><td>月度更新订阅（补充）</td><td>4</td><td>3</td><td>2</td><td>2</td><td>11</td><td>首单后上，做复购</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>为什么卫浴 SOP 包总分 11 仍要推：</strong>因为它的竞争密度只有 1，且你的行业经验能做出别人做不出的案例。打法是“通用模板包走量、垂直包赚利润”：先用前两个包拿到第一批付费用户和案例，再用卫浴包做高客单。</div>
+
+    <h3>1.2 首批上架 5 个 SKU</h3>
+
+    <div class="sku">
+      <h4>SKU 1 · 电商卖家小红书种草文模板包 V1.0（引流 + 主力）</h4>
+      <p class="kv"><b>一句话卖点：</b>把 100 篇爆款种草文的套路拆成 30 个标题公式 + 5 篇直接填的笔记模板，你只需要替换产品名。</p>
+      <p class="kv"><b>目标客户：</b>淘宝/拼多多/抖音店主、微商、实体店老板，想发小红书但不会写、没时间写。</p>
+      <p class="kv"><b>定价：</b>引流款 9.9 元（只含标题公式）；标准版 19.9-39.9 元（标题 + 5 篇模板 + 话题标签清单）。</p>
+      <p class="kv"><b>制作难度：</b>★★☆☆☆　<b>预计制作时间：</b>3-4 小时</p>
+      <p class="kv"><b>竞品参考：</b>小红书搜索“小红书文案模板”“种草文模板”“AI 文案提示词”；微信搜狗搜“小红书爆款文案”；闲鱼搜“文案模板”。</p>
+      <p class="kv"><b>差异化：</b>别人卖“通用 100 条提示词”，你卖“电商卖家专用 + 飞书表格 + 每季度更新 V 版本号 + 案例示范”。</p>
+    </div>
+
+    <div class="sku">
+      <h4>SKU 2 · 电商主图/详情页文案提示词包（主力利润）</h4>
+      <p class="kv"><b>一句话卖点：</b>输入产品名和卖点，AI 直接给你 5 条主图卖点文案和 8 模块详情页文案，拿来就能用。</p>
+      <p class="kv"><b>目标客户：</b>电商店主、代运营新人、做详情页的设计师/运营。</p>
+      <p class="kv"><b>定价：</b>39.9-69 元（含提示词 + 使用说明 + 2 个行业样例：卫浴、家居）。</p>
+      <p class="kv"><b>制作难度：</b>★★☆☆☆　<b>预计制作时间：</b>3-4 小时</p>
+      <p class="kv"><b>竞品参考：</b>淘宝/闲鱼搜“详情页文案 模板”“主图文案 AI”；小红书搜“电商文案 prompt”。</p>
+      <p class="kv"><b>差异化：</b>附“AI 生成后怎么检查违禁词/错别字”清单，并把提示词做成填空式，不是一堆理论。</p>
+    </div>
+
+    <div class="sku">
+      <h4>SKU 3 · 卫浴建材实体店小红书运营 SOP 包（利润 + 差异化）</h4>
+      <p class="kv"><b>一句话卖点：</b>给卫浴/建材门店老板的 30 天小红书执行手册：每天发什么、怎么拍、怎么写，照着做就行。</p>
+      <p class="kv"><b>目标客户：</b>卫浴、瓷砖、灯具、全屋定制等建材门店老板和经销商，以及跑门店渠道的人。</p>
+      <p class="kv"><b>定价：</b>99-199 元（30 天内容日历 + 20 个选题 + 门店种草文模板 + 评论区话术 + 飞书表格）。</p>
+      <p class="kv"><b>制作难度：</b>★★★☆☆　<b>预计制作时间：</b>5-6 小时</p>
+      <p class="kv"><b>竞品参考：</b>小红书搜“建材 小红书运营”“卫浴 获客”“门店 小红书”；目前公开供给很少，属于验证型蓝海。</p>
+      <p class="kv"><b>差异化：</b>你的卫浴渠道经验就是壁垒：门店怎么讲产品、客户最常问什么、怎么把到店客户变成内容素材，这些不是通用提示词能替代的。</p>
+    </div>
+
+    <div class="sku">
+      <h4>SKU 4 · 卫浴门店标题生成器（引流款）</h4>
+      <p class="kv"><b>一句话卖点：</b>9.9 元买 50 个卫浴门店小红书标题，发笔记不用再想标题。</p>
+      <p class="kv"><b>目标客户：</b>想低成本试水的小门店老板。</p>
+      <p class="kv"><b>定价：</b>9.9-19.9 元</p>
+      <p class="kv"><b>制作难度：</b>★☆☆☆☆　<b>预计制作时间：</b>1.5 小时</p>
+      <p class="kv"><b>竞品参考：</b>小红书搜“门店标题”“建材 文案”；主要用于测试蓝海需求和付款流程。</p>
+      <p class="kv"><b>差异化：</b>全部标题按卫浴场景分类：门店开业、新品到店、安装实拍、客户问答、避坑科普。</p>
+    </div>
+
+    <div class="sku">
+      <h4>SKU 5 · 30 天内容代做体验包 + 月度订阅（转化后端）</h4>
+      <p class="kv"><b>一句话卖点：</b>69 元体验 1 条种草文 + 1 条主图文案 + 对应模板；满意再加 29.9 元/月订阅，每月更新 2 个场景包。</p>
+      <p class="kv"><b>目标客户：</b>买过模板但不肯自己动手、或试了 AI 还是不会用的店主。</p>
+      <p class="kv"><b>定价：</b>体验包 69 元；月度订阅 29.9 元/月；后续可升级 399-599 元月度运营包。</p>
+      <p class="kv"><b>制作难度：</b>★★☆☆☆　<b>预计制作时间：</b>每单 60-90 分钟</p>
+      <p class="kv"><b>竞品参考：</b>小红书/闲鱼搜“AI 文案代写”“小红书代写 单”；微信搜狗搜“AI 文案代写 服务”。</p>
+      <p class="kv"><b>差异化：</b>不卖“包月不限量”，卖“先体验再订阅”；交付标准写清楚 48 小时内交付、3 轮修改，降低客户顾虑。</p>
+    </div>
+
+    <h3>1.3 产品形态确定</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>载体</th><th>优点</th><th>缺点</th><th>适合阶段</th><th>推荐</th></tr></thead>
+        <tbody>
+          <tr><td>飞书文档/多维表格</td><td>免费、可在线复制、目录清晰、适合放表格模板</td><td>对方需要接受邀请/登录飞书</td><td>初期主载体</td><td><span class="badge b-high">推荐</span></td></tr>
+          <tr><td>PDF</td><td>打开门槛最低、防改动、像“正式产品”</td><td>不能直接复制、更新麻烦</td><td>交付成品版</td><td><span class="badge b-high">推荐</span></td></tr>
+          <tr><td>百度网盘</td><td>适合大文件、图片包、视频教程</td><td>下载慢、需要对方有账号</td><td>素材包交付</td><td><span class="badge b-mid">辅助</span></td></tr>
+          <tr><td>Notion</td><td>模板感强、海外用户多</td><td>国内访问不稳定、学习成本高</td><td>后期可选</td><td><span class="badge b-low">后期</span></td></tr>
+          <tr><td>小报童</td><td>付费专栏顺手、支付简单</td><td>重文字内容，不适合表格/图片</td><td>第二个月</td><td><span class="badge b-mid">可选</span></td></tr>
+          <tr><td>知识星球</td><td>社群+更新+答疑一体，复购好</td><td>年费高、有流量门槛</td><td>有 30 个付费用户后</td><td><span class="badge b-mid">后期</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>结论：</strong>提示词库初期 = 飞书文档（在线版）+ PDF（正式版）双份交付；素材包 = 百度网盘链接；代做服务 = 飞书/腾讯文档交付 + 图片包 + PDF；知识付费 = 先微信收款/面包多，30 个付费用户后再开知识星球。</div>
+    <div class="note"><strong>收款怎么设：</strong>先注册面包多或爱发电（搜“面包多 官网”“爱发电 官网”），上架数字商品拿到自动发货链接；小红书开店开通后同时用官方交易；私域测试阶段可以用微信转账，但要遵守平台规则，不在小红书私信里直接引导大额转账。⚠️ 各平台抽佣和提现规则不同，以你注册时页面显示为准。</div>
+  </section>
+  <section class="module" id="m2">
+    <div class="module-head"><span class="m-no">二</span><h2>产品制作全流程（手把手教程）</h2></div>
+
+    <h3>2.1 AI 提示词库产品制作：以“电商种草文模板包”为例</h3>
+    <p>下面每一步都按“打开什么 → 点什么 → 输入什么 → 看到什么算成功”写。第一次做不要追求完美，目标是 3-4 小时内做出一个能卖的版本。</p>
+
+    <div class="step"><b class="k">Step 1 · 确定目录结构 ⏱️ 20 分钟</b>
+    <p>打开飞书 → 点左上角“新建文档” → 标题写“电商种草文模板包 V1.0” → 回车后输入 “/目录” 插入目录。把内容按下面 5 部分排好：</p>
+    <ol>
+      <li>第一部分：30 个爆款标题公式（填空式，例如“【产品】用了 30 天的真实感受”）</li>
+      <li>第二部分：5 篇完整笔记模板（产品种草、开箱体验、避坑科普、场景搭配、工厂实拍）</li>
+      <li>第三部分：小红书话题标签清单（按行业分组，如家居、卫浴、女装、零食）</li>
+      <li>第四部分：使用说明（怎么替换产品名、怎么写开头第一句、怎么配图）</li>
+      <li>第五部分：更新记录（版本号 + 日期 + 更新内容）</li>
+    </ol>
+    <p><b>做完标志：</b>目录里能点出 5 个空章节，页面标题清晰可见。</p></div>
+
+    <div class="step"><b class="k">Step 2 · 收集提示词素材 ⏱️ 60-90 分钟</b>
+    <p>素材不是抄别人的成品，而是找“人家为什么火”的结构。用下面 5 个来源，每个来源记 5 条标题或开头：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>来源</th><th>具体怎么找</th></tr></thead>
+        <tbody>
+          <tr><td>小红书</td><td>打开小红书 → 搜索“种草文”“好物分享” → 点“最热” → 记录前 20 条标题和开头第一句</td></tr>
+          <tr><td>微信公众号</td><td>微信搜狗（weixin.sogou.com）→ 搜“小红书文案”“种草笔记” → 看标题结构和常用词</td></tr>
+          <tr><td>知乎</td><td>知乎搜“怎么写小红书文案” → 看高赞回答里的写作框架</td></tr>
+          <tr><td>抖音图文</td><td>抖音搜“好物分享图文” → 记录 5 个点赞高的标题</td></tr>
+          <tr><td>AI 生成启发</td><td>把 5 个爆款标题丢给 DeepSeek，让它总结共同结构，再生成 30 个新标题</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><b>筛选标准：</b>标题里带具体产品、具体数字、具体场景的留下；只有“太好用了”“绝绝子”这类空话的不要。</p></div>
+
+    <div class="step"><b class="k">Step 3 · 用 AI 测试并优化每条提示词 ⏱️ 60 分钟</b>
+    <p>打开 DeepSeek 或 Kimi 网页版 → 把下面这条“测试提示词”粘贴进去，分别用 2 个完全不同的产品测（例如“卫浴花洒”和“女装连衣裙”），看输出能不能直接用：</p>
+    <blockquote>你是小红书种草文写手。请根据【产品】【核心卖点】【目标人群】写一篇 500 字的种草笔记。
+要求：1. 开头第一句必须是场景痛点；2. 中间写 2 个使用细节；3. 结尾给 1 个购买理由；4. 全文不超过 20 个感叹号；5. 不要用“绝绝子”“YYDS”这类空话。
+【产品】：{产品名}
+【核心卖点】：{卖点1}；{卖点2}
+【目标人群】：{人群}</blockquote>
+    <p><b>判断好坏的标准：</b>输出里出现“这款产品”“众所周知”这类 AI 味句子 → 在提示词里加“禁止出现以下词语：这款产品、众所周知、首先其次最后”；输出超过 500 字 → 加“严格控制在 500 字以内”；2 个产品都能测出可用结果 → 这条提示词合格，放进模板包。</p></div>
+
+    <div class="step"><b class="k">Step 4 · 排版与包装 ⏱️ 45 分钟</b>
+    <p>把测试好的提示词填回飞书文档：每个标题公式一行，下面附 1 个“卫浴产品示例”和 1 个“通用示例”。然后做三件事：</p>
+    <ol>
+      <li>飞书文档 → 右上角“… ” → 导出为 PDF，得到防改动的正式版；</li>
+      <li>打开 Canva 或稿定设计（搜“Canva 官网”“稿定设计”）→ 搜索“小红书封面”模板 → 把标题改成产品名，导出 3:4 封面图；</li>
+      <li>把 PDF 封面插到 PDF 第一页，让产品看起来像“完整手册”而不是“几段聊天记录”。</li>
+    </ol>
+    <p><b>做完标志：</b>飞书文档、PDF、封面图三个文件都存在，封面标题与产品名一致。</p></div>
+
+    <div class="step"><b class="k">Step 5 · 制作产品说明页 ⏱️ 30 分钟</b>
+    <p>在飞书里新建“产品说明页”，内容固定四块，直接照抄并替换：</p>
+    <blockquote>【目录预览】本包包含：30 个标题公式 / 5 篇完整笔记模板 / 话题标签清单 / 使用说明。
+【使用教程】第 1 步：把产品名填进标题公式；第 2 步：用 Step 3 的测试提示词生成正文；第 3 步：按模板里的配图建议配 3 张图；第 4 步：复制标签清单发出去。
+【更新承诺】本包每季度更新 1 次，老客户凭订单号免费领取新版本，版本号格式 V2026.09。
+【售后说明】数字产品一经发货不支持退款；如果发现内容无法使用，48 小时内私信我，我会帮你调整或补发。</blockquote>
+    <div class="note"><strong>注意：</strong>写“不支持退款”是数字产品常见做法，但平台规则可能要求标明售后政策，请以你上架平台的实际要求为准（⚠️ 此处需根据实际情况调整）。</div></div>
+
+    <div class="step"><b class="k">Step 6 · 制作免费体验版 ⏱️ 30 分钟</b>
+    <p>从完整包里抽出 10 个标题公式 + 1 篇模板，另存为“免费体验版.pdf”。用途有三个：小红书评论区回复“扣 1 领取”、公众号菜单栏自动回复、私信自动回复。免费版最后加一页：</p>
+    <blockquote>这只是 1/5 的内容。完整版含 30 个标题公式 + 5 篇模板 + 标签清单，领取完整版请私信“完整版”。</blockquote></div>
+
+    <h3>完整样例章节：第一部分“30 个爆款标题公式”</h3>
+    <p>下面给出可直接复制的 10 条，其余 20 条按同一格式补齐。公式 = 填空结构 + 卫浴示例 + 通用示例。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>编号</th><th>标题公式</th><th>卫浴示例</th><th>通用示例</th></tr></thead>
+        <tbody>
+          <tr><td>01</td><td>【产品】用了【天数】的真实感受</td><td>这个恒温花洒用了 30 天的真实感受</td><td>这件连衣裙穿了 30 天的真实感受</td></tr>
+          <tr><td>02</td><td>【人群】必看：选【产品】前先看这【数字】点</td><td>装修小白必看：选花洒前先看这 5 点</td><td>油皮姐妹必看：选粉底液前先看这 5 点</td></tr>
+          <tr><td>03</td><td>别再【错误做法】了，【产品】应该【正确做法】</td><td>别再只看颜值了，智能马桶应该先看冲力</td><td>别再只看价格了，跑步鞋应该先看缓震</td></tr>
+          <tr><td>04</td><td>【数字】年装修经验，【产品】我只推荐这【数字】款</td><td>5 年装修经验，浴室柜我只推荐这 3 款</td><td>3 年养猫经验，猫粮我只推荐这 3 款</td></tr>
+          <tr><td>05</td><td>【场景】怎么选【产品】？看这篇就够了</td><td>老房翻新怎么选淋浴房？看这篇就够了</td><td>租房党怎么选电饭煲？看这篇就够了</td></tr>
+          <tr><td>06</td><td>被问爆的【产品】，【场景】真的很能打</td><td>被问爆的岩板浴室柜，小户型真的很能打</td><td>被问爆的露营椅，公园野餐真的很能打</td></tr>
+          <tr><td>07</td><td>【产品】别乱买，先分清【差异点】</td><td>智能马桶别乱买，先分清即热和储热</td><td>破壁机别乱买，先分清静音和不静音</td></tr>
+          <tr><td>08</td><td>从【价格】到【价格】，我为什么最后选了【产品】</td><td>从 800 到 3000，我为什么最后选了这款花洒</td><td>从 100 到 600，我为什么最后选了这款台灯</td></tr>
+          <tr><td>09</td><td>【产品】安装翻车实录，这 3 个坑提前避开</td><td>浴室柜安装翻车实录，这 3 个坑提前避开</td><td>窗帘安装翻车实录，这 3 个坑提前避开</td></tr>
+          <tr><td>10</td><td>【人群】都在问的【产品】避坑清单</td><td>第一次装修的人都在问的马桶避坑清单</td><td>第一次养狗的人都在问的狗笼避坑清单</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>提示：</strong>不要照抄竞品原文标题，只学结构。把“卫浴示例”和“通用示例”都放进去，是为了让买家看到“我能直接套用”。</div>
+
+    <h3>2.2 AI 文案代做服务制作</h3>
+    <p>代做是你的后端转化产品：买模板的人里，总有几个会说“太麻烦了，你直接帮我写吧”。服务流程固定为 7 步，每步都要有标准话术和交付标准。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>步骤</th><th>动作</th><th>工具</th><th>耗时</th><th>标准话术</th></tr></thead>
+        <tbody>
+          <tr><td>1. 接单</td><td>客户私信询价，先报价并确认范围</td><td>小红书/微信</td><td>10 分钟</td><td>“可以做的。你把产品名、卖点、目标人群发我，我先给你确认交付内容和价格，确认后再付款。” </td></tr>
+          <tr><td>2. 需求收集</td><td>发飞书表单，收集产品/人群/平台/参考/禁忌</td><td>飞书表单</td><td>10 分钟</td><td>“请填一下这个需求表，10 分钟内填完，我今晚给你初稿。” </td></tr>
+          <tr><td>3. AI 生成</td><td>用提示词生成 3 版初稿</td><td>DeepSeek/Kimi</td><td>15-30 分钟</td><td>（见下方提示词模板）</td></tr>
+          <tr><td>4. 人工微调</td><td>检查事实、违禁词、AI 味，改成能直接发布</td><td>无</td><td>20-30 分钟</td><td>这是你收钱的部分：AI 稿不能直接交，必须改到“像人写的”。</td></tr>
+          <tr><td>5. 交付</td><td>发飞书文档或 PDF，写清修改范围</td><td>飞书</td><td>10 分钟</td><td>“稿子好了，包含 3 版主图文案。你有 3 轮修改机会，重点看卖点有没有说清楚。” </td></tr>
+          <tr><td>6. 修改</td><td>按客户反馈改，控制轮次</td><td>飞书</td><td>30 分钟</td><td>“收到，我改这 2 处：第一处把‘质量好’改成具体材质，第二处补一个使用场景。今晚 10 点前发你。” </td></tr>
+          <tr><td>7. 归档</td><td>脱敏后存案例库，写一句复盘</td><td>飞书表格</td><td>5 分钟</td><td>内部动作，不发给客户；客户名字和产品名打码后再存。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>AI 生成主图/种草文/短视频脚本的提示词模板</h3>
+    <blockquote>你是有 5 年经验的电商文案。请为以下产品分别生成 3 版【主图文案】。
+要求：每版 15 字以内，突出 1 个核心卖点，口语化，不用“极致”“顶级”等广告法风险词。
+产品：{产品名}
+核心卖点：{卖点}
+目标人群：{人群}
+输出格式：每版一行，后面用括号标出它针对的人群。</blockquote>
+    <blockquote>你是有 3 年经验的小红书博主。请写一篇 500 字种草笔记。
+结构：第一句场景痛点 → 2 个使用细节 → 1 个购买理由 → 结尾引导收藏。
+要求：自然语气，不用“绝绝子/YYDS”，不夸大功效，不写具体价格。
+产品：{产品名}　场景：{使用场景}　人群：{人群}</blockquote>
+    <blockquote>你是短视频脚本编导。请为 30-60 秒口播视频写脚本。
+输出格式：表格，列依次为 时间 / 画面 / 口播文案 / 字幕 / 背景音乐建议。
+主题：{主题}　目标：{涨粉/带货/解答问题}　人群：{人群}</blockquote>
+
+    <h3>3 套交付物模板</h3>
+    <div class="grid-2">
+      <div class="card"><h4>模板 1 · 电商主图文案交付</h4>
+      <blockquote>【主图文案 3 版】
+版本 A（人群：追求性价比）：{文案}
+版本 B（人群：看重颜值）：{文案}
+版本 C（人群：担心售后）：{文案}
+【建议排版】版本 A 放主图，版本 C 放第二张图。</blockquote></div>
+      <div class="card"><h4>模板 2 · 小红书种草文交付</h4>
+      <blockquote>【标题 3 选 1】{标题1} / {标题2} / {标题3}
+【正文 500 字】{正文}
+【话题标签】#产品 #场景 #人群 #避坑
+【配图建议】首图实拍图 + 1 张细节图 + 1 张使用场景图</blockquote></div>
+      <div class="card"><h4>模板 3 · 短视频脚本交付</h4>
+      <blockquote>【时长】45 秒
+【开头 0-3 秒】画面：产品特写；口播：你知道 90% 的人都在做错这件事吗？
+【中间 3-35 秒】分 3 个卖点，每个 10 秒
+【结尾 35-45 秒】引导关注/私信
+【字幕】每句口播同步字幕</blockquote></div>
+    </div>
+
+    <h3>代做服务报价与报价话术</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>服务</th><th>价格</th><th>交付物</th><th>修改</th></tr></thead>
+        <tbody>
+          <tr><td>电商主图文案</td><td>29-49 元</td><td>3 版主图文案 + 排版建议</td><td>3 轮</td></tr>
+          <tr><td>小红书种草文</td><td>69-129 元</td><td>3 个标题 + 500 字正文 + 标签 + 配图建议</td><td>3 轮</td></tr>
+          <tr><td>短视频脚本</td><td>49-99 元</td><td>45-60 秒脚本 + 分镜表</td><td>3 轮</td></tr>
+          <tr><td>详情页文案</td><td>99-199 元</td><td>8 模块详情页文案 + 提示词</td><td>3 轮</td></tr>
+          <tr><td>体验包</td><td>69 元</td><td>1 条种草文 + 1 条主图文案 + 对应模板</td><td>3 轮</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>客户问“能不能便宜点”时：
+“这个价格已经包含 3 轮修改，等于帮你把稿子改到能用为止。你可以先试 29 元的主图文案，觉得交付质量满意了，再考虑种草文。”</blockquote>
+
+    <h3>2.3 工作流模板包制作</h3>
+    <p>工作流模板和提示词库的区别：提示词库告诉你“说什么”，工作流告诉你“按什么顺序做什么”。结构固定为三件套：SOP 文档（怎么做）+ 流程图（走什么顺序）+ Checklist（做完没有）。</p>
+    <div class="step"><b class="k">用飞书多维表格制作模板 ⏱️ 45 分钟</b>
+    <p>打开飞书 → 点“新建多维表格” → 选空白表格 → 把字段改成：日期、平台、选题、标题、状态（待写/已写/已发）、链接、数据（浏览/赞/藏）。这个表就是你的“内容日历”。再做第二个视图“按状态分组”，就能一眼看到今天欠了几条内容。</p>
+    <p><b>做完标志：</b>两张视图存在，能按“已发/未发”筛选。</p></div>
+
+    <h3>完整样例：卫浴门店小红书月度运营 SOP</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>周</th><th>内容主题</th><th>示例选题</th><th>频次</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>门店人设 + 产品科普</td><td>老板的一天 / 花洒怎么选 / 马桶冲力怎么看</td><td>周一到周五每天 1 条</td></tr>
+          <tr><td>第 2 周</td><td>案例实拍 + 安装过程</td><td>客户家浴室改造前后 / 安装师傅的一天</td><td>每天 1 条，周末发实拍</td></tr>
+          <tr><td>第 3 周</td><td>避坑 + 问答</td><td>装修最容易被坑的 5 个卫浴问题</td><td>每天 1 条，其中 2 条来自客户提问</td></tr>
+          <tr><td>第 4 周</td><td>活动 + 引流</td><td>门店新品到店 / 到店免费量尺</td><td>每天 1 条，周末做互动</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>【每日动作 Checklist】
+□ 早上 9 点：把当天选题填进飞书表格
+□ 上午：用提示词生成初稿并人工微调
+□ 下午：配图发布，加 3 个精准标签
+□ 晚上 8 点：回复评论，把高意向客户拉到微信
+□ 睡前：在表格里填数据（浏览/赞/藏）</blockquote>
+    <div class="note"><strong>诚实提醒：</strong>工作流模板的价值在于“别人照着做能跑通”，所以每个模板必须配一个完整示例。没有示例的模板包卖不出去，这是最容易失败的地方。</div>
+  </section>
+  <section class="module" id="m3">
+    <div class="module-head"><span class="m-no">三</span><h2>上架与销售渠道搭建</h2></div>
+
+    <h3>3.1 平台选择与注册</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>平台</th><th>适合卖什么</th><th>优点</th><th>缺点/门槛</th><th>推荐度</th></tr></thead>
+        <tbody>
+          <tr><td>面包多</td><td>数字商品、自动发货</td><td>注册简单、自动发货链接、适合 9.9-199 元</td><td>平台抽佣、需实名</td><td><span class="badge b-high">主阵地</span></td></tr>
+          <tr><td>爱发电</td><td>数字商品、订阅</td><td>创作者友好、可做月度订阅</td><td>抽佣、部分用户不熟悉</td><td><span class="badge b-high">主阵地</span></td></tr>
+          <tr><td>小红书店铺</td><td>模板包、代做订单</td><td>在平台内成交，信任度高</td><td>开店有审核和经营要求</td><td><span class="badge b-mid">同步上</span></td></tr>
+          <tr><td>微信小商店</td><td>模板包</td><td>微信内闭环，私域成交方便</td><td>个人开店类目受限</td><td><span class="badge b-mid">可选</span></td></tr>
+          <tr><td>闲鱼</td><td>低价模板、代做</td><td>流量大、门槛低</td><td>虚拟物品规则严格，易被判违规</td><td><span class="badge b-low">慎用</span></td></tr>
+          <tr><td>小报童</td><td>付费专栏</td><td>文字订阅顺手</td><td>不适合表格/图片交付</td><td><span class="badge b-mid">第 2 个月</span></td></tr>
+          <tr><td>知识星球</td><td>社群+更新+答疑</td><td>复购好、能沉淀客户</td><td>年费、有流量门槛</td><td><span class="badge b-low">30 个付费用户后</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>推荐组合：</strong>主阵地 = 小红书内容引流 + 面包多/爱发电收款发货；私域 = 微信个人号承接复购；第 2 个月加小报童或知识星球做订阅。</div>
+
+    <h4>面包多注册步骤（第一个先做这个）⏱️ 30 分钟</h4>
+    <div class="step"><b class="k">第一步：注册并实名</b>
+    <p>打开浏览器 → 输入面包多官网（搜索“面包多”）→ 点“登录/注册” → 用手机号注册 → 按提示完成实名认证。做完标志：个人中心能看到“创建商品”按钮。</p></div>
+    <div class="step"><b class="k">第二步：创建数字商品</b>
+    <p>点“创建商品” → 商品类型选“数字商品/文件下载” → 标题填“电商卖家小红书种草文模板包 V1.0” → 价格填 19.9 → 上传 PDF 和飞书链接文档 → 开启“自动发货” → 点发布。做完标志：生成一个可以发给客户的购买链接。</p></div>
+
+    <h4>小红书店铺注册步骤（第二周再做）⏱️ 30 分钟</h4>
+    <p>打开小红书 App → 左上角三横菜单 → 创作中心 → 更多服务 → 店铺/开店 → 按提示提交身份证等信息。⚠️ 具体入口随 App 版本变化，找不到就在小红书内搜索“小红书开店教程”；店铺审核可能需要 1-7 天，不要因为审核慢就停更。</p>
+
+    <h3>3.2 商品上架操作</h3>
+    <h4>标题 5 个公式（直接套用）</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>公式</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>人群词 + 产品词 + 结果词</td><td>电商卖家专用 小红书种草文模板包 直接替换产品名就能发</td></tr>
+          <tr><td>数字 + 痛点</td><td>30 个爆款标题公式，解决你“不知道发什么”</td></tr>
+          <tr><td>产品 + 版本 + 年份</td><td>电商文案提示词库 V1.0（2026 版）</td></tr>
+          <tr><td>场景 + 产品</td><td>卫浴门店 30 天小红书运营 SOP 包</td></tr>
+          <tr><td>关键词 + 副标题</td><td>AI 文案模板包｜含飞书表格 可直接复制</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>封面图怎么做 ⏱️ 20 分钟/张</h4>
+    <p>打开 Canva 或稿定设计 → 搜索“电商 封面”“知识付费 封面”模板 → 选 3:4 竖版 → 标题大字写“30 个爆款标题公式” → 副标题写“直接复制就能用” → 配色不超过 3 种 → 导出 PNG。封面是点击率的一半，标题一定要比封面图案大。</p>
+
+    <h4>商品详情页完整模板</h4>
+    <blockquote>【你拿到什么】
+1. 30 个爆款标题公式（PDF + 飞书文档）
+2. 5 篇完整笔记模板
+3. 话题标签清单（按行业分组）
+4. 使用说明（含 AI 生成提示词）
+5. 季度更新：老客户免费领新版
+
+【适合谁】
+- 想发小红书但不会写文案的电商卖家
+- 没时间试错的门店老板
+- 想用 AI 提效的运营新手
+
+【怎么用】
+第 1 步：替换产品名；第 2 步：按提示词生成正文；第 3 步：配图发布。
+
+【售后】
+数字商品一经发货不支持退款；48 小时内发现内容问题可私信处理。</blockquote>
+
+    <h4>定价与优惠设置</h4>
+    <p>引流款 9.9 元（标题公式单独版）→ 标准款 19.9-39.9 元（完整模板包）→ 利润款 99-199 元（卫浴 SOP 包）。上新前 3 天可以在面包多设置“新人券”或限时 9.9 元，目的不是赚钱，是让第一批用户完成付款动作、积累评价。</p>
+
+    <h3>3.3 私域承接</h3>
+    <h4>微信个人号设置（30 分钟）</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>位置</th><th>怎么写</th></tr></thead>
+        <tbody>
+          <tr><td>昵称</td><td>和你小红书同名，如“AI 提效日记｜电商文案”</td></tr>
+          <tr><td>头像</td><td>用 Canva 做一张文字头像：名字 + “AI 文案模板”</td></tr>
+          <tr><td>朋友圈背景</td><td>一句话：帮你用 AI 把电商内容 10 倍速做完</td></tr>
+          <tr><td>签名</td><td>小红书文案模板｜电商主图详情页｜私信“模板”领取目录</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>客户加你后第一句：
+“你好，我是 XX。你是想先看看模板目录，还是先拿一份免费体验版？发‘体验’两个字给我，我直接发你。”</blockquote>
+
+    <h4>前 7 天朋友圈规划</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>天</th><th>发什么</th></tr></thead>
+        <tbody>
+          <tr><td>Day 1</td><td>官宣：我在做 AI 文案模板，附 1 张封面图</td></tr>
+          <tr><td>Day 2</td><td>晒产品目录（只截图目录，不截全文）</td></tr>
+          <tr><td>Day 3</td><td>发 1 条用模板写出的卫浴种草文示例</td></tr>
+          <tr><td>Day 4</td><td>发客户咨询截图（打码）：“有人问卫浴店能不能用，能”</td></tr>
+          <tr><td>Day 5</td><td>发免费体验版领取方式</td></tr>
+          <tr><td>Day 6</td><td>发 1 条制作过程：AI 生成 vs 人工微调对比</td></tr>
+          <tr><td>Day 7</td><td>发首单反馈（如果还没有单，就发“已完成 5 个产品，等你来”的心态贴）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>社群什么时候建：</strong>付费用户达到 30 人之前不建群，只用私聊维护；达到后建“模板更新群”，群规只有一条：不刷屏，每月 1 号和 15 号发更新。</div>
+  </section>
+
+  <section class="module" id="m4">
+    <div class="module-head"><span class="m-no">四</span><h2>引流体系搭建</h2></div>
+
+    <h3>4.1 AI 资讯号（做曝光）</h3>
+    <h4>账号设置（具体文案）</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>项目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>昵称</td><td>AI 提效日记</td></tr>
+          <tr><td>简介</td><td>每天 3 分钟看懂 AI。电商文案、门店获客、副业避坑，关注我少走弯路。</td></tr>
+          <tr><td>头像</td><td>白底 + 蓝字“AI 日记”</td></tr>
+          <tr><td>置顶笔记</td><td>《我用 AI 帮电商卖家写文案，这是完整流程》</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>固定栏目（每周 7 条）</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>栏目</th><th>内容</th><th>频率</th></tr></thead>
+        <tbody>
+          <tr><td>AI 日报</td><td>3 条 AI 动态 + 一句话点评</td><td>日更</td></tr>
+          <tr><td>工具实测</td><td>真实用 1 个 AI 工具，写优缺点和价格</td><td>每周 2 条</td></tr>
+          <tr><td>副业案例拆解</td><td>拆 1 个可复制的 AI 副业案例</td><td>每周 1 条</td></tr>
+          <tr><td>避坑提醒</td><td>AI 工具跑路、收费陷阱、版权风险</td><td>每周 1 条</td></tr>
+          <tr><td>行业速报</td><td>一周 AI 大事轻解读</td><td>周末 1 条</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>10 个信息源清单</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>来源</th><th>怎么用</th></tr></thead>
+        <tbody>
+          <tr><td>36 氪 AI 频道</td><td>看融资和产品动态</td></tr>
+          <tr><td>机器之心</td><td>技术新闻，适合做日报</td></tr>
+          <tr><td>量子位</td><td>AI 产品发布快讯</td></tr>
+          <tr><td>新智元</td><td>行业观点和大模型动态</td></tr>
+          <tr><td>IT 之家 AI 板块</td><td>工具更新和价格变化</td></tr>
+          <tr><td>即刻“AI 探索站”圈子</td><td>真实用户吐槽和体验</td></tr>
+          <tr><td>公众号“量子位”“机器之心”</td><td>订阅后每天收推送</td></tr>
+          <tr><td>Hacker News</td><td>看海外 AI 产品首发（可用翻译）</td></tr>
+          <tr><td>OpenAI / Google AI 官方博客</td><td>一手发布，最准确</td></tr>
+          <tr><td>今日热榜</td><td>聚合热点，快速挑选题</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>每日内容生产 SOP</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>步骤</th><th>动作</th><th>工具</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>1. 采集</td><td>浏览信息源，选 3 条</td><td>今日热榜 / 公众号 / RSSHub</td><td>10 分钟</td></tr>
+          <tr><td>2. 改写</td><td>用 DeepSeek 生成“核心事实 + 影响 + 一句话点评”</td><td>DeepSeek</td><td>15 分钟</td></tr>
+          <tr><td>3. 配图</td><td>Canva/即梦做封面</td><td>Canva / 即梦</td><td>10 分钟</td></tr>
+          <tr><td>4. 排版</td><td>小红书编辑器排版</td><td>小红书</td><td>10 分钟</td></tr>
+          <tr><td>5. 发布</td><td>早 8 点或晚 19 点发布 + 3-5 个标签</td><td>小红书</td><td>5 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>3 条可直接发布的样例内容</h4>
+    <blockquote>【样例 1 · AI 日报】
+标题：AI 资讯｜一句话看懂今天 3 条大新闻
+正文：1. XX 发布新模型，价格降 50% → 对普通人的影响：做图更便宜。2. XX 工具新增视频生成 → 对店主的影响：详情页视频可以自己做了。3. XX 平台收紧 AI 内容标注 → 对创作者的影响：发 AI 内容要标“AI 生成”。
+标签：#AI日报 #AI工具 #效率工具 #副业</blockquote>
+    <blockquote>【样例 2 · 工具实测】
+标题：DeepSeek 实测：10 分钟写 3 版小红书文案，值不值？
+正文：我拿一个真实卫浴产品测了 10 分钟。优点：快、能出 3 版不同角度。缺点：第一版很 AI 味，需要人工改语气。结论：适合当草稿机，不能直接发。
+标签：#AI工具 #实测 #小红书文案</blockquote>
+    <blockquote>【样例 3 · 避坑提醒】
+标题：AI 副业课又来了，这 3 个信号直接避雷
+正文：1. 承诺“月入过万”的，划走。2. 让你先交 998 再拉人的，划走。3. 不展示真实交付案例的，划走。
+标签：#AI副业 #避坑 #防骗</blockquote>
+
+    <h3>4.2 垂直实操内容（做信任）</h3>
+    <p><strong>内容定位：</strong>“教电商卖家和卫浴门店老板，用 AI 做出能卖货的内容”。你不是教 AI 理论，是教“主图怎么写、详情页怎么拆、小红书发什么”。</p>
+    <h4>20 个选题库</h4>
+    <div class="grid-2">
+      <div class="card"><ol>
+        <li>主图文案为什么没人点？3 个原因</li>
+        <li>30 秒写出 3 版主图文案（含提示词）</li>
+        <li>详情页 8 模块拆解：照着写就行</li>
+        <li>小红书种草文开头第一句怎么写</li>
+        <li>卫浴门店 30 天内容日历（公开 7 天版）</li>
+        <li>马桶怎么拍才不像广告</li>
+        <li>花洒卖点怎么写才不“假”</li>
+        <li>客户问“有没有效果”，怎么回</li>
+        <li>门店没有专业摄影师怎么做图</li>
+        <li>AI 生成文案怎么去掉 AI 味</li>
+        <li>电商标题怎么填关键词</li>
+        <li>短视频口播脚本 3 段式结构</li>
+        <li>朋友圈 7 天内容怎么排</li>
+        <li>免费模板怎么变成付费用户</li>
+        <li>小红书笔记被限流了怎么办</li>
+        <li>一个产品能写 20 篇内容吗？能</li>
+        <li>装修建材店要不要做小红书</li>
+        <li>AI 配图怎么选风格</li>
+        <li>买家秀怎么要（话术模板）</li>
+        <li>30 天复盘：哪些内容带来咨询</li>
+      </ol></div>
+    </div>
+    <h4>内容结构模板</h4>
+    <blockquote>【开头】一个具体场景或问题（“你是不是也遇到过……”）
+【中间】3 个步骤或 3 个坑，每步给 1 个截图/示例
+【结尾】一句结论 + 引导（“想要完整模板，私信‘模板’”）
+【标签】#AI文案 #电商文案 #小红书运营 #门店获客</blockquote>
+    <h4>3 种不硬广的植入话术</h4>
+    <blockquote>1. 内容型：“这个模板我整理成表格了，需要的话私信‘表格’。”
+2. 案例型：“我帮一个卫浴店按这个流程做了 7 天，有 3 个客户私信问价。”
+3. 免费资源型：“想先试 10 个标题公式的，评论区扣 1。”</blockquote>
+
+    <h4>2 篇完整样例文章</h4>
+    <div class="card"><h4>样例 1 · 电商卖家</h4>
+    <blockquote>标题：别再憋主图文案了，30 秒用 AI 出 3 版
+你是不是也这样：产品很好，就是写不出主图上的那句话？
+我做电商内容帮别人写了 2 个月，最常用的是这个三步法：
+第 1 步：把产品名、卖点、人群填进提示词；
+第 2 步：让 AI 出 3 版，分别针对“性价比”“颜值”“售后”三类人；
+第 3 步：删掉“极致”“顶级”这类词，换成一个具体细节。
+示例：一款花洒，AI 第一版写“极致沐浴体验”，我改成“水压小也能洗出瀑布感”。
+这套提示词和 30 个标题公式我整理成模板了，想要完整版私信“模板”。</blockquote></div>
+    <div class="card"><h4>样例 2 · 卫浴门店</h4>
+    <blockquote>标题：卫浴店做小红书，发什么最有用？30 天日历公开 7 天
+很多建材老板问我：小红书到底发什么？
+我的答案是：别发广告，发“过程”。
+第 1-2 天：发老板的一天（门店实拍，带客户逛店）
+第 3-4 天：发安装实拍（前后对比）
+第 5 天：发客户问题（“花洒水压小怎么办”）
+第 6-7 天：发避坑科普（选马桶先看冲力）
+核心逻辑：客户不关心你多专业，只关心“我家能不能用”。
+完整 30 天日历我做成 SOP 包了，需要的话私信“卫浴”。</blockquote></div>
+
+    <h3>4.3 知识付费（做筛选与高客单）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>形态</th><th>价格</th><th>什么时候做</th></tr></thead>
+        <tbody>
+          <tr><td>模板订阅</td><td>29.9 元/月</td><td>有 5 个付费用户后</td></tr>
+          <tr><td>付费社群</td><td>99 元/月 或 199 元/季</td><td>30 个付费用户后</td></tr>
+          <tr><td>1 对 1 咨询</td><td>99-299 元/30 分钟</td><td>有人私信问“能不能教我”时</td></tr>
+          <tr><td>系列课</td><td>39.9-99 元</td><td>内容积累 30 篇后打包</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>免费 vs 付费边界：</strong>免费内容讲“为什么”（为什么没人看、为什么写不好），付费内容给“照着做”（完整模板、SOP、答疑、更新）。免费内容每篇只解决一个问题，付费内容一次解决一类问题。</p>
+    <p><strong>筛选付费用户：</strong>评论区和私信里连续问 2 个以上“具体怎么做”的人，就是高意向用户；用“免费体验版”收集联系方式，再在交付时顺口提一句订阅。</p>
+    <h4>知识付费产品大纲样例：8 节课</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>课</th><th>主题</th><th>交付</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>你的第一个模板包怎么定目录</td><td>目录模板</td></tr>
+          <tr><td>2</td><td>30 个标题公式从哪来</td><td>采集清单</td></tr>
+          <tr><td>3</td><td>提示词怎么写才不 AI 味</td><td>5 条提示词</td></tr>
+          <tr><td>4</td><td>主图文案 3 版生成流程</td><td>操作视频</td></tr>
+          <tr><td>5</td><td>小红书种草文模板</td><td>完整模板</td></tr>
+          <tr><td>6</td><td>上架和收款设置</td><td>操作截图</td></tr>
+          <tr><td>7</td><td>冷启动 10 个客户的私信话术</td><td>话术库</td></tr>
+          <tr><td>8</td><td>30 天数据复盘表</td><td>飞书表格</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4.4 引流到变现的转化路径</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>环节</th><th>动作</th><th>转化率预估</th><th>提升方法</th></tr></thead>
+        <tbody>
+          <tr><td>曝光</td><td>资讯号 + 垂直内容发布</td><td>单篇 500-2000 浏览（新号）</td><td>标题带工具名/结果词，封面大字</td></tr>
+          <tr><td>关注</td><td>主页简介清晰 + 置顶内容</td><td>浏览→关注 1%-3%</td><td>简介写“我帮你解决什么”，置顶放最好的一条</td></tr>
+          <tr><td>私信/领取</td><td>文末钩子“私信领免费版”</td><td>100 浏览 → 1-3 次私信</td><td>免费版放真东西，别只放目录</td></tr>
+          <tr><td>私域</td><td>加到微信，发体验版</td><td>私信→加微 30%-50%</td><td>第一句给明确好处，不要寒暄三连</td></tr>
+          <tr><td>成交</td><td>9.9 引流品 → 主力包 → 订阅</td><td>10 个加微 → 1-2 单</td><td>晒交付过程、限时优惠、明确售后</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="unavail"><strong>诚实提醒：</strong>上面的转化率是“目标区间”，不是平台保证。你前 30 天唯一要做的，就是把自己账号的真实数据填进这张表，谁高谁低一目了然。数据低于目标不代表失败，代表你要改标题、改钩子、改价格，而不是换方向。</div>
+  </section>
+  <section class="module" id="m5">
+    <div class="module-head"><span class="m-no">五</span><h2>30 天逐日执行计划</h2></div>
+    <p>规则只有一条：<strong>每天只做当天安排的事，做完打钩，做不完顺延到第二天，绝不在 Day 3 回去改 Day 1。</strong>前 30 天拼的不是质量，是“有没有把流程跑完”。</p>
+
+    <h3>Day 0 · 准备日（总耗时约 2 小时）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>清单</th><th>内容</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td>硬件检查</td><td>电脑能上网、手机有小红书 App、准备一个不用的手机号（注册小号用）</td><td>两项都可用</td></tr>
+          <tr><td>账号清单</td><td>面包多（或爱发电）、小红书、微信公众号、飞书、DeepSeek、Kimi、Canva/稿定、即梦</td><td>全部注册完成，密码存进备忘录</td></tr>
+          <tr><td>工具清单</td><td>飞书建 2 个文档：产品文档、数据复盘表；Canva 存 3 个封面模板</td><td>2 个文档能打开</td></tr>
+          <tr><td>花费总表</td><td>第 1 周只花：DeepSeek API/会员 0-30 元 + 即梦额度 0-60 元 + 备用金 200 元，合计 ≤300 元</td><td>总表写在飞书里</td></tr>
+          <tr><td>心态预设</td><td>第 1 周你会觉得“好难好烦”，这是正常的；目标不是爆单，是“跑完流程”</td><td>在飞书写下一句：30 天后我要完成的事</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 1 · 基建日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>工具</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-19:30</td><td>注册小红书账号，昵称“AI 提效日记”，简介写“每天 3 分钟看懂 AI。电商文案/门店获客/避坑”</td><td>手机</td><td>账号创建成功，简介保存</td><td>30 分钟</td></tr>
+          <tr><td>19:30-20:00</td><td>注册公众号（订阅号），名称“AI 提效日记”</td><td>电脑</td><td>注册完成，能进后台</td><td>30 分钟</td></tr>
+          <tr><td>20:00-20:40</td><td>注册面包多/爱发电并实名</td><td>电脑</td><td>个人中心出现“创建商品”</td><td>40 分钟</td></tr>
+          <tr><td>20:40-21:20</td><td>注册飞书，新建“产品文档”和“30 天数据表”</td><td>飞书</td><td>两个文档能打开</td><td>40 分钟</td></tr>
+          <tr><td>21:20-22:00</td><td>注册 DeepSeek、Kimi、Canva/稿定、即梦，各跑一次免费额度</td><td>电脑</td><td>每个工具都生成过 1 次内容</td><td>40 分钟</td></tr>
+          <tr><td>22:00-22:30</td><td>把 5 个 SKU 名称和价格写进飞书产品文档</td><td>飞书</td><td>5 行 SKU 表存在</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 2 · 产品框架日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-19:40</td><td>按模块二 Step 1 建好“种草文模板包 V1.0”的 5 部分目录</td><td>目录能点出 5 个空章节</td><td>40 分钟</td></tr>
+          <tr><td>19:40-21:00</td><td>小红书搜“种草文/好物分享”按最热记 20 个标题，微信搜狗搜“小红书爆款文案”记 10 个</td><td>30 个标题存进飞书</td><td>80 分钟</td></tr>
+          <tr><td>21:00-22:00</td><td>把标题归纳成 10 个公式（参照模块二样例）</td><td>10 个公式写在文档里</td><td>60 分钟</td></tr>
+          <tr><td>22:00-22:30</td><td>用 DeepSeek 测 1 条种草文提示词（花洒和连衣裙各 1 次）</td><td>2 个测试结果存档</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 3 · 第一个产品初稿日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-20:30</td><td>补齐 30 个标题公式（先复制 10 个样例，再自己补 20 个）</td><td>30 条全部可填空</td><td>90 分钟</td></tr>
+          <tr><td>20:30-21:30</td><td>写 5 篇完整笔记模板（产品种草/开箱/避坑/场景/工厂实拍）</td><td>5 篇模板每个 300 字以上</td><td>60 分钟</td></tr>
+          <tr><td>21:30-22:00</td><td>整理话题标签清单（家居/卫浴/女装/零食 4 组）</td><td>4 组标签存在</td><td>30 分钟</td></tr>
+          <tr><td>22:00-22:30</td><td>写产品说明页（目录/教程/更新/售后四块）</td><td>说明页完成</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 4 · 产品完善 + 封面制作日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-20:00</td><td>把飞书文档导出 PDF，检查错别字和排版</td><td>PDF 无错别字、无空白页</td><td>60 分钟</td></tr>
+          <tr><td>20:00-21:00</td><td>Canva/稿定做 3 张封面（标准包/卫浴包/引流包）</td><td>3 张 3:4 封面导出</td><td>60 分钟</td></tr>
+          <tr><td>21:00-21:40</td><td>制作免费体验版（10 个标题公式 + 1 篇模板）</td><td>体验版 PDF 存在</td><td>40 分钟</td></tr>
+          <tr><td>21:40-22:30</td><td>把 SKU 2 主图/详情页提示词包初版也建出来（至少 10 条提示词）</td><td>第二份产品有内容</td><td>50 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 5 · 上架日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-20:00</td><td>面包多上架 SKU 1 和 SKU 4（自动发货）</td><td>2 个购买链接能打开</td><td>60 分钟</td></tr>
+          <tr><td>20:00-20:40</td><td>小红书提交店铺申请</td><td>提交成功，截图存档</td><td>40 分钟</td></tr>
+          <tr><td>20:40-21:40</td><td>写 5 个商品的详情页文案（用模板三的详情页模板）</td><td>5 份详情页存在</td><td>60 分钟</td></tr>
+          <tr><td>21:40-22:30</td><td>设置微信个人号（昵称/头像/背景/签名），准备首条朋友圈</td><td>微信号设置完成</td><td>50 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 6 · 引流内容生产日（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-20:00</td><td>按模块四信息源选 3 条 AI 新闻，用 DeepSeek 写成 AI 日报</td><td>1 条日报成品</td><td>60 分钟</td></tr>
+          <tr><td>20:00-21:00</td><td>写 1 篇工具实测（DeepSeek 写小红书文案）</td><td>1 篇实测成品</td><td>60 分钟</td></tr>
+          <tr><td>21:00-22:00</td><td>写 1 篇垂直内容（主图文案 30 秒 3 版）</td><td>1 篇垂直内容成品</td><td>60 分钟</td></tr>
+          <tr><td>22:00-22:30</td><td>给 3 篇内容各做 1 张封面</td><td>3 张封面导出</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 7 · 发布 + 冷启动 + 第一周复盘（19:00-22:30）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>具体动作</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>19:00-20:00</td><td>发布 3 篇内容，文末加“私信领免费版”钩子</td><td>3 篇已发布</td><td>60 分钟</td></tr>
+          <tr><td>20:00-21:00</td><td>朋友圈发官宣 + 产品目录截图</td><td>2 条朋友圈已发</td><td>60 分钟</td></tr>
+          <tr><td>21:00-22:00</td><td>第一周复盘：填数据表（发布数/浏览/私信/订单）</td><td>数据表 7 行填完</td><td>60 分钟</td></tr>
+          <tr><td>22:00-22:30</td><td>写下周 7 个选题</td><td>7 个选题存进飞书</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 8-14 · 第 2 周：内容持续输出 + 产品迭代 + 争取第一单</h3>
+    <div class="card">
+      <p><strong>✅ 本周完成清单：</strong>每天 1 条内容共 7 条；3 篇带钩子；10 次私信互动；1 次产品优化（按反馈改标题或说明页）；把免费体验版发给 10 个人。</p>
+      <p><strong>📊 最低数据指标：</strong>发布 7 条；至少 1 篇 500+ 浏览；3 次私信咨询；1 个加微信；发出 10 份免费体验版。</p>
+      <p><strong>⚠️ 最可能卡住的地方：</strong>发了没人看 → 先看标题和封面是不是“工具名 + 结果”格式；没人私信 → 检查钩子是不是藏在文末最后一行（要放在正文里，不要放在最后一句之后）。</p>
+      <p><strong>🔄 没达标补救：</strong>把数据最好的 1 条改 3 个标题重发，别重做内容；连续 3 天没人私信就主动去 20 条热门笔记评论区回复专业建议，不广告、只解答。</p>
+    </div>
+
+    <h3>Day 15-21 · 第 3 周：优化转化路径 + 测试付费产品</h3>
+    <div class="card">
+      <p><strong>✅ 本周完成清单：</strong>上架 9.9 元引流品；发 1 条“免费领取”置顶；主动私信 10 个潜在客户（用模块七话术）；上线 29.9 元月度订阅；记录每笔咨询的对话过程。</p>
+      <p><strong>📊 最低数据指标：</strong>20 份免费版领取；5 次私信咨询；2 次报价；1 单成交（9.9-39.9 元都算）。</p>
+      <p><strong>⚠️ 最可能卡住的地方：</strong>有人问但不下单 → 大概率是信任不够或价格没说明白；立即补上“交付过程截图 + 售后说明 + 限时优惠”。</p>
+      <p><strong>🔄 没达标补救：</strong>降价不是首选；改成“买一送一”（买模板包送 1 次代做体验），测试是价格问题还是信任问题。</p>
+    </div>
+
+    <h3>Day 22-30 · 第 4 周：稳定日更 + 冲第一笔收入 + 复盘</h3>
+    <div class="card">
+      <p><strong>✅ 本周完成清单：</strong>每天 1 条内容；把卖得最好的 SKU 优化详情页；发 1 条客户好评（有就打码晒，没有就晒交付过程）；做 30 天总复盘。</p>
+      <p><strong>📊 最低数据指标：</strong>累计发布 30 条内容；累计 20 次私信；3 单成交（含 9.9 元）；1 个订阅用户；明确知道“哪类内容带来咨询”。</p>
+      <p><strong>⚠️ 最可能卡住的地方：</strong>还是没单 → 不要怀疑产品，先检查是不是“钩子太多、入口太少”：主页简介、每条内容、评论区置顶，三个入口必须都指向同一个购买链接。</p>
+      <p><strong>🔄 没达标补救：</strong>第 30 天只做一件事：挑出 10 个问过问题的人，用 1 对 1 免费诊断话术再聊一轮，目标只谈成 1 单；这比新做 10 条内容更有用。</p>
+    </div>
+  </section>
+
+  <section class="module" id="m6">
+    <div class="module-head"><span class="m-no">六</span><h2>每日固定 SOP（跑通后的日常）</h2></div>
+
+    <h3>工作日版（2 小时）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间段</th><th>任务</th><th>工具</th><th>产出</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 个 30 分钟</td><td>采集资讯 + 选题</td><td>今日热榜 / 公众号 / RSSHub</td><td>3 条选题</td><td>30 分钟</td></tr>
+          <tr><td>第 2 个 30 分钟</td><td>AI 生成内容 + 排版</td><td>DeepSeek + 小红书编辑器</td><td>1 篇待发内容</td><td>30 分钟</td></tr>
+          <tr><td>第 3 个 30 分钟</td><td>回复互动 + 处理咨询/订单</td><td>小红书 / 微信 / 面包多</td><td>互动和咨询处理完</td><td>30 分钟</td></tr>
+          <tr><td>第 4 个 30 分钟</td><td>产品制作/迭代/学习</td><td>飞书 / DeepSeek</td><td>1 个产品更新或 1 个新模板</td><td>30 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>周末版（4 小时）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时段</th><th>任务</th><th>做完标志</th><th>耗时</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 小时</td><td>批量生产下周 5-7 条内容草稿</td><td>7 条草稿在飞书</td><td>60 分钟</td></tr>
+          <tr><td>第 2 小时</td><td>批量做封面和排版</td><td>7 张封面导出</td><td>60 分钟</td></tr>
+          <tr><td>第 3 小时</td><td>产品更新/上新（新增 5 条提示词或优化详情页）</td><td>1 个产品更新完成</td><td>60 分钟</td></tr>
+          <tr><td>第 4 小时</td><td>数据复盘 + 下周计划</td><td>复盘表填完，下周选题定好</td><td>60 分钟</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>最低限度日（加班/生病/只有 30 分钟）</h3>
+    <div class="card">
+      <p>最少做三件事，保证不断更、不掉客户：</p>
+      <ol>
+        <li>花 10 分钟回复所有私信和评论（超过 24 小时不回复，咨询基本就没了）；</li>
+        <li>花 15 分钟把周末备好的草稿发 1 条（如果连草稿都没有，就发 1 条“工具实测一句话版”：工具名 + 结论 + 截图）；</li>
+        <li>花 5 分钟在数据表里填今天的数据。</li>
+      </ol>
+      <div class="tip"><strong>铁律：</strong>可以不完美，但不能连续两天不发内容、不回复。断更两天，算法权重和客户信任都会明显下滑。</div>
+    </div>
+  </section>
+  <section class="module" id="m7">
+    <div class="module-head"><span class="m-no">七</span><h2>获客话术与转化模板</h2></div>
+
+    <h3>7.1 冷启动获客（前 10 个客户从哪来）</h3>
+    <p>前 10 个客户不会自己来，你要主动去他们提问的地方。下面 5 个方法按“当天就能做”排序，每个方法都给出具体操作，不是“多发内容”。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>方法</th><th>具体操作</th><th>单次耗时</th></tr></thead>
+        <tbody>
+          <tr><td>1. 评论区答疑引流</td><td>小红书搜索“AI 文案 怎么做”“小红书 没流量”“详情页 怎么写”→ 找提问用户 → 用下面的私信话术发过去</td><td>20 分钟/10 人</td></tr>
+          <tr><td>2. 免费体验版钩子</td><td>每条内容结尾放“私信‘体验’领免费版”，自动回复里先发体验版，再发完整版目录</td><td>5 分钟/条</td></tr>
+          <tr><td>3. 公众号关键词回复</td><td>公众号后台设置关键词“模板”，自动回复免费体验版链接</td><td>20 分钟设置</td></tr>
+          <tr><td>4. 本地/行业群</td><td>进 2 个装修、建材、电商卖家微信群，只回答“AI 怎么帮门店写文案”，不刷广告</td><td>碎片时间</td></tr>
+          <tr><td>5. 转介绍</td><td>每完成 1 单就发 1 条“如果身边有人需要，帮我推荐一下”，给老客户 1 次免费更新额度</td><td>5 分钟/单</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>3 套私信话术（可直接复制）</h4>
+    <blockquote>话术 1（评论区提问的人）：
+“你好，看到你在问小红书文案怎么写。我最近整理了一份 30 个标题公式的免费体验版，里面有 10 个标题公式可以直接套用，需要的话我发你，不需要也没关系。”</blockquote>
+    <blockquote>话术 2（潜在客户询价）：
+“你好，电商文案模板包 19.9 元，含 30 个标题公式 + 5 篇笔记模板 + 标签清单，付款后自动发货，48 小时内有问题我帮你调整。你可以先花 9.9 元试试单篇标题公式，觉得有用再升级。”</blockquote>
+    <blockquote>话术 3（门店老板）：
+“你好，我是做电商文案模板的，卫浴建材门店的小红书内容也做。你店里的产品大概是什么品类？我先给你 3 个适合你门店的标题，你看看有没有用。”</blockquote>
+
+    <h4>2 套评论区互动话术</h4>
+    <blockquote>话术 1（解答型）：
+“我遇到过同样的问题。后来把标题从‘XX 很好用’改成‘XX 用了 30 天的真实感受’，数据明显好一些。你可以先试这个改法。”</blockquote>
+    <blockquote>话术 2（引导型）：
+“这个问题的完整步骤我写在置顶笔记里了，看完还有不懂的可以私信问我。”</blockquote>
+
+    <h4>1 套朋友圈预热文案（连续 3 天）</h4>
+    <blockquote>第 1 天：“我准备做一件想了很久的事：把 AI 写文案的方法整理成模板，给没时间试错的人直接用。产品 3 天内上架。”
+第 2 天：“今天做了 30 个标题公式，拿卫浴花洒和女装各测了一遍，都能直接套。最有成就感的是，终于不用对着空白文档发呆了。”
+第 3 天：“产品好了。9.9 元体验版 + 19.9 元完整版，今晚 8 点开卖。前 10 位送一次修改。”</blockquote>
+
+    <h3>7.2 客户沟通全流程话术</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>场景</th><th>话术（直接复制）</th></tr></thead>
+        <tbody>
+          <tr><td>客户问“多少钱”</td><td>“要看你要什么：9.9 元是标题公式单篇版，19.9 元是完整模板包，69 元是代做体验包（1 条种草文 + 1 条主图）。你目前想解决什么问题？我帮你选。” </td></tr>
+          <tr><td>客户说“太贵了”</td><td>“模板包 19.9 元是 30 个标题公式 + 5 篇模板，平均一个模板不到 1 块钱，而且能用很多次。你先用 9.9 元版试试，值不值你自己判断。” </td></tr>
+          <tr><td>客户问“能不能便宜点”</td><td>“可以，但我不直接降价：你现在下单，我送你 1 次修改（价值 10 元）。这个更实用，价格还是不变。” </td></tr>
+          <tr><td>下单后确认需求</td><td>“收到，先确认三件事：1. 产品名和 2 个核心卖点；2. 目标客户是谁；3. 有没有参考笔记或禁忌词。你填完这个表单，我 48 小时内交付。” </td></tr>
+          <tr><td>交付后要好评</td><td>“交付完成。如果你觉得内容对你有帮助，麻烦回一句‘已收到，质量 OK’，我截图到朋友圈帮更多人看到；有任何问题 48 小时内都免费调。” </td></tr>
+          <tr><td>好评后转介绍</td><td>“谢谢认可。如果你身边有做电商或开店的朋友也缺文案，可以把这个链接转给他；他下单后我送你一次免费更新。” </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>7.3 产品推荐话术（不硬广）</h3>
+    <h4>资讯号内容里自然植入的 3 种方式</h4>
+    <blockquote>1. 工具对比型：“今天实测了 3 个 AI 写文案工具，结论是工具都差不多，差别在你会不会提问。我把自己常用的提示词整理成模板了，感兴趣可以私信‘模板’。”
+2. 行业解读型：“这条新闻对电商卖家的影响是：做图更便宜了。但内容还是得有人把关，模板 + 人工微调才是正确姿势。”
+3. 避坑型：“很多 AI 副业课教的是套路，我拆过的案例里，能跑通的都是先把交付做明白的人。”</blockquote>
+    <h4>垂直内容里推荐的 3 种话术</h4>
+    <blockquote>1. 资源型：“完整模板我做成包了，私信‘模板’直接看目录。”
+2. 结果型：“按这个流程，我帮卫浴店做了 7 天，有 3 个人私信问价。”
+3. 服务型：“不想自己动手？69 元体验包帮你写 1 条种草文 + 1 条主图，还送模板。”</blockquote>
+    <h4>朋友圈展示的 3 种模板</h4>
+    <blockquote>1. 交付过程：“晚上 8 点接单，9 点半交付。主图文案 3 版 + 排版建议，客户说第二版直接用。”
+2. 客户反馈（打码）：“客户原话：终于不用憋文案了。”
+3. 产品更新：“模板包 V1.1 更新：新增 5 个卫浴标题公式。老客户免费领取。”</blockquote>
+  </section>
+
+  <section class="module" id="m8">
+    <div class="module-head"><span class="m-no">八</span><h2>工具清单与费用总表</h2></div>
+
+    <h3>完整工具清单</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>工具名称</th><th>用途</th><th>免费版够用吗</th><th>付费价格</th><th>是否必须</th><th>免费替代</th><th>搜索关键词/官网</th></tr></thead>
+        <tbody>
+          <tr><td>DeepSeek</td><td>文案、提示词、资讯改写</td><td>够用</td><td>0-30 元/月</td><td>必须</td><td>Kimi、豆包</td><td>deepseek.com</td></tr>
+          <tr><td>Kimi</td><td>备用大模型</td><td>够用</td><td>0-20 元/月</td><td>备用</td><td>DeepSeek、豆包</td><td>kimi.moonshot.cn</td></tr>
+          <tr><td>即梦 AI</td><td>配图、封面、产品图</td><td>免费额度够第 1 个月</td><td>0-60 元/月</td><td>建议</td><td>通义万相、豆包</td><td>搜索“即梦 AI”</td></tr>
+          <tr><td>剪映</td><td>短视频剪辑（第 2 个月用）</td><td>够用</td><td>0-25 元/月</td><td>后期</td><td>免费版</td><td>剪映官网</td></tr>
+          <tr><td>Canva / 稿定设计</td><td>封面、详情页、朋友圈图</td><td>够用</td><td>0-30 元/月</td><td>必须</td><td>小红书编辑器、WPS</td><td>canva.cn / 稿定设计</td></tr>
+          <tr><td>飞书</td><td>文档、表格、交付、表单</td><td>完全够用</td><td>0 元</td><td>必须</td><td>腾讯文档、石墨</td><td>feishu.cn</td></tr>
+          <tr><td>面包多 / 爱发电</td><td>数字商品收款发货</td><td>按成交抽佣</td><td>抽佣 3%-10% ⚠️</td><td>必须</td><td>微信转账（测试期）</td><td>搜索“面包多”“爱发电”</td></tr>
+          <tr><td>小红书</td><td>内容、店铺、获客</td><td>免费</td><td>0 元</td><td>必须</td><td>无</td><td>小红书 App</td></tr>
+          <tr><td>微信公众号</td><td>私域承接、免费版分发</td><td>免费</td><td>0 元</td><td>建议</td><td>个人微信号</td><td>mp.weixin.qq.com</td></tr>
+          <tr><td>百度网盘</td><td>素材包交付</td><td>够用</td><td>0 元</td><td>辅助</td><td>微信文件传输</td><td>pan.baidu.com</td></tr>
+          <tr><td>今日热榜 / RSSHub</td><td>资讯采集</td><td>免费</td><td>0 元</td><td>必须</td><td>公众号订阅</td><td>tophub.today / rsshub.app</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>费用总表（总计 ≤1000 元）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>项目</th><th>费用</th><th>什么时候花</th><th>是否必须</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>DeepSeek API/会员</td><td>0-30 元/月</td><td>第 1 周</td><td>建议</td><td>网页免费版先用</td></tr>
+          <tr><td>即梦/通义万相额度</td><td>0-60 元/月</td><td>第 1 周</td><td>建议</td><td>免费额度先够用</td></tr>
+          <tr><td>Canva/稿定会员</td><td>0-30 元/月</td><td>需要导出高清图时</td><td>可选</td><td>免费模板够用</td></tr>
+          <tr><td>收款平台测试</td><td>0-50 元</td><td>第 1 周上架时</td><td>必须</td><td>自己买 1 次测自动发货</td></tr>
+          <tr><td>备用金</td><td>200 元</td><td>随时</td><td>建议</td><td>用于临时付费工具和测试</td></tr>
+          <tr><td>素材版权/字体</td><td>0-100 元</td><td>有需要时</td><td>按需</td><td>优先免费商用素材</td></tr>
+          <tr><td>域名/服务器</td><td>0 元</td><td>第 3 个月以后</td><td>后期</td><td>跑通前不买</td></tr>
+          <tr><td>知识星球/小报童年费</td><td>0-300 元</td><td>有 30 个付费用户后</td><td>后期</td><td>第 2 个月再评估</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>第 1 周必须花的钱：</strong>控制在 100-300 元内，主要是大模型额度和收款平台测试。<strong>可以后面再花：</strong>剪映会员、Canva 会员、域名服务器、知识星球。如果第 1 个月花了超过 300 元，说明你在买“不必须”的东西。</div>
+  </section>
+  <section class="module" id="m9">
+    <div class="module-head"><span class="m-no">九</span><h2>风险预案与避坑指南</h2></div>
+
+    <h3>5 个最可能遇到的坑</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>坑</th><th>具体表现</th><th>原因</th><th>解决方案</th><th>预防措施</th></tr></thead>
+        <tbody>
+          <tr><td>1. 只发内容不接单</td><td>涨了 300 粉，0 收入，变成“为爱发电”</td><td>内容没带购买入口，或不敢报价</td><td>每条内容加 1 个钩子；主动私信 20 个提问用户</td><td>Day 1 就写死：主页简介 + 置顶 + 文末三个入口</td></tr>
+          <tr><td>2. 低价接一堆杂单</td><td>29 元的单改 8 轮，熬夜做不完</td><td>没有写清楚交付范围和修改次数</td><td>用标准报价表，写明 3 轮修改、48 小时交付</td><td>只卖套餐，不卖“不限量”</td></tr>
+          <tr><td>3. 时间全花在资讯号</td><td>每天日更，产品 2 周没更新</td><td>资讯号做着最轻松，产品做着最难</td><td>每天至少留 30 分钟给产品/接单/交付</td><td>按模块六时间块执行，不允许挪用</td></tr>
+          <tr><td>4. 依赖单一 AI 工具</td><td>DeepSeek 限流，当天断更</td><td>只注册了一个工具</td><td>每个任务保留 1 个备用工具</td><td>Day 1 就注册 DeepSeek + Kimi + 豆包</td></tr>
+          <tr><td>5. 搬运和夸大承诺</td><td>限流、封号、退款纠纷</td><td>想省事或想快点成交</td><td>原创化改写、注明来源、用真实案例</td><td>不承诺销量，不写“爆款保证”，文案标 AI 辅助</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>法律与合规</h3>
+    <div class="card">
+      <p><strong>要不要营业执照：</strong>早期用平台收款、以个人名义小规模经营可以先用个人身份；收入稳定后（建议连续 2-3 个月有稳定订单）注册个体工商户，成本低、能开收据、更正规。⚠️ 各平台对商家资质要求不同，以你上架时平台提示为准。</p>
+      <p><strong>税务怎么处理：</strong>从第 1 天就把每笔收入记进飞书台账（日期/平台/金额/客户）。注册个体户后按当地要求申报，不确定就咨询当地税务或打 12366。</p>
+      <p><strong>版权/原创：</strong>不直接搬运他人文案；AI 生成内容按平台要求标注“AI 生成”；配图和字体只用免费商用素材；代做时和客户约定素材使用范围。</p>
+      <p><strong>平台红线：</strong>不承诺具体销量和爆款；不刷单刷赞；不在小红书私信里频繁发微信号（按平台规则引导）；数字商品退款政策以上架平台要求为准。</p>
+    </div>
+
+    <h3>心态管理：每周你会经历什么</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>阶段</th><th>你会遇到</th><th>该做什么</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>内容很烂、没人看</td><td>正常。只检查“有没有发出去、有没有钩子”，不检查“写得好不好”</td></tr>
+          <tr><td>第 2 周</td><td>还是没人看</td><td>正常。只改标题和封面，其他不动</td></tr>
+          <tr><td>第 3 周</td><td>有人问了但没买</td><td>正常。说明入口有效，缺的是信任；补交付截图和售后说明</td></tr>
+          <tr><td>第 4 周</td><td>可能赚了第一笔小钱</td><td>把第一单的完整流程截图存进案例库</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>想放弃时的自我对话模板：
+“我现在遇到的是：内容没人看 / 有人问没人买 / 没时间做完。
+这是不是流程问题？如果是，我改一个变量：标题、钩子或价格。
+我只需要再跑 3 天看看结果，不需要今天就决定成败。”
+</blockquote>
+  </section>
+
+  <section class="module" id="m10">
+    <div class="module-head"><span class="m-no">十</span><h2>30 天里程碑与后续规划</h2></div>
+
+    <h3>检查表</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>节点</th><th>必须完成</th><th>最低指标</th><th>未达标怎么办</th></tr></thead>
+        <tbody>
+          <tr><td>Day 3</td><td>账号、工具、收款平台注册完；产品文档目录建好</td><td>飞书里有 SKU 表和产品目录</td><td>缺哪个补哪个，Day 4 不补，Day 5 补</td></tr>
+          <tr><td>Day 7</td><td>2 个 SKU 上架；3 条内容发布；微信号设置完成</td><td>50-100 粉；3 次互动；1 份免费版发出</td><td>把标题改成“工具名 + 结果”格式重发 1 条</td></tr>
+          <tr><td>Day 14</td><td>7 条内容；10 份免费版；1 次产品迭代</td><td>1 篇 500+ 浏览；3 次私信</td><td>停止铺量，集中做数据最好的 1 个选题</td></tr>
+          <tr><td>Day 21</td><td>9.9 元引流品上架；主动私信 10 人</td><td>20 份领取；5 次咨询；1 单（任意金额）</td><td>用免费诊断话术聊 5 个人，别降价</td></tr>
+          <tr><td>Day 30</td><td>累计 30 条内容；复盘表填完；确定 2 个主推 SKU</td><td>3 单；1 个订阅；清楚哪类内容带来咨询</td><td>第 30 天只做一件事：把 10 个问过问题的人再聊一轮</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Day 31 及以后</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>问题</th><th>判断标准</th><th>动作</th></tr></thead>
+        <tbody>
+          <tr><td>第 2 个月目标</td><td>验证出 2 个主推 SKU</td><td>把资源全部投到数据最好的 SKU，加代做后端和订阅</td></tr>
+          <tr><td>什么时候涨价</td><td>连续 2 周有 3 单以上，且有人主动问“有没有更贵的”</td><td>主力包涨 30%-50%，同步加一个更高价档位</td></tr>
+          <tr><td>什么时候上新品</td><td>现有 SKU 稳定出单，且制作流程已模板化</td><td>优先上“自媒体内容提示词包”或“卫浴实体店直播话术包”</td></tr>
+          <tr><td>什么时候自动化/外包</td><td>月收入稳定，且交付占时间超过 40%</td><td>把提示词模板化交给 AI，把重复环节（排版、配图）外包</td></tr>
+          <tr><td>什么时候考虑全职</td><td>连续 3 个月收入达到你日常开支的 1.5 倍，且有持续增长</td><td>先留 3 个月安全垫，再决定全职</td></tr>
+          <tr><td>12 个月后的理想状态</td><td>模板包 + 订阅 + 代做三条线都有稳定收入</td><td>被动收入占比提升，开始做垂直课程和社群</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="module">
+    <h3>最后几句话</h3>
+    <blockquote>这份企划书你不需要一次读完。你只需要现在做一件事：打开 Day 1 的第一个动作，做完它。做完后，再看 Day 1 的第二个动作。30 天后回头看，你会感谢今天的自己。</blockquote>
+    <h3>深化选项</h3>
+    <blockquote>需要我进一步展开哪个部分？
+A. 把 Day 1-7 展开为逐小时执行表（精确到每 15 分钟）
+B. 写出首批上架产品的完整内容（如：提示词库前 30 条提示词 + 排版）
+C. 写出 10 条可直接发布的小红书引流笔记（标题 + 正文 + 标签 + 封面描述）
+D. 设计完整的客户沟通话术手册（从第一次私信到售后转介绍，20 个场景）
+E. 制作 30 天引流内容排期表（每天发什么、几点发、用什么标签）
+F. 设计知识付费产品的完整课程大纲（8 节课 + 定价 + 销售页文案）
+G. 帮我设计产品的视觉包装方案（封面/详情页/预览图的 AI 制作教程）
+H. 其他（请说明）</blockquote>
+  </section>
+
+  <footer class="footer">
+    <p>AI 数字产品小店 · 选品落地与从零到一执行手册 · 生成日期 2026-08-26</p>
+    <p>预算 ≤1000 元 · 每日 2-4 小时 · 所有数字为目标管理参考，不构成收益承诺，请以自己 30 天实测数据为准。</p>
+  </footer>
+</main>
+</body>
+</html>
