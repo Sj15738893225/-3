@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="AI 数字产品小店 Day 1-7 逐小时执行表：15 分钟粒度，从零基础到第一个产品上架并开始冷启动">
+<title>Day 1-7 逐小时执行表 · AI 数字产品小店</title>
+<style>
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light dark;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --text: #1d2733;
+  --muted: #5c6672;
+  --border: #dce3e8;
+  --accent: #2b6f9e;
+  --accent-soft: #e5f0f7;
+  --accent-text: #1c5276;
+  --warn: #a35d0a;
+  --warn-soft: #f7ecd9;
+  --danger: #b3402c;
+  --danger-soft: #fbe9e5;
+  --good: #2e7d5b;
+  --good-soft: #e3f2ec;
+  --tag-bg: #eef2f4;
+  --tag-text: #34424e;
+  --shadow: 0 1px 2px rgba(16, 24, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15181c;
+    --surface: #1e2329;
+    --text: #eef1f4;
+    --muted: #a6b0ba;
+    --border: #313a44;
+    --accent: #64b5e0;
+    --accent-soft: #16303e;
+    --accent-text: #a8d8f0;
+    --warn: #e2a05b;
+    --warn-soft: #3a2f1d;
+    --danger: #ef8a73;
+    --danger-soft: #3a211d;
+    --good: #7cc9a5;
+    --good-soft: #1d352b;
+    --tag-bg: #262d35;
+    --tag-text: #c8d0d8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.75;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { max-width: 1180px; margin: 0 auto; padding: 30px 18px 64px; }
+.hero { border-bottom: 1px solid var(--border); padding-bottom: 22px; margin-bottom: 26px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+h1 { margin: 0 0 10px; font-size: 30px; line-height: 1.32; }
+h2 { margin: 0 0 12px; font-size: 22px; line-height: 1.36; }
+h3 { margin: 22px 0 10px; font-size: 17px; line-height: 1.42; }
+h4 { margin: 16px 0 8px; font-size: 15px; }
+p { margin: 8px 0; }
+.subtitle { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li, .chips span {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent-text);
+  font-size: 13px;
+  padding: 6px 10px;
+  box-shadow: var(--shadow);
+}
+.toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin: 10px 0 16px; }
+.toc a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 8px 10px;
+  color: var(--accent-text);
+  text-decoration: none;
+  font-size: 13px;
+  box-shadow: var(--shadow);
+}
+.toc a:hover { border-color: var(--accent); }
+.module {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 20px 22px 24px;
+  margin: 18px 0 30px;
+}
+.module-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 14px; }
+.m-no {
+  display: inline-block;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.table-wrap { overflow-x: auto; margin: 10px 0 14px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; background: var(--surface); }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: var(--tag-bg); color: var(--tag-text); font-weight: 600; }
+td.time { white-space: nowrap; color: var(--accent-text); font-weight: 600; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.note { border-left: 3px solid var(--warn); background: var(--warn-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.tip { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.ok { border-left: 3px solid var(--good); background: var(--good-soft); padding: 10px 12px; margin: 12px 0; font-size: 14px; }
+.blockquote, blockquote {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.badge { display: inline-block; border-radius: 8px; padding: 3px 7px; font-size: 11px; font-weight: 600; margin-right: 6px; white-space: nowrap; }
+.b-high { background: var(--accent-soft); color: var(--accent-text); }
+.b-mid { background: var(--warn-soft); color: var(--warn); }
+.b-low { background: var(--tag-bg); color: var(--tag-text); }
+.day { border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; margin: 16px 0; background: var(--surface); }
+.day h3 { margin-top: 0; color: var(--accent-text); }
+.footer { margin-top: 34px; border-top: 1px solid var(--border); padding-top: 14px; color: var(--muted); font-size: 13px; }
+@media (max-width: 700px) {
+  .page { padding: 22px 14px 44px; }
+  h1 { font-size: 24px; }
+  .module { padding: 16px 14px 18px; }
+}
+@media print { :root { color-scheme: light; } body { background: #fff; color: #000; } .module, .day { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">AI 数字产品小店 · 从零到一执行手册 · 深化 A</p>
+    <h1>Day 1-7 逐小时执行表（精确到 15 分钟）</h1>
+    <p class="subtitle">把执行手册里 Day 1-7 的“一天任务”拆成 15 分钟一个动作。每条都写了时间、动作、工具和“做完标志”，你只需要按顺序打勾。</p>
+    <ul class="chips">
+      <li>每天 19:00-23:00</li>
+      <li>15 分钟粒度</li>
+      <li>每格都有做完标志</li>
+      <li>超时顺延，不返工</li>
+    </ul>
+    <nav class="toc" aria-label="目录">
+      <a href="#rule">使用说明</a>
+      <a href="#d1">Day 1 · 基建日</a>
+      <a href="#d2">Day 2 · 产品框架日</a>
+      <a href="#d3">Day 3 · 产品初稿日</a>
+      <a href="#d4">Day 4 · 完善+封面日</a>
+      <a href="#d5">Day 5 · 上架日</a>
+      <a href="#d6">Day 6 · 内容生产日</a>
+      <a href="#d7">Day 7 · 发布+复盘日</a>
+    </nav>
+  </header>
+
+  <section class="module" id="rule">
+    <div class="module-head"><span class="m-no">说明</span><h2>使用说明</h2></div>
+    <div class="ok"><strong>三条铁律：</strong>1. 每个 15 分钟只做一件事，做完在表上打勾；2. 超时不要硬扛，顺延到下一个“缓冲格”，但当天必须发完内容和回复；3. 卡住超过 15 分钟就跳到“卡点预案”，不要反复改上一步。</div>
+    <div class="note"><strong>时间都是建议起点：</strong>如果你是 19:30 才开始，把整张表往后平移即可，但顺序不要变。周末可以多排 1-2 小时，把没做完的“补漏格”清掉。</div>
+  </section>
+
+  <section class="day" id="d1">
+    <h3>Day 1 · 基建日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>准备：打开电脑和手机，新建备忘录“Day1”，把下面 16 个时间段抄进去</td><td>备忘录</td><td>备忘录有 16 行</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>注册小红书：用不常用的手机号注册，昵称填“AI 提效日记”</td><td>小红书 App</td><td>账号创建成功</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>完善小红书资料：简介填“每天 3 分钟看懂 AI。电商文案/门店获客/避坑”，头像用系统默认先占位</td><td>小红书 App</td><td>简介保存成功</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>截图存档：账号页、简介页各截 1 张，存进飞书“30 天数据表”同目录</td><td>飞书</td><td>2 张截图已上传</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>注册微信公众号（订阅号），名称“AI 提效日记”</td><td>电脑</td><td>进入公众号后台</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>完善公众号：简介填“电商文案模板/门店小红书运营，每天更新 AI 实操”；绑定运营者微信号</td><td>公众号后台</td><td>自动回复能打开</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>注册面包多并登录（搜索“面包多 官网”）</td><td>电脑</td><td>个人中心出现“创建商品”</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>面包多实名认证：按页面提示上传身份证信息</td><td>面包多</td><td>实名状态“已提交”</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：喝水、休息；前 8 格没做完的，在这里补</td><td>无</td><td>前 8 格全部打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>注册/登录飞书（搜索“飞书官网”）</td><td>飞书</td><td>进入飞书工作台</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>新建“产品文档”和“30 天数据表”两个文档</td><td>飞书</td><td>工作台能看到 2 个文档</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>产品文档里建 SKU 表：5 行（种草文模板包/主图详情页提示词包/卫浴 SOP 包/标题生成器/体验包+订阅）</td><td>飞书</td><td>5 行 SKU 表存在</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>注册 DeepSeek 网页版，点一次“新建对话”</td><td>DeepSeek</td><td>发出一条测试消息</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>注册 Kimi 网页版，发一条“你好”测试</td><td>Kimi</td><td>收到回复</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>注册 Canva 或稿定设计，搜索“小红书封面”并收藏 3 个模板</td><td>Canva/稿定</td><td>收藏夹有 3 个模板</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>注册即梦 AI，生成 1 张测试图；把全部账号密码存进备忘录并打勾收尾</td><td>即梦 AI</td><td>1 张测试图生成，账号清单完整</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>2 个账号级入口（小红书/公众号）+ 收款平台 + 4 个 AI/设计工具全部可用，飞书有 SKU 表。</div>
+    <div class="tip"><strong>卡点预案：</strong>实名认证要 1-7 天 → 不影响今天，面包多可以先“创建商品”再等实名；哪个平台要 2 次验证 → 用另一个手机号收验证码；电脑慢 → 手机上也能完成注册类动作。</div>
+  </section>
+
+  <section class="day" id="d2">
+    <h3>Day 2 · 产品框架日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>打开飞书“产品文档”，新建“种草文模板包 V1.0”页面</td><td>飞书</td><td>页面标题可见</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>建 5 部分目录：30 个标题公式 / 5 篇笔记模板 / 标签清单 / 使用说明 / 更新记录</td><td>飞书</td><td>目录 5 行</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>给每部分写 1 句说明，让目录看起来“像产品”</td><td>飞书</td><td>5 句说明写完</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>小红书搜索“种草文”，点“最热”，记录前 5 个标题到“30 个标题收集”表格</td><td>小红书+飞书</td><td>5 条标题已记录</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>继续记录第 6-10 个标题，只记标题，不记全文</td><td>小红书+飞书</td><td>累计 10 条</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>换关键词“好物分享”，记录第 11-15 个标题</td><td>小红书+飞书</td><td>累计 15 条</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>记录第 16-20 个标题，顺手标出“有数字/有场景/有痛点”的标题</td><td>小红书+飞书</td><td>累计 20 条，标出 10 条</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>微信搜狗（weixin.sogou.com）搜“小红书爆款文案”，记录 5 个文章标题</td><td>微信搜狗</td><td>5 条公众号标题入表</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补前 8 格没完成的部分</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>记录第 6-10 个公众号标题，筛选“能看出产品/人群”的</td><td>微信搜狗+飞书</td><td>累计 30 条标题</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>把 30 条标题去重、归类：产品型/避坑型/场景型/价格型/问答型</td><td>飞书</td><td>30 条分进 5 类</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>归纳第 1-5 个标题公式（例如“【产品】用了【天数】的真实感受”）</td><td>飞书</td><td>5 个公式</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>归纳第 6-10 个公式，每个公式配 1 个卫浴示例</td><td>飞书</td><td>10 个公式+卫浴示例</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>打开 DeepSeek，用模块二的“测试提示词”测花洒产品</td><td>DeepSeek</td><td>1 份测试输出存档</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>用同一提示词测“女装连衣裙”，对比两版输出</td><td>DeepSeek</td><td>第 2 份测试存档</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>复盘：把两版输出里“可直接用”的句子标绿，写 1 句改进提示词的笔记</td><td>飞书</td><td>复盘笔记 1 段</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>产品目录立起来，30 个标题入库，10 个公式能填空，提示词测试跑通 2 个行业。</div>
+    <div class="tip"><strong>卡点预案：</strong>小红书搜索看不到“最热”→ 先随便记 20 条，今天目标只是“有标题可用”；觉得公式难归纳 → 直接用执行手册里 10 条现成公式，先复制再替换。</div>
+  </section>
+
+  <section class="day" id="d3">
+    <h3>Day 3 · 产品初稿日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>打开产品文档，新建“30 个标题公式”章节</td><td>飞书</td><td>章节存在</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>复制执行手册里的 10 条公式进文档，补齐卫浴示例</td><td>飞书</td><td>10 条完整</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>按昨天归类的 5 类标题，补第 11-20 条公式</td><td>飞书</td><td>20 条</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>补第 21-30 条公式，每条第 1 句必须是“填空式”</td><td>飞书</td><td>30 条</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>检查 30 条：把“绝绝子/YYDS”等空话词删除</td><td>飞书</td><td>0 条空话</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>写模板 1“产品种草”：300 字，含开头痛点、2 个细节、1 个购买理由</td><td>飞书+DeepSeek</td><td>300 字模板</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>写模板 2“开箱体验”：按开箱顺序写 5 个画面</td><td>飞书+DeepSeek</td><td>模板 2 完成</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>写模板 3“避坑科普”：3 个坑 + 3 个判断方法</td><td>飞书+DeepSeek</td><td>模板 3 完成</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补模板 1-3 的检查</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>写模板 4“场景搭配”：给 3 个使用场景，每个 100 字</td><td>飞书+DeepSeek</td><td>模板 4 完成</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>写模板 5“工厂实拍”：拍摄清单 + 文案框架</td><td>飞书+DeepSeek</td><td>模板 5 完成</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>整理标签清单第 1-2 组（家居/卫浴），每组 10 个标签</td><td>飞书</td><td>20 个标签</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>整理标签第 3-4 组（女装/零食），每组 10 个</td><td>飞书</td><td>累计 40 个标签</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>写“产品说明页”：目录预览/使用教程/更新承诺/售后说明四块</td><td>飞书</td><td>说明页完成</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>全文校对：错别字、重复句、明显 AI 味句子</td><td>飞书</td><td>0 处明显错误</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>把文档另存为副本“V1.0 初稿”，存档并打勾</td><td>飞书</td><td>副本存在</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>30 条公式 + 5 篇模板 + 4 组标签 + 说明页，产品第一次有完整初稿。</div>
+    <div class="tip"><strong>卡点预案：</strong>写模板写到卡住 → 每篇只写 300 字，先用 DeepSeek 出初稿再人工改；今天写不完 5 篇 → 至少完成 3 篇，剩余 2 篇用 Day 4 的缓冲格补。</div>
+  </section>
+  <section class="day" id="d4">
+    <h3>Day 4 · 产品完善 + 封面制作日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>打开“种草文模板包 V1.0 初稿”，从头通读一遍</td><td>飞书</td><td>通读完成</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>导出 PDF：飞书右上角“… ”→ 导出为 PDF</td><td>飞书</td><td>PDF 已下载</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>检查 PDF 排版：空行、表格断裂、页码是否正常</td><td>PDF 阅读器</td><td>0 处断裂</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>发现错别字或排版问题就改回飞书文档，重新导出 1 次</td><td>飞书</td><td>最终 PDF 干净</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>打开 Canva/稿定，搜索“知识付费 封面”“小红书 封面”</td><td>Canva/稿定</td><td>3 个模板已收藏</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>做标准包封面：大字“30 个爆款标题公式”，副标题“直接复制就能用”</td><td>Canva/稿定</td><td>封面 1 导出 3:4</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>做卫浴包封面：大字“卫浴门店 30 天小红书 SOP”</td><td>Canva/稿定</td><td>封面 2 导出</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>做引流包封面：大字“9.9 元 50 个卫浴门店标题”</td><td>Canva/稿定</td><td>封面 3 导出</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补前 8 格</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>制作免费体验版：复制 10 条公式 + 1 篇模板，另存为“免费体验版.pdf”</td><td>飞书</td><td>体验版 PDF 存在</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>体验版最后一页加钩子：“完整版含 30 个公式+5 篇模板，私信‘完整版’”</td><td>飞书</td><td>钩子页存在</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>SKU2 建目录：主图提示词 / 详情页提示词 / 使用说明 / 更新记录</td><td>飞书</td><td>目录 4 行</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>写 5 条主图提示词（每条含产品/卖点/人群/禁忌词）</td><td>飞书</td><td>5 条完成</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>写 5 条详情页提示词（痛点/卖点/信任背书/FAQ）</td><td>飞书</td><td>5 条完成</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>用 DeepSeek 实测 1 条主图提示词，看输出是否能用</td><td>DeepSeek</td><td>测试存档</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>把 3 张封面、2 个 PDF、SKU2 文档统一存到“产品交付文件夹”</td><td>飞书/网盘</td><td>文件夹 5 个文件齐全</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>SKU1 有正式 PDF 和封面，免费体验版可发，SKU2 有 10 条提示词初稿。</div>
+    <div class="tip"><strong>卡点预案：</strong>Canva 导出要会员 → 用免费模板或稿定免费版，导出带水印也先能用；PDF 排版难看 → 只要内容完整、没有乱码，就先上架，别追求完美。</div>
+  </section>
+
+  <section class="day" id="d5">
+    <h3>Day 5 · 上架日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>打开面包多后台，确认实名状态</td><td>面包多</td><td>后台能打开</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>创建商品 SKU1：标题“电商卖家小红书种草文模板包 V1.0”，价格 19.9</td><td>面包多</td><td>商品草稿保存</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>上传 PDF，开启“自动发货”，发布商品</td><td>面包多</td><td>生成购买链接</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>创建商品 SKU4：卫浴门店标题生成器，价格 9.9，上传体验版 PDF</td><td>面包多</td><td>第 2 个链接生成</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>自己花 9.9 元买 1 次 SKU4，确认自动发货收到文件</td><td>面包多</td><td>收到文件，测试通过</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>小红书找开店入口：三横菜单 → 创作中心 → 更多服务 → 店铺</td><td>小红书 App</td><td>找到入口</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>按提示提交店铺申请（实名/身份证/店铺名）</td><td>小红书 App</td><td>申请已提交</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>截图存档申请状态和预计审核时间</td><td>飞书</td><td>1 张截图入库</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补前 8 格</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>写 SKU1 详情页（目录预览/使用教程/更新承诺/售后）</td><td>面包多</td><td>SKU1 详情完成</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>写 SKU2 详情页（主图+详情页提示词包）</td><td>面包多</td><td>SKU2 详情完成</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>写 SKU3 详情页（卫浴 30 天 SOP 包，暂标“预售/即将上架”）</td><td>面包多</td><td>SKU3 草稿完成</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>写 SKU4 详情页（9.9 元引流款，突出“50 个标题”）</td><td>面包多</td><td>SKU4 详情完成</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>写 SKU5 详情页（69 元体验包+29.9 订阅说明）</td><td>面包多</td><td>SKU5 草稿完成</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>设置微信：昵称“AI 提效日记｜电商文案”，签名“私信‘模板’领目录”</td><td>微信</td><td>资料保存</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>写首条朋友圈草稿（官宣文案）并存到备忘录</td><td>备忘录</td><td>草稿存在</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>2 个 SKU 已可售、3 个 SKU 有详情页草稿、小红书店铺已提交、微信私域入口搭好。</div>
+    <div class="tip"><strong>卡点预案：</strong>小红书店铺审核要 1-7 天 → 不影响今天，面包多已经能卖；实名没通过 → 先保存商品草稿，明天再发布。</div>
+  </section>
+
+  <section class="day" id="d6">
+    <h3>Day 6 · 引流内容生产日（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>打开今日热榜，浏览“AI”板块</td><td>今日热榜</td><td>看完前 20 条</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>选 3 条 AI 新闻，把链接和标题复制进飞书选题表</td><td>飞书</td><td>3 条已入库</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>DeepSeek 生成日报：核心事实 + 影响 + 一句话点评</td><td>DeepSeek</td><td>初稿生成</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>人工改日报：删 AI 味句子，加 1 句“对电商/门店的影响”</td><td>飞书</td><td>日报定稿</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>写工具实测框架：工具名/测试任务/优点/缺点/结论</td><td>飞书</td><td>框架 5 行</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>实际用 DeepSeek 写 1 条主图文案，截图保存</td><td>DeepSeek</td><td>2 张截图</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>写实测正文：真实过程 + 结论“适合当草稿机，不能直接发”</td><td>飞书</td><td>实测定稿</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>写垂直内容《30 秒出 3 版主图文案》：开头痛点 + 3 步法</td><td>飞书</td><td>初稿完成</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补前 8 格</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>补垂直内容：每一步加具体提示词示例</td><td>飞书</td><td>示例齐全</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>做日报封面：Canva 选模板，标题写“AI 日报｜3 条快讯”</td><td>Canva</td><td>封面 1</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>做实测封面：标题“DeepSeek 实测：10 分钟写 3 版文案”</td><td>Canva</td><td>封面 2</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>做垂直内容封面：标题“主图文案 30 秒出 3 版”</td><td>Canva</td><td>封面 3</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>检查 3 篇内容：标签 3-5 个、文末有“私信领免费版”钩子</td><td>飞书</td><td>3 篇都有钩子</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>3 篇草稿（含封面）存进飞书“Day7 待发”文件夹</td><td>飞书</td><td>3 个草稿就位</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>记录明日发布顺序：日报 → 实测 → 垂直内容，各配 1 条置顶评论</td><td>备忘录</td><td>发布顺序写清</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>3 篇带封面、带钩子、带标签的内容定稿，明天打开就能发。</div>
+    <div class="tip"><strong>卡点预案：</strong>今天不想写 → 每篇只写 150 字也能发，先“完成”再“完善”；AI 日报当天没有好新闻 → 写“本周 3 个 AI 工具更新”替代。</div>
+  </section>
+
+  <section class="day" id="d7">
+    <h3>Day 7 · 发布 + 冷启动 + 第一周复盘（19:00-23:00，16 个 15 分钟格）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>工具</th><th>做完标志</th></tr></thead>
+        <tbody>
+          <tr><td class="time">19:00-19:15</td><td>检查 3 篇草稿：错别字、标签、封面、钩子</td><td>飞书</td><td>3 篇终稿</td></tr>
+          <tr><td class="time">19:15-19:30</td><td>发布第 1 篇 AI 日报，加 3-5 个标签</td><td>小红书</td><td>笔记已发布</td></tr>
+          <tr><td class="time">19:30-19:45</td><td>发布第 2 篇工具实测</td><td>小红书</td><td>笔记已发布</td></tr>
+          <tr><td class="time">19:45-20:00</td><td>发布第 3 篇垂直内容</td><td>小红书</td><td>笔记已发布</td></tr>
+          <tr><td class="time">20:00-20:15</td><td>3 篇各发 1 条置顶互动评论（“想要完整版私信‘模板’”）</td><td>小红书</td><td>3 条评论已置顶</td></tr>
+          <tr><td class="time">20:15-20:30</td><td>朋友圈发官宣文案（用 Day 5 草稿）</td><td>微信</td><td>官宣已发</td></tr>
+          <tr><td class="time">20:30-20:45</td><td>朋友圈发产品目录截图（不打码产品，打码客户信息）</td><td>微信</td><td>目录已发</td></tr>
+          <tr><td class="time">20:45-21:00</td><td>回复第一批评论和私信，用执行手册的评论区话术</td><td>小红书</td><td>全部回复完</td></tr>
+          <tr><td class="time">21:00-21:15</td><td><strong>缓冲格</strong>：休息；补前 8 格</td><td>无</td><td>前 8 格打勾</td></tr>
+          <tr><td class="time">21:15-21:30</td><td>设置私信自动回复：关键词“模板/体验/完整版”都回复免费体验版链接</td><td>小红书</td><td>自动回复测试通过</td></tr>
+          <tr><td class="time">21:30-21:45</td><td>填数据表第 1-3 天数据（发布数/浏览/互动）</td><td>飞书</td><td>3 行填完</td></tr>
+          <tr><td class="time">21:45-22:00</td><td>填第 4-7 天数据</td><td>飞书</td><td>7 行填完</td></tr>
+          <tr><td class="time">22:00-22:15</td><td>复盘：哪类内容有反馈、哪条标题数据最好</td><td>飞书</td><td>复盘 3 句</td></tr>
+          <tr><td class="time">22:15-22:30</td><td>写下周 7 个选题（复用执行手册 20 个选题库）</td><td>飞书</td><td>7 个选题</td></tr>
+          <tr><td class="time">22:30-22:45</td><td>给下周选题排期：周一至周日各 1 条</td><td>飞书</td><td>排期表完成</td></tr>
+          <tr><td class="time">22:45-23:00</td><td>写本周 3 句话总结：做完了什么/数据怎么样/下周改什么，存档</td><td>飞书</td><td>总结存在</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><strong>✅ 今日完成 = </strong>3 篇内容发布、朋友圈冷启动、自动回复可用、第一周数据表填完、下周选题排好。</div>
+    <div class="tip"><strong>卡点预案：</strong>发布后被限流/没浏览 → 今天不调整，先记数据，Day 8-9 按模块五“第 2 周”规则改标题；没收到私信 → 明天主动去热门笔记评论区答疑 20 分钟。</div>
+    <div class="ok"><strong>Day 1-7 总目标回顾：</strong>2 个 SKU 可售、5 个 SKU 有详情页、3 条内容发布、微信私域搭好、下周选题排完。没达标只补缺口，不推翻重来。</div>
+  </section>
+
+  <footer class="footer">
+    <p>AI 数字产品小店 · Day 1-7 逐小时执行表 · 生成日期 2026-08-26</p>
+    <p>完整手册见 <a href="ai-digital-product-30day-playbook.html">AI 数字产品小店·选品落地与从零到一执行手册</a>。所有数字为目标管理参考，不构成收益承诺。</p>
+  </footer>
+</main>
+</body>
+</html>
